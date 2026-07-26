@@ -1,0 +1,132 @@
+mode: rule
+ipv6: false
+log-level: info
+allow-lan: true
+bind-address: "*"
+mixed-port: 7890
+# was: external-controller: 0.0.0.0:9090
+external-controller: 127.0.0.1:9090
+# external-ui disabled for test — was: external-ui: ui
+secret: ""
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: off
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+    - any:53
+  auto-route: true
+  auto-detect-interface: true
+  auto-redirect: true
+  strict-route: false
+  mtu: 1500
+
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "example.com"
+    - "+.example.com"
+  nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+  proxy-server-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+
+# Xray does VLESS Reality; mihomo only routes
+proxies:
+  - name: xttp
+    type: socks5
+    server: 127.0.0.1
+    port: 11090
+    udp: true
+
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - xttp
+
+rule-providers:
+  g_Without:
+    type: file
+    behavior: classical
+    path: ./rule-providers/groups/g_Without.yaml
+  g_Google_meet:
+    type: file
+    behavior: classical
+    path: ./rule-providers/groups/g_Google_meet.yaml
+  g_Google_AI:
+    type: file
+    behavior: classical
+    path: ./rule-providers/groups/g_Google_AI.yaml
+  g_Discord:
+    type: file
+    behavior: classical
+    path: ./rule-providers/groups/g_Discord.yaml
+  g_Meta:
+    type: file
+    behavior: classical
+    path: ./rule-providers/groups/g_Meta.yaml
+  g_Telegram:
+    type: file
+    behavior: classical
+    path: ./rule-providers/groups/g_Telegram.yaml
+  g_GeoBlock:
+    type: file
+    behavior: classical
+    path: ./rule-providers/groups/g_GeoBlock.yaml
+  g_HODCA:
+    type: file
+    behavior: classical
+    path: ./rule-providers/groups/g_HODCA.yaml
+  g_Youtube:
+    type: file
+    behavior: classical
+    path: ./rule-providers/groups/g_Youtube.yaml
+  g_SoundCloud:
+    type: file
+    behavior: classical
+    path: ./rule-providers/groups/g_SoundCloud.yaml
+
+rules:
+  - GEOIP,PRIVATE,DIRECT,no-resolve
+
+  # groups -> PROXY
+  - RULE-SET,g_Without,PROXY
+  - RULE-SET,g_Google_meet,PROXY
+  - RULE-SET,g_Google_AI,PROXY
+  - RULE-SET,g_Discord,PROXY
+  - RULE-SET,g_Meta,PROXY
+  - RULE-SET,g_Telegram,PROXY
+  - RULE-SET,g_GeoBlock,PROXY
+  - RULE-SET,g_HODCA,PROXY
+  - RULE-SET,g_Youtube,PROXY
+  - RULE-SET,g_SoundCloud,PROXY
+
+  - MATCH,DIRECT

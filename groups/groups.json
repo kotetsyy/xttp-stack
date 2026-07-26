@@ -1,0 +1,7232 @@
+[
+  {
+    "id": "6a589411",
+    "name": "Without",
+    "enabled": true,
+    "entries": [
+      {
+        "type": "ipv6",
+        "value": "2001:b28:f23d::/48",
+        "rule": "IP-CIDR6,2001:b28:f23d::/48,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "dc8bf822"
+      },
+      {
+        "type": "ipv6",
+        "value": "2001:b28:f23f::/48",
+        "rule": "IP-CIDR6,2001:b28:f23f::/48,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "38a8c33e"
+      },
+      {
+        "type": "ipv6",
+        "value": "2001:67c:4e8::/48",
+        "rule": "IP-CIDR6,2001:67c:4e8::/48,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "4b302312"
+      },
+      {
+        "type": "ipv6",
+        "value": "2001:b28:f23c::/48",
+        "rule": "IP-CIDR6,2001:b28:f23c::/48,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "3ce28caa"
+      },
+      {
+        "type": "ipv6",
+        "value": "2a0a:f280::/32",
+        "rule": "IP-CIDR6,2a0a:f280::/32,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "11f8eef2"
+      },
+      {
+        "type": "namespace",
+        "value": "accounts.x.ai",
+        "rule": "DOMAIN-SUFFIX,accounts.x.ai",
+        "enabled": true,
+        "name": "",
+        "id": "460a974a"
+      },
+      {
+        "type": "namespace",
+        "value": "core.telegram.org",
+        "rule": "DOMAIN-SUFFIX,core.telegram.org",
+        "enabled": true,
+        "name": "",
+        "id": "98417a0f"
+      },
+      {
+        "type": "namespace",
+        "value": "x.ai.com",
+        "rule": "DOMAIN-SUFFIX,x.ai.com",
+        "enabled": true,
+        "name": "",
+        "id": "05de5aa5"
+      },
+      {
+        "type": "namespace",
+        "value": "bydauto.uz",
+        "rule": "DOMAIN-SUFFIX,bydauto.uz",
+        "enabled": true,
+        "name": "",
+        "id": "101f2024"
+      },
+      {
+        "type": "namespace",
+        "value": "unifi.ui.com",
+        "rule": "DOMAIN-SUFFIX,unifi.ui.com",
+        "enabled": true,
+        "name": "",
+        "id": "5a8de2a6"
+      },
+      {
+        "type": "namespace",
+        "value": "time.windows.com",
+        "rule": "DOMAIN-SUFFIX,time.windows.com",
+        "enabled": true,
+        "name": "",
+        "id": "06acdc3a"
+      },
+      {
+        "type": "namespace",
+        "value": "static.rutracker.cc",
+        "rule": "DOMAIN-SUFFIX,static.rutracker.cc",
+        "enabled": true,
+        "name": "",
+        "id": "3de0db60"
+      }
+    ]
+  },
+  {
+    "id": "b2c0aa46",
+    "name": "Google meet",
+    "enabled": true,
+    "entries": [
+      {
+        "type": "namespace",
+        "value": "meetings.clients6.google.com",
+        "rule": "DOMAIN-SUFFIX,meetings.clients6.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "cdb9c8ba"
+      },
+      {
+        "type": "namespace",
+        "value": "meetings.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,meetings.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "6017a198"
+      },
+      {
+        "type": "namespace",
+        "value": "hangouts.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,hangouts.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "883b6e91"
+      },
+      {
+        "type": "namespace",
+        "value": "meet.google.com",
+        "rule": "DOMAIN-SUFFIX,meet.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "2af7fcf3"
+      },
+      {
+        "type": "namespace",
+        "value": "stream.meet.google.com",
+        "rule": "DOMAIN-SUFFIX,stream.meet.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "6dbee85c"
+      }
+    ]
+  },
+  {
+    "id": "19d6a4cc",
+    "name": "Google AI",
+    "enabled": true,
+    "entries": [
+      {
+        "type": "namespace",
+        "value": "deepmind.com",
+        "rule": "DOMAIN-SUFFIX,deepmind.com",
+        "enabled": true,
+        "name": "",
+        "id": "c237517d"
+      },
+      {
+        "type": "namespace",
+        "value": "deepmind.google",
+        "rule": "DOMAIN-SUFFIX,deepmind.google",
+        "enabled": true,
+        "name": "",
+        "id": "19394851"
+      },
+      {
+        "type": "namespace",
+        "value": "geller-pa.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,geller-pa.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "c020a03d"
+      },
+      {
+        "type": "namespace",
+        "value": "generativelanguage.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,generativelanguage.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "a0b39886"
+      },
+      {
+        "type": "namespace",
+        "value": "ai.google.dev",
+        "rule": "DOMAIN-SUFFIX,ai.google.dev",
+        "enabled": true,
+        "name": "",
+        "id": "9916f38b"
+      },
+      {
+        "type": "namespace",
+        "value": "generativeai.google",
+        "rule": "DOMAIN-SUFFIX,generativeai.google",
+        "enabled": true,
+        "name": "",
+        "id": "bb474e2e"
+      },
+      {
+        "type": "namespace",
+        "value": "makersuite.google.com",
+        "rule": "DOMAIN-SUFFIX,makersuite.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "d89d2e6a"
+      },
+      {
+        "type": "namespace",
+        "value": "aistudio.google.com",
+        "rule": "DOMAIN-SUFFIX,aistudio.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "79670220"
+      },
+      {
+        "type": "namespace",
+        "value": "bard.google.com",
+        "rule": "DOMAIN-SUFFIX,bard.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "fb17a5f7"
+      },
+      {
+        "type": "namespace",
+        "value": "gemini.google",
+        "rule": "DOMAIN-SUFFIX,gemini.google",
+        "enabled": true,
+        "name": "",
+        "id": "0ad9d1b1"
+      },
+      {
+        "type": "namespace",
+        "value": "gemini.google.com",
+        "rule": "DOMAIN-SUFFIX,gemini.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "e261b25f"
+      },
+      {
+        "type": "namespace",
+        "value": "notebooklm.google.com",
+        "rule": "DOMAIN-SUFFIX,notebooklm.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "4771934e"
+      },
+      {
+        "type": "namespace",
+        "value": "clients6.google.com",
+        "rule": "DOMAIN-SUFFIX,clients6.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "911985bd"
+      },
+      {
+        "type": "namespace",
+        "value": "notebooklm.google",
+        "rule": "DOMAIN-SUFFIX,notebooklm.google",
+        "enabled": true,
+        "name": "",
+        "id": "77e60426"
+      },
+      {
+        "type": "namespace",
+        "value": "jules.google",
+        "rule": "DOMAIN-SUFFIX,jules.google",
+        "enabled": true,
+        "name": "",
+        "id": "5c73fbd3"
+      },
+      {
+        "type": "namespace",
+        "value": "jules.google.com",
+        "rule": "DOMAIN-SUFFIX,jules.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "875dc52a"
+      },
+      {
+        "type": "namespace",
+        "value": "labs.google",
+        "rule": "DOMAIN-SUFFIX,labs.google",
+        "enabled": true,
+        "name": "",
+        "id": "0e5aae68"
+      },
+      {
+        "type": "namespace",
+        "value": "aisandbox-pa.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,aisandbox-pa.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "264315c2"
+      },
+      {
+        "type": "namespace",
+        "value": "stitch.withgoogle.com",
+        "rule": "DOMAIN-SUFFIX,stitch.withgoogle.com",
+        "enabled": true,
+        "name": "",
+        "id": "e0e50a94"
+      },
+      {
+        "type": "namespace",
+        "value": "robinfrontend-pa.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "e4c03f63"
+      },
+      {
+        "type": "namespace",
+        "value": "aida.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,aida.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "2c3e5100"
+      },
+      {
+        "type": "namespace",
+        "value": "antigravity-pa.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,antigravity-pa.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "d43588e0"
+      },
+      {
+        "type": "namespace",
+        "value": "antigravity.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,antigravity.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "4fea6cb8"
+      },
+      {
+        "type": "namespace",
+        "value": "antigravity.google",
+        "rule": "DOMAIN-SUFFIX,antigravity.google",
+        "enabled": true,
+        "name": "",
+        "id": "4c3d1a77"
+      },
+      {
+        "type": "namespace",
+        "value": "antigravity-unleash.goog",
+        "rule": "DOMAIN-SUFFIX,antigravity-unleash.goog",
+        "enabled": true,
+        "name": "",
+        "id": "9a31d3e0"
+      },
+      {
+        "type": "namespace",
+        "value": "firebaseinstallations.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,firebaseinstallations.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "dad7f6ec"
+      },
+      {
+        "type": "namespace",
+        "value": "speechs3proto2-pa.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,speechs3proto2-pa.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "ac3170a1"
+      }
+    ]
+  },
+  {
+    "id": "4434640a",
+    "name": "Discord",
+    "enabled": true,
+    "entries": [
+      {
+        "type": "namespace",
+        "value": "dis.gd",
+        "rule": "DOMAIN-SUFFIX,dis.gd",
+        "enabled": true,
+        "name": "",
+        "id": "d0508426"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.co",
+        "rule": "DOMAIN-SUFFIX,discord.co",
+        "enabled": true,
+        "name": "",
+        "id": "ef2d8576"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.com",
+        "rule": "DOMAIN-SUFFIX,discord.com",
+        "enabled": true,
+        "name": "",
+        "id": "02d1c725"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.design",
+        "rule": "DOMAIN-SUFFIX,discord.design",
+        "enabled": true,
+        "name": "",
+        "id": "4e876824"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.dev",
+        "rule": "DOMAIN-SUFFIX,discord.dev",
+        "enabled": true,
+        "name": "",
+        "id": "1eff8c6b"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.gg",
+        "rule": "DOMAIN-SUFFIX,discord.gg",
+        "enabled": true,
+        "name": "",
+        "id": "d5d0b213"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.gift",
+        "rule": "DOMAIN-SUFFIX,discord.gift",
+        "enabled": true,
+        "name": "",
+        "id": "f1fadf1d"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.gifts",
+        "rule": "DOMAIN-SUFFIX,discord.gifts",
+        "enabled": true,
+        "name": "",
+        "id": "861f2bc7"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.media",
+        "rule": "DOMAIN-SUFFIX,discord.media",
+        "enabled": true,
+        "name": "",
+        "id": "7cfdaa85"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.new",
+        "rule": "DOMAIN-SUFFIX,discord.new",
+        "enabled": true,
+        "name": "",
+        "id": "f8e13fd1"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.store",
+        "rule": "DOMAIN-SUFFIX,discord.store",
+        "enabled": true,
+        "name": "",
+        "id": "42ece737"
+      },
+      {
+        "type": "namespace",
+        "value": "discord.tools",
+        "rule": "DOMAIN-SUFFIX,discord.tools",
+        "enabled": true,
+        "name": "",
+        "id": "386e7a38"
+      },
+      {
+        "type": "namespace",
+        "value": "discordapp.com",
+        "rule": "DOMAIN-SUFFIX,discordapp.com",
+        "enabled": true,
+        "name": "",
+        "id": "925656da"
+      },
+      {
+        "type": "namespace",
+        "value": "discordapp.net",
+        "rule": "DOMAIN-SUFFIX,discordapp.net",
+        "enabled": true,
+        "name": "",
+        "id": "153ab825"
+      },
+      {
+        "type": "namespace",
+        "value": "discordmerch.com",
+        "rule": "DOMAIN-SUFFIX,discordmerch.com",
+        "enabled": true,
+        "name": "",
+        "id": "077aea08"
+      },
+      {
+        "type": "namespace",
+        "value": "discordpartygames.com",
+        "rule": "DOMAIN-SUFFIX,discordpartygames.com",
+        "enabled": true,
+        "name": "",
+        "id": "39eef8f5"
+      },
+      {
+        "type": "namespace",
+        "value": "discord-activities.com",
+        "rule": "DOMAIN-SUFFIX,discord-activities.com",
+        "enabled": true,
+        "name": "",
+        "id": "0ae029a7"
+      },
+      {
+        "type": "namespace",
+        "value": "discordactivities.com",
+        "rule": "DOMAIN-SUFFIX,discordactivities.com",
+        "enabled": true,
+        "name": "",
+        "id": "488b3bfc"
+      },
+      {
+        "type": "namespace",
+        "value": "discordsays.com",
+        "rule": "DOMAIN-SUFFIX,discordsays.com",
+        "enabled": true,
+        "name": "",
+        "id": "151e5f51"
+      },
+      {
+        "type": "namespace",
+        "value": "discord-attachments-uploads-prd.storage.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,discord-attachments-uploads-prd.storage.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "81104ff2"
+      }
+    ]
+  },
+  {
+    "id": "c41f1176",
+    "name": "Meta",
+    "enabled": true,
+    "entries": [
+      {
+        "type": "namespace",
+        "value": "instagram.com",
+        "rule": "DOMAIN-SUFFIX,instagram.com",
+        "enabled": true,
+        "name": "",
+        "id": "4c1a532d"
+      },
+      {
+        "type": "namespace",
+        "value": "ig.me",
+        "rule": "DOMAIN-SUFFIX,ig.me",
+        "enabled": true,
+        "name": "",
+        "id": "faa2c6d1"
+      },
+      {
+        "type": "namespace",
+        "value": "facebook.com",
+        "rule": "DOMAIN-SUFFIX,facebook.com",
+        "enabled": true,
+        "name": "",
+        "id": "64a9aab6"
+      },
+      {
+        "type": "namespace",
+        "value": "facebook.net",
+        "rule": "DOMAIN-SUFFIX,facebook.net",
+        "enabled": true,
+        "name": "",
+        "id": "f8706a37"
+      },
+      {
+        "type": "namespace",
+        "value": "cdninstagram.com",
+        "rule": "DOMAIN-SUFFIX,cdninstagram.com",
+        "enabled": true,
+        "name": "",
+        "id": "ca541ce0"
+      },
+      {
+        "type": "namespace",
+        "value": "fbcdn.net",
+        "rule": "DOMAIN-SUFFIX,fbcdn.net",
+        "enabled": true,
+        "name": "",
+        "id": "c21a5fb9"
+      },
+      {
+        "type": "namespace",
+        "value": "fbsbx.com",
+        "rule": "DOMAIN-SUFFIX,fbsbx.com",
+        "enabled": true,
+        "name": "",
+        "id": "48e4a1ca"
+      },
+      {
+        "type": "namespace",
+        "value": "internalfb.com",
+        "rule": "DOMAIN-SUFFIX,internalfb.com",
+        "enabled": true,
+        "name": "",
+        "id": "62f076fd"
+      },
+      {
+        "type": "namespace",
+        "value": "oculus.com",
+        "rule": "DOMAIN-SUFFIX,oculus.com",
+        "enabled": true,
+        "name": "",
+        "id": "7f040449"
+      },
+      {
+        "type": "namespace",
+        "value": "meta.com",
+        "rule": "DOMAIN-SUFFIX,meta.com",
+        "enabled": true,
+        "name": "",
+        "id": "dcffc7d5"
+      },
+      {
+        "type": "namespace",
+        "value": "threads.net",
+        "rule": "DOMAIN-SUFFIX,threads.net",
+        "enabled": true,
+        "name": "",
+        "id": "f446a360"
+      },
+      {
+        "type": "namespace",
+        "value": "threads.com",
+        "rule": "DOMAIN-SUFFIX,threads.com",
+        "enabled": true,
+        "name": "",
+        "id": "997ebccf"
+      },
+      {
+        "type": "namespace",
+        "value": "fb.com",
+        "rule": "DOMAIN-SUFFIX,fb.com",
+        "enabled": true,
+        "name": "",
+        "id": "7938b812"
+      },
+      {
+        "type": "namespace",
+        "value": "whatsapp.com",
+        "rule": "DOMAIN-SUFFIX,whatsapp.com",
+        "enabled": true,
+        "name": "",
+        "id": "e135cd3d"
+      },
+      {
+        "type": "namespace",
+        "value": "whatsapp.net",
+        "rule": "DOMAIN-SUFFIX,whatsapp.net",
+        "enabled": true,
+        "name": "",
+        "id": "9b813203"
+      },
+      {
+        "type": "namespace",
+        "value": "whatsapp.biz",
+        "rule": "DOMAIN-SUFFIX,whatsapp.biz",
+        "enabled": true,
+        "name": "",
+        "id": "d65111fa"
+      },
+      {
+        "type": "namespace",
+        "value": "wa.me",
+        "rule": "DOMAIN-SUFFIX,wa.me",
+        "enabled": false,
+        "name": "",
+        "id": "d11c1383"
+      },
+      {
+        "type": "namespace",
+        "value": "circlecrewpinkcrowd.com",
+        "rule": "DOMAIN-SUFFIX,circlecrewpinkcrowd.com",
+        "enabled": true,
+        "name": "",
+        "id": "0383ece2"
+      }
+    ]
+  },
+  {
+    "id": "c4b3865b",
+    "name": "Telegram",
+    "enabled": true,
+    "entries": [
+      {
+        "type": "namespace",
+        "value": "cdn-telegram.org",
+        "rule": "DOMAIN-SUFFIX,cdn-telegram.org",
+        "enabled": true,
+        "name": "",
+        "id": "fc101c32"
+      },
+      {
+        "type": "namespace",
+        "value": "comments.app",
+        "rule": "DOMAIN-SUFFIX,comments.app",
+        "enabled": true,
+        "name": "",
+        "id": "716317ff"
+      },
+      {
+        "type": "namespace",
+        "value": "contest.com",
+        "rule": "DOMAIN-SUFFIX,contest.com",
+        "enabled": true,
+        "name": "",
+        "id": "15a80f95"
+      },
+      {
+        "type": "namespace",
+        "value": "fragment.com",
+        "rule": "DOMAIN-SUFFIX,fragment.com",
+        "enabled": true,
+        "name": "",
+        "id": "49ad5f72"
+      },
+      {
+        "type": "namespace",
+        "value": "graph.org",
+        "rule": "DOMAIN-SUFFIX,graph.org",
+        "enabled": true,
+        "name": "",
+        "id": "dee34ac2"
+      },
+      {
+        "type": "namespace",
+        "value": "quiz.directory",
+        "rule": "DOMAIN-SUFFIX,quiz.directory",
+        "enabled": true,
+        "name": "",
+        "id": "2f2ff2f4"
+      },
+      {
+        "type": "namespace",
+        "value": "t.me",
+        "rule": "DOMAIN-SUFFIX,t.me",
+        "enabled": true,
+        "name": "",
+        "id": "9870e88a"
+      },
+      {
+        "type": "namespace",
+        "value": "tdesktop.com",
+        "rule": "DOMAIN-SUFFIX,tdesktop.com",
+        "enabled": true,
+        "name": "",
+        "id": "b4bfc8d3"
+      },
+      {
+        "type": "namespace",
+        "value": "telega.one",
+        "rule": "DOMAIN-SUFFIX,telega.one",
+        "enabled": true,
+        "name": "",
+        "id": "e8604878"
+      },
+      {
+        "type": "namespace",
+        "value": "telegra.ph",
+        "rule": "DOMAIN-SUFFIX,telegra.ph",
+        "enabled": true,
+        "name": "",
+        "id": "4aaa5e66"
+      },
+      {
+        "type": "namespace",
+        "value": "telegram-cdn.org",
+        "rule": "DOMAIN-SUFFIX,telegram-cdn.org",
+        "enabled": true,
+        "name": "",
+        "id": "e275d2ee"
+      },
+      {
+        "type": "namespace",
+        "value": "telegram.dog",
+        "rule": "DOMAIN-SUFFIX,telegram.dog",
+        "enabled": true,
+        "name": "",
+        "id": "2b03c993"
+      },
+      {
+        "type": "namespace",
+        "value": "telegram.me",
+        "rule": "DOMAIN-SUFFIX,telegram.me",
+        "enabled": true,
+        "name": "",
+        "id": "ab4ee76f"
+      },
+      {
+        "type": "namespace",
+        "value": "telegram.org",
+        "rule": "DOMAIN-SUFFIX,telegram.org",
+        "enabled": true,
+        "name": "",
+        "id": "0dfea09d"
+      },
+      {
+        "type": "namespace",
+        "value": "telegram.space",
+        "rule": "DOMAIN-SUFFIX,telegram.space",
+        "enabled": true,
+        "name": "",
+        "id": "bb4a7a2b"
+      },
+      {
+        "type": "namespace",
+        "value": "telesco.pe",
+        "rule": "DOMAIN-SUFFIX,telesco.pe",
+        "enabled": true,
+        "name": "",
+        "id": "967e7d5b"
+      },
+      {
+        "type": "namespace",
+        "value": "tg.dev",
+        "rule": "DOMAIN-SUFFIX,tg.dev",
+        "enabled": true,
+        "name": "",
+        "id": "62370508"
+      },
+      {
+        "type": "namespace",
+        "value": "tx.me",
+        "rule": "DOMAIN-SUFFIX,tx.me",
+        "enabled": true,
+        "name": "",
+        "id": "e9bc72bf"
+      },
+      {
+        "type": "namespace",
+        "value": "usercontent.dev",
+        "rule": "DOMAIN-SUFFIX,usercontent.dev",
+        "enabled": true,
+        "name": "",
+        "id": "2848c78d"
+      },
+      {
+        "type": "namespace",
+        "value": "ton.org",
+        "rule": "DOMAIN-SUFFIX,ton.org",
+        "enabled": true,
+        "name": "",
+        "id": "7c82aefa"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.105.192.0/23",
+        "rule": "IP-CIDR,91.105.192.0/23,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "0eb64db2"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.108.4.0/22",
+        "rule": "IP-CIDR,91.108.4.0/22,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "cc12f658"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.108.8.0/22",
+        "rule": "IP-CIDR,91.108.8.0/22,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "86b24ccc"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.108.12.0/22",
+        "rule": "IP-CIDR,91.108.12.0/22,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "353dd952"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.108.16.0/22",
+        "rule": "IP-CIDR,91.108.16.0/22,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "290dbad6"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.108.20.0/22",
+        "rule": "IP-CIDR,91.108.20.0/22,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "86f4acd4"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.108.20.0/23",
+        "rule": "IP-CIDR,91.108.20.0/23,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "27855455"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.108.56.0/22",
+        "rule": "IP-CIDR,91.108.56.0/22,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "156f8b44"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.108.56.0/23",
+        "rule": "IP-CIDR,91.108.56.0/23,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "de4b2e75"
+      },
+      {
+        "type": "ipv4",
+        "value": "95.161.64.0/20",
+        "rule": "IP-CIDR,95.161.64.0/20,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "52bbb06a"
+      },
+      {
+        "type": "ipv4",
+        "value": "149.154.160.0/23",
+        "rule": "IP-CIDR,149.154.160.0/23,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "e9df44f2"
+      },
+      {
+        "type": "ipv4",
+        "value": "149.154.160.0/22",
+        "rule": "IP-CIDR,149.154.160.0/22,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "a6b6849f"
+      },
+      {
+        "type": "ipv4",
+        "value": "149.154.162.0/23",
+        "rule": "IP-CIDR,149.154.162.0/23,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "493af955"
+      },
+      {
+        "type": "ipv4",
+        "value": "149.154.164.0/23",
+        "rule": "IP-CIDR,149.154.164.0/23,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "00e6c5e4"
+      },
+      {
+        "type": "ipv4",
+        "value": "149.154.164.0/22",
+        "rule": "IP-CIDR,149.154.164.0/22,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "396cbdfd"
+      },
+      {
+        "type": "ipv4",
+        "value": "149.154.166.0/23",
+        "rule": "IP-CIDR,149.154.166.0/23,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "32bed0ae"
+      },
+      {
+        "type": "ipv4",
+        "value": "149.154.168.0/22",
+        "rule": "IP-CIDR,149.154.168.0/22,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "7d4357e7"
+      },
+      {
+        "type": "ipv4",
+        "value": "149.154.172.0/22",
+        "rule": "IP-CIDR,149.154.172.0/22,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "bc9d789f"
+      },
+      {
+        "type": "ipv4",
+        "value": "185.76.151.0/24",
+        "rule": "IP-CIDR,185.76.151.0/24,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "69fa4f6a"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.108.8.0/21",
+        "rule": "IP-CIDR,91.108.8.0/21,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "2730d117"
+      },
+      {
+        "type": "ipv4",
+        "value": "91.108.16.0/21",
+        "rule": "IP-CIDR,91.108.16.0/21,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "58ab8732"
+      },
+      {
+        "type": "ipv4",
+        "value": "149.154.160.0/20",
+        "rule": "IP-CIDR,149.154.160.0/20,no-resolve",
+        "enabled": true,
+        "name": "",
+        "id": "55f5a4ec"
+      }
+    ]
+  },
+  {
+    "id": "b69357b0",
+    "name": "GeoBlock",
+    "enabled": true,
+    "entries": [
+      {
+        "type": "namespace",
+        "value": "4pda.to",
+        "rule": "DOMAIN-SUFFIX,4pda.to",
+        "enabled": true,
+        "name": "",
+        "id": "d39e50ba"
+      },
+      {
+        "type": "namespace",
+        "value": "4pda.ws",
+        "rule": "DOMAIN-SUFFIX,4pda.ws",
+        "enabled": true,
+        "name": "",
+        "id": "152dbb7a"
+      },
+      {
+        "type": "namespace",
+        "value": "habr.com",
+        "rule": "DOMAIN-SUFFIX,habr.com",
+        "enabled": true,
+        "name": "",
+        "id": "9d33f0d7"
+      },
+      {
+        "type": "namespace",
+        "value": "claude.ai",
+        "rule": "DOMAIN-SUFFIX,claude.ai",
+        "enabled": true,
+        "name": "",
+        "id": "921d83b3"
+      },
+      {
+        "type": "namespace",
+        "value": "claude.com",
+        "rule": "DOMAIN-SUFFIX,claude.com",
+        "enabled": true,
+        "name": "",
+        "id": "612606a1"
+      },
+      {
+        "type": "namespace",
+        "value": "anthropic.com",
+        "rule": "DOMAIN-SUFFIX,anthropic.com",
+        "enabled": true,
+        "name": "",
+        "id": "f95696a1"
+      },
+      {
+        "type": "namespace",
+        "value": "intercom.io",
+        "rule": "DOMAIN-SUFFIX,intercom.io",
+        "enabled": true,
+        "name": "",
+        "id": "ee645097"
+      },
+      {
+        "type": "namespace",
+        "value": "downloads.intercomcdn.com",
+        "rule": "DOMAIN-SUFFIX,downloads.intercomcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "1a34d3ac"
+      },
+      {
+        "type": "namespace",
+        "value": "anthropic.qualtrics.com",
+        "rule": "DOMAIN-SUFFIX,anthropic.qualtrics.com",
+        "enabled": true,
+        "name": "",
+        "id": "96709dd3"
+      },
+      {
+        "type": "namespace",
+        "value": "openai.com",
+        "rule": "DOMAIN-SUFFIX,openai.com",
+        "enabled": true,
+        "name": "",
+        "id": "b5418cb5"
+      },
+      {
+        "type": "namespace",
+        "value": "chatgpt.com",
+        "rule": "DOMAIN-SUFFIX,chatgpt.com",
+        "enabled": true,
+        "name": "",
+        "id": "51205d85"
+      },
+      {
+        "type": "namespace",
+        "value": "oaistatic.com",
+        "rule": "DOMAIN-SUFFIX,oaistatic.com",
+        "enabled": true,
+        "name": "",
+        "id": "e1b14510"
+      },
+      {
+        "type": "namespace",
+        "value": "oaiusercontent.com",
+        "rule": "DOMAIN-SUFFIX,oaiusercontent.com",
+        "enabled": true,
+        "name": "",
+        "id": "55adea5a"
+      },
+      {
+        "type": "namespace",
+        "value": "chat.com",
+        "rule": "DOMAIN-SUFFIX,chat.com",
+        "enabled": true,
+        "name": "",
+        "id": "370de723"
+      },
+      {
+        "type": "namespace",
+        "value": "ai.com",
+        "rule": "DOMAIN-SUFFIX,ai.com",
+        "enabled": true,
+        "name": "",
+        "id": "8cacfdb0"
+      },
+      {
+        "type": "namespace",
+        "value": "chat.openai.com.cdn.cloudflare.net",
+        "rule": "DOMAIN-SUFFIX,chat.openai.com.cdn.cloudflare.net",
+        "enabled": true,
+        "name": "",
+        "id": "ef7f79b2"
+      },
+      {
+        "type": "namespace",
+        "value": "production-openaicom-storage.azureedge.net",
+        "rule": "DOMAIN-SUFFIX,production-openaicom-storage.azureedge.net",
+        "enabled": true,
+        "name": "",
+        "id": "83af1ada"
+      },
+      {
+        "type": "namespace",
+        "value": "x.ai",
+        "rule": "DOMAIN-SUFFIX,x.ai",
+        "enabled": true,
+        "name": "",
+        "id": "e1a2894f"
+      },
+      {
+        "type": "namespace",
+        "value": "grok.com",
+        "rule": "DOMAIN-SUFFIX,grok.com",
+        "enabled": true,
+        "name": "",
+        "id": "03cd2575"
+      },
+      {
+        "type": "namespace",
+        "value": "grok.x.com",
+        "rule": "DOMAIN-SUFFIX,grok.x.com",
+        "enabled": true,
+        "name": "",
+        "id": "0e44638a"
+      },
+      {
+        "type": "namespace",
+        "value": "notion.so",
+        "rule": "DOMAIN-SUFFIX,notion.so",
+        "enabled": true,
+        "name": "",
+        "id": "0f9ac47e"
+      },
+      {
+        "type": "namespace",
+        "value": "notion.com",
+        "rule": "DOMAIN-SUFFIX,notion.com",
+        "enabled": true,
+        "name": "",
+        "id": "8679e986"
+      },
+      {
+        "type": "namespace",
+        "value": "notion.new",
+        "rule": "DOMAIN-SUFFIX,notion.new",
+        "enabled": true,
+        "name": "",
+        "id": "f754725a"
+      },
+      {
+        "type": "namespace",
+        "value": "notion.site",
+        "rule": "DOMAIN-SUFFIX,notion.site",
+        "enabled": true,
+        "name": "",
+        "id": "6c98d631"
+      },
+      {
+        "type": "namespace",
+        "value": "notion-static.com",
+        "rule": "DOMAIN-SUFFIX,notion-static.com",
+        "enabled": true,
+        "name": "",
+        "id": "6a3aef8e"
+      },
+      {
+        "type": "namespace",
+        "value": "notion-emojis.s3-us-west-2.amazonaws.com",
+        "rule": "DOMAIN-SUFFIX,notion-emojis.s3-us-west-2.amazonaws.com",
+        "enabled": true,
+        "name": "",
+        "id": "c3623bb7"
+      },
+      {
+        "type": "namespace",
+        "value": "code.gist.build",
+        "rule": "DOMAIN-SUFFIX,code.gist.build",
+        "enabled": true,
+        "name": "",
+        "id": "ecaf9189"
+      },
+      {
+        "type": "namespace",
+        "value": "news.google.com",
+        "rule": "DOMAIN-SUFFIX,news.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "49562e2a"
+      },
+      {
+        "type": "namespace",
+        "value": "suggestqueries.google.com",
+        "rule": "DOMAIN-SUFFIX,suggestqueries.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "071813cf"
+      },
+      {
+        "type": "namespace",
+        "value": "lookerstudio.google.com",
+        "rule": "DOMAIN-SUFFIX,lookerstudio.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "763a5903"
+      },
+      {
+        "type": "namespace",
+        "value": "proactivebackend-pa.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "a4007537"
+      },
+      {
+        "type": "namespace",
+        "value": "intel.com",
+        "rule": "DOMAIN-SUFFIX,intel.com",
+        "enabled": true,
+        "name": "",
+        "id": "bf23645e"
+      },
+      {
+        "type": "namespace",
+        "value": "intel.de",
+        "rule": "DOMAIN-SUFFIX,intel.de",
+        "enabled": true,
+        "name": "",
+        "id": "df51bbae"
+      },
+      {
+        "type": "namespace",
+        "value": "intel.nl",
+        "rule": "DOMAIN-SUFFIX,intel.nl",
+        "enabled": true,
+        "name": "",
+        "id": "94016bf0"
+      },
+      {
+        "type": "namespace",
+        "value": "geolocation.onetrust.com",
+        "rule": "DOMAIN-SUFFIX,geolocation.onetrust.com",
+        "enabled": true,
+        "name": "",
+        "id": "71460386"
+      },
+      {
+        "type": "namespace",
+        "value": "hashicorp.com",
+        "rule": "DOMAIN-SUFFIX,hashicorp.com",
+        "enabled": true,
+        "name": "",
+        "id": "892585e5"
+      },
+      {
+        "type": "namespace",
+        "value": "terraform.io",
+        "rule": "DOMAIN-SUFFIX,terraform.io",
+        "enabled": true,
+        "name": "",
+        "id": "da45a86c"
+      },
+      {
+        "type": "namespace",
+        "value": "vagrantcloud.com",
+        "rule": "DOMAIN-SUFFIX,vagrantcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "4cc39c72"
+      },
+      {
+        "type": "namespace",
+        "value": "theaudiodb.com",
+        "rule": "DOMAIN-SUFFIX,theaudiodb.com",
+        "enabled": true,
+        "name": "",
+        "id": "b237778f"
+      },
+      {
+        "type": "namespace",
+        "value": "themoviedb.org",
+        "rule": "DOMAIN-SUFFIX,themoviedb.org",
+        "enabled": true,
+        "name": "",
+        "id": "09d432a5"
+      },
+      {
+        "type": "namespace",
+        "value": "tmdb.org",
+        "rule": "DOMAIN-SUFFIX,tmdb.org",
+        "enabled": true,
+        "name": "",
+        "id": "277571f4"
+      },
+      {
+        "type": "namespace",
+        "value": "tmdb.com",
+        "rule": "DOMAIN-SUFFIX,tmdb.com",
+        "enabled": true,
+        "name": "",
+        "id": "51a9f1d2"
+      },
+      {
+        "type": "namespace",
+        "value": "image.tmdb.org",
+        "rule": "DOMAIN-SUFFIX,image.tmdb.org",
+        "enabled": true,
+        "name": "",
+        "id": "a5101b9f"
+      },
+      {
+        "type": "namespace",
+        "value": "api.themoviedb.org",
+        "rule": "DOMAIN-SUFFIX,api.themoviedb.org",
+        "enabled": true,
+        "name": "",
+        "id": "27116b35"
+      },
+      {
+        "type": "namespace",
+        "value": "tmdb-image-prod.b-cdn.net",
+        "rule": "DOMAIN-SUFFIX,tmdb-image-prod.b-cdn.net",
+        "enabled": true,
+        "name": "",
+        "id": "afae6c88"
+      },
+      {
+        "type": "namespace",
+        "value": "jetbrains.com",
+        "rule": "DOMAIN-SUFFIX,jetbrains.com",
+        "enabled": true,
+        "name": "",
+        "id": "af6aab5d"
+      },
+      {
+        "type": "namespace",
+        "value": "myjetbrains.com",
+        "rule": "DOMAIN-SUFFIX,myjetbrains.com",
+        "enabled": true,
+        "name": "",
+        "id": "9308d0cb"
+      },
+      {
+        "type": "namespace",
+        "value": "jetbrains.space",
+        "rule": "DOMAIN-SUFFIX,jetbrains.space",
+        "enabled": true,
+        "name": "",
+        "id": "c594d394"
+      },
+      {
+        "type": "namespace",
+        "value": "api.jetbrains.ai",
+        "rule": "DOMAIN-SUFFIX,api.jetbrains.ai",
+        "enabled": true,
+        "name": "",
+        "id": "7ef081bc"
+      },
+      {
+        "type": "namespace",
+        "value": "youtrack.cloud",
+        "rule": "DOMAIN-SUFFIX,youtrack.cloud",
+        "enabled": true,
+        "name": "",
+        "id": "2306e3b4"
+      },
+      {
+        "type": "namespace",
+        "value": "toolbox.app",
+        "rule": "DOMAIN-SUFFIX,toolbox.app",
+        "enabled": true,
+        "name": "",
+        "id": "660db50d"
+      },
+      {
+        "type": "namespace",
+        "value": "jetbrains.team",
+        "rule": "DOMAIN-SUFFIX,jetbrains.team",
+        "enabled": true,
+        "name": "",
+        "id": "ab718fdf"
+      },
+      {
+        "type": "namespace",
+        "value": "supercell.com",
+        "rule": "DOMAIN-SUFFIX,supercell.com",
+        "enabled": true,
+        "name": "",
+        "id": "d93f41e6"
+      },
+      {
+        "type": "namespace",
+        "value": "clashofclans.com",
+        "rule": "DOMAIN-SUFFIX,clashofclans.com",
+        "enabled": true,
+        "name": "",
+        "id": "5fec20e5"
+      },
+      {
+        "type": "namespace",
+        "value": "brawlstarsgame.com",
+        "rule": "DOMAIN-SUFFIX,brawlstarsgame.com",
+        "enabled": true,
+        "name": "",
+        "id": "61f04978"
+      },
+      {
+        "type": "namespace",
+        "value": "clashroyaleapp.com",
+        "rule": "DOMAIN-SUFFIX,clashroyaleapp.com",
+        "enabled": true,
+        "name": "",
+        "id": "2fc3ae03"
+      },
+      {
+        "type": "namespace",
+        "value": "squadbustersgame.com",
+        "rule": "DOMAIN-SUFFIX,squadbustersgame.com",
+        "enabled": true,
+        "name": "",
+        "id": "75a73a73"
+      },
+      {
+        "type": "namespace",
+        "value": "haydaygame.com",
+        "rule": "DOMAIN-SUFFIX,haydaygame.com",
+        "enabled": true,
+        "name": "",
+        "id": "b32b6ca1"
+      },
+      {
+        "type": "namespace",
+        "value": "copilot.microsoft.com",
+        "rule": "DOMAIN-SUFFIX,copilot.microsoft.com",
+        "enabled": true,
+        "name": "",
+        "id": "b32dcbed"
+      },
+      {
+        "type": "namespace",
+        "value": "designer.microsoft.com",
+        "rule": "DOMAIN-SUFFIX,designer.microsoft.com",
+        "enabled": true,
+        "name": "",
+        "id": "4e6acb3b"
+      },
+      {
+        "type": "namespace",
+        "value": "xsts.auth.xboxlive.com",
+        "rule": "DOMAIN-SUFFIX,xsts.auth.xboxlive.com",
+        "enabled": true,
+        "name": "",
+        "id": "3743a0d6"
+      },
+      {
+        "type": "namespace",
+        "value": "salesforce.com",
+        "rule": "DOMAIN-SUFFIX,salesforce.com",
+        "enabled": true,
+        "name": "",
+        "id": "14db1447"
+      },
+      {
+        "type": "namespace",
+        "value": "salesforceiq.com",
+        "rule": "DOMAIN-SUFFIX,salesforceiq.com",
+        "enabled": true,
+        "name": "",
+        "id": "9e6ec912"
+      },
+      {
+        "type": "namespace",
+        "value": "force.com",
+        "rule": "DOMAIN-SUFFIX,force.com",
+        "enabled": true,
+        "name": "",
+        "id": "6ec6a0cd"
+      },
+      {
+        "type": "namespace",
+        "value": "force-user-content.com",
+        "rule": "DOMAIN-SUFFIX,force-user-content.com",
+        "enabled": true,
+        "name": "",
+        "id": "2d818b49"
+      },
+      {
+        "type": "namespace",
+        "value": "salesforceliveagent.com",
+        "rule": "DOMAIN-SUFFIX,salesforceliveagent.com",
+        "enabled": true,
+        "name": "",
+        "id": "699948a3"
+      },
+      {
+        "type": "namespace",
+        "value": "salesforce-experience.com",
+        "rule": "DOMAIN-SUFFIX,salesforce-experience.com",
+        "enabled": true,
+        "name": "",
+        "id": "cbf623ac"
+      },
+      {
+        "type": "namespace",
+        "value": "salesforce-hub.com",
+        "rule": "DOMAIN-SUFFIX,salesforce-hub.com",
+        "enabled": true,
+        "name": "",
+        "id": "19bcd4b0"
+      },
+      {
+        "type": "namespace",
+        "value": "salesforce-scrt.com",
+        "rule": "DOMAIN-SUFFIX,salesforce-scrt.com",
+        "enabled": true,
+        "name": "",
+        "id": "a4774d60"
+      },
+      {
+        "type": "namespace",
+        "value": "salesforce-setup.com",
+        "rule": "DOMAIN-SUFFIX,salesforce-setup.com",
+        "enabled": true,
+        "name": "",
+        "id": "a92b162c"
+      },
+      {
+        "type": "namespace",
+        "value": "salesforce-sites.com",
+        "rule": "DOMAIN-SUFFIX,salesforce-sites.com",
+        "enabled": true,
+        "name": "",
+        "id": "cb0073c6"
+      },
+      {
+        "type": "namespace",
+        "value": "sfdcopens.com",
+        "rule": "DOMAIN-SUFFIX,sfdcopens.com",
+        "enabled": true,
+        "name": "",
+        "id": "93885a1a"
+      },
+      {
+        "type": "namespace",
+        "value": "site.com",
+        "rule": "DOMAIN-SUFFIX,site.com",
+        "enabled": true,
+        "name": "",
+        "id": "11320fd4"
+      },
+      {
+        "type": "namespace",
+        "value": "trailblazer.me",
+        "rule": "DOMAIN-SUFFIX,trailblazer.me",
+        "enabled": true,
+        "name": "",
+        "id": "38f54176"
+      },
+      {
+        "type": "namespace",
+        "value": "trailhead.com",
+        "rule": "DOMAIN-SUFFIX,trailhead.com",
+        "enabled": true,
+        "name": "",
+        "id": "6fade492"
+      },
+      {
+        "type": "namespace",
+        "value": "fast.com",
+        "rule": "DOMAIN-SUFFIX,fast.com",
+        "enabled": true,
+        "name": "",
+        "id": "67076a14"
+      },
+      {
+        "type": "namespace",
+        "value": "netflix.ca",
+        "rule": "DOMAIN-SUFFIX,netflix.ca",
+        "enabled": true,
+        "name": "",
+        "id": "66cf651c"
+      },
+      {
+        "type": "namespace",
+        "value": "netflix.com",
+        "rule": "DOMAIN-SUFFIX,netflix.com",
+        "enabled": true,
+        "name": "",
+        "id": "66fadd8f"
+      },
+      {
+        "type": "namespace",
+        "value": "netflix.net",
+        "rule": "DOMAIN-SUFFIX,netflix.net",
+        "enabled": true,
+        "name": "",
+        "id": "fd3cac43"
+      },
+      {
+        "type": "namespace",
+        "value": "netflixinvestor.com",
+        "rule": "DOMAIN-SUFFIX,netflixinvestor.com",
+        "enabled": true,
+        "name": "",
+        "id": "2bcab149"
+      },
+      {
+        "type": "namespace",
+        "value": "netflixtechblog.com",
+        "rule": "DOMAIN-SUFFIX,netflixtechblog.com",
+        "enabled": true,
+        "name": "",
+        "id": "8a421375"
+      },
+      {
+        "type": "namespace",
+        "value": "nflxext.com",
+        "rule": "DOMAIN-SUFFIX,nflxext.com",
+        "enabled": true,
+        "name": "",
+        "id": "30797a46"
+      },
+      {
+        "type": "namespace",
+        "value": "nflximg.com",
+        "rule": "DOMAIN-SUFFIX,nflximg.com",
+        "enabled": true,
+        "name": "",
+        "id": "92cfdd21"
+      },
+      {
+        "type": "namespace",
+        "value": "nflximg.net",
+        "rule": "DOMAIN-SUFFIX,nflximg.net",
+        "enabled": true,
+        "name": "",
+        "id": "31f7f1de"
+      },
+      {
+        "type": "namespace",
+        "value": "nflxsearch.net",
+        "rule": "DOMAIN-SUFFIX,nflxsearch.net",
+        "enabled": true,
+        "name": "",
+        "id": "cee3d2d1"
+      },
+      {
+        "type": "namespace",
+        "value": "nflxso.net",
+        "rule": "DOMAIN-SUFFIX,nflxso.net",
+        "enabled": true,
+        "name": "",
+        "id": "6d64e3ac"
+      },
+      {
+        "type": "namespace",
+        "value": "nflxvideo.net",
+        "rule": "DOMAIN-SUFFIX,nflxvideo.net",
+        "enabled": true,
+        "name": "",
+        "id": "1b9aa106"
+      },
+      {
+        "type": "namespace",
+        "value": "autodesk.com",
+        "rule": "DOMAIN-SUFFIX,autodesk.com",
+        "enabled": true,
+        "name": "",
+        "id": "867c2b05"
+      },
+      {
+        "type": "namespace",
+        "value": "cdn.web-platform.io",
+        "rule": "DOMAIN-SUFFIX,cdn.web-platform.io",
+        "enabled": true,
+        "name": "",
+        "id": "98cdfb1d"
+      },
+      {
+        "type": "namespace",
+        "value": "assets.heroku.com",
+        "rule": "DOMAIN-SUFFIX,assets.heroku.com",
+        "enabled": true,
+        "name": "",
+        "id": "784611a3"
+      },
+      {
+        "type": "namespace",
+        "value": "herokucdn.com",
+        "rule": "DOMAIN-SUFFIX,herokucdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "d9e86e04"
+      },
+      {
+        "type": "namespace",
+        "value": "gaming.amazon.com",
+        "rule": "DOMAIN-SUFFIX,gaming.amazon.com",
+        "enabled": true,
+        "name": "",
+        "id": "93b9841b"
+      },
+      {
+        "type": "namespace",
+        "value": "primevideo.com",
+        "rule": "DOMAIN-SUFFIX,primevideo.com",
+        "enabled": true,
+        "name": "",
+        "id": "33447301"
+      },
+      {
+        "type": "namespace",
+        "value": "vmware.com",
+        "rule": "DOMAIN-SUFFIX,vmware.com",
+        "enabled": true,
+        "name": "",
+        "id": "fc7fbc22"
+      },
+      {
+        "type": "namespace",
+        "value": "download3.omnissa.com",
+        "rule": "DOMAIN-SUFFIX,download3.omnissa.com",
+        "enabled": true,
+        "name": "",
+        "id": "c17f35e0"
+      },
+      {
+        "type": "namespace",
+        "value": "geforcenow.com",
+        "rule": "DOMAIN-SUFFIX,geforcenow.com",
+        "enabled": true,
+        "name": "",
+        "id": "15002b3e"
+      },
+      {
+        "type": "namespace",
+        "value": "gfn.am",
+        "rule": "DOMAIN-SUFFIX,gfn.am",
+        "enabled": true,
+        "name": "",
+        "id": "dbe1cf3e"
+      },
+      {
+        "type": "namespace",
+        "value": "developer.nvidia.com",
+        "rule": "DOMAIN-SUFFIX,developer.nvidia.com",
+        "enabled": true,
+        "name": "",
+        "id": "3d7c5b55"
+      },
+      {
+        "type": "namespace",
+        "value": "install.launcher.omniverse.nvidia.com",
+        "rule": "DOMAIN-SUFFIX,install.launcher.omniverse.nvidia.com",
+        "enabled": true,
+        "name": "",
+        "id": "e7450923"
+      },
+      {
+        "type": "namespace",
+        "value": "canva.dev",
+        "rule": "DOMAIN-SUFFIX,canva.dev",
+        "enabled": true,
+        "name": "",
+        "id": "3f11b7d6"
+      },
+      {
+        "type": "namespace",
+        "value": "canva.com",
+        "rule": "DOMAIN-SUFFIX,canva.com",
+        "enabled": true,
+        "name": "",
+        "id": "2465cb1f"
+      },
+      {
+        "type": "namespace",
+        "value": "kaleido.ai",
+        "rule": "DOMAIN-SUFFIX,kaleido.ai",
+        "enabled": true,
+        "name": "",
+        "id": "d3de8a61"
+      },
+      {
+        "type": "namespace",
+        "value": "usher.ttvnw.net",
+        "rule": "DOMAIN-SUFFIX,usher.ttvnw.net",
+        "enabled": true,
+        "name": "",
+        "id": "db82cd65"
+      },
+      {
+        "type": "namespace",
+        "value": "gql.twitch.tv",
+        "rule": "DOMAIN-SUFFIX,gql.twitch.tv",
+        "enabled": true,
+        "name": "",
+        "id": "6425330f"
+      },
+      {
+        "type": "namespace",
+        "value": "parallels.com",
+        "rule": "DOMAIN-SUFFIX,parallels.com",
+        "enabled": true,
+        "name": "",
+        "id": "542bfd94"
+      },
+      {
+        "type": "namespace",
+        "value": "myparallels.com",
+        "rule": "DOMAIN-SUFFIX,myparallels.com",
+        "enabled": true,
+        "name": "",
+        "id": "2581c50f"
+      },
+      {
+        "type": "namespace",
+        "value": "parallels.net",
+        "rule": "DOMAIN-SUFFIX,parallels.net",
+        "enabled": true,
+        "name": "",
+        "id": "87bd933a"
+      },
+      {
+        "type": "namespace",
+        "value": "parallels.cn",
+        "rule": "DOMAIN-SUFFIX,parallels.cn",
+        "enabled": true,
+        "name": "",
+        "id": "c77cd56b"
+      },
+      {
+        "type": "namespace",
+        "value": "parallelsaccess.com",
+        "rule": "DOMAIN-SUFFIX,parallelsaccess.com",
+        "enabled": true,
+        "name": "",
+        "id": "dddb4823"
+      },
+      {
+        "type": "namespace",
+        "value": "crunchyroll.com",
+        "rule": "DOMAIN-SUFFIX,crunchyroll.com",
+        "enabled": true,
+        "name": "",
+        "id": "030313b1"
+      },
+      {
+        "type": "namespace",
+        "value": "v.vrv.co",
+        "rule": "DOMAIN-SUFFIX,v.vrv.co",
+        "enabled": true,
+        "name": "",
+        "id": "784c71b2"
+      },
+      {
+        "type": "namespace",
+        "value": "vod-fy.crunchyrollcdn.com",
+        "rule": "DOMAIN-SUFFIX,vod-fy.crunchyrollcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "1524f54c"
+      },
+      {
+        "type": "namespace",
+        "value": "a-vrv.akamaized.net",
+        "rule": "DOMAIN-SUFFIX,a-vrv.akamaized.net",
+        "enabled": true,
+        "name": "",
+        "id": "7bbdcbfb"
+      },
+      {
+        "type": "namespace",
+        "value": "paddle.com",
+        "rule": "DOMAIN-SUFFIX,paddle.com",
+        "enabled": true,
+        "name": "",
+        "id": "dd1d93cf"
+      },
+      {
+        "type": "namespace",
+        "value": "paddlestatus.com",
+        "rule": "DOMAIN-SUFFIX,paddlestatus.com",
+        "enabled": true,
+        "name": "",
+        "id": "6f4c3f4a"
+      },
+      {
+        "type": "namespace",
+        "value": "profitwell.com",
+        "rule": "DOMAIN-SUFFIX,profitwell.com",
+        "enabled": true,
+        "name": "",
+        "id": "f0d3155a"
+      },
+      {
+        "type": "namespace",
+        "value": "paritydeals.com",
+        "rule": "DOMAIN-SUFFIX,paritydeals.com",
+        "enabled": true,
+        "name": "",
+        "id": "7afd263f"
+      },
+      {
+        "type": "namespace",
+        "value": "cursor.sh",
+        "rule": "DOMAIN-SUFFIX,cursor.sh",
+        "enabled": true,
+        "name": "",
+        "id": "ae6bd038"
+      },
+      {
+        "type": "namespace",
+        "value": "cursor-cdn.com",
+        "rule": "DOMAIN-SUFFIX,cursor-cdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "f00a73c6"
+      },
+      {
+        "type": "namespace",
+        "value": "cursorapi.com",
+        "rule": "DOMAIN-SUFFIX,cursorapi.com",
+        "enabled": true,
+        "name": "",
+        "id": "579edf82"
+      },
+      {
+        "type": "namespace",
+        "value": "adobe.com",
+        "rule": "DOMAIN-SUFFIX,adobe.com",
+        "enabled": true,
+        "name": "",
+        "id": "705883cf"
+      },
+      {
+        "type": "namespace",
+        "value": "adobe.io",
+        "rule": "DOMAIN-SUFFIX,adobe.io",
+        "enabled": true,
+        "name": "",
+        "id": "abc1003d"
+      },
+      {
+        "type": "namespace",
+        "value": "adobe.net",
+        "rule": "DOMAIN-SUFFIX,adobe.net",
+        "enabled": true,
+        "name": "",
+        "id": "865b3635"
+      },
+      {
+        "type": "namespace",
+        "value": "servarr.com",
+        "rule": "DOMAIN-SUFFIX,servarr.com",
+        "enabled": true,
+        "name": "",
+        "id": "cc5f450b"
+      },
+      {
+        "type": "namespace",
+        "value": "nba.com",
+        "rule": "DOMAIN-SUFFIX,nba.com",
+        "enabled": true,
+        "name": "",
+        "id": "0bba9b46"
+      },
+      {
+        "type": "namespace",
+        "value": "lambdalabs.com",
+        "rule": "DOMAIN-SUFFIX,lambdalabs.com",
+        "enabled": true,
+        "name": "",
+        "id": "7e70fd22"
+      },
+      {
+        "type": "namespace",
+        "value": "grafana.com",
+        "rule": "DOMAIN-SUFFIX,grafana.com",
+        "enabled": true,
+        "name": "",
+        "id": "c4c3d013"
+      },
+      {
+        "type": "namespace",
+        "value": "xtracloud.net",
+        "rule": "DOMAIN-SUFFIX,xtracloud.net",
+        "enabled": true,
+        "name": "",
+        "id": "97544802"
+      },
+      {
+        "type": "namespace",
+        "value": "glpals.com",
+        "rule": "DOMAIN-SUFFIX,glpals.com",
+        "enabled": true,
+        "name": "",
+        "id": "a1adf2e4"
+      },
+      {
+        "type": "namespace",
+        "value": "gpsonextra.net",
+        "rule": "DOMAIN-SUFFIX,gpsonextra.net",
+        "enabled": true,
+        "name": "",
+        "id": "6601e730"
+      },
+      {
+        "type": "namespace",
+        "value": "reactflow.dev",
+        "rule": "DOMAIN-SUFFIX,reactflow.dev",
+        "enabled": true,
+        "name": "",
+        "id": "9663cf36"
+      },
+      {
+        "type": "namespace",
+        "value": "netlify.com",
+        "rule": "DOMAIN-SUFFIX,netlify.com",
+        "enabled": true,
+        "name": "",
+        "id": "930ea75f"
+      },
+      {
+        "type": "namespace",
+        "value": "bell-sw.com",
+        "rule": "DOMAIN-SUFFIX,bell-sw.com",
+        "enabled": true,
+        "name": "",
+        "id": "943190b2"
+      },
+      {
+        "type": "namespace",
+        "value": "graylog.org",
+        "rule": "DOMAIN-SUFFIX,graylog.org",
+        "enabled": true,
+        "name": "",
+        "id": "03205168"
+      },
+      {
+        "type": "namespace",
+        "value": "spacelift.io",
+        "rule": "DOMAIN-SUFFIX,spacelift.io",
+        "enabled": true,
+        "name": "",
+        "id": "da8709ca"
+      },
+      {
+        "type": "namespace",
+        "value": "ibm.com",
+        "rule": "DOMAIN-SUFFIX,ibm.com",
+        "enabled": true,
+        "name": "",
+        "id": "5e2f86de"
+      },
+      {
+        "type": "namespace",
+        "value": "swagger.io",
+        "rule": "DOMAIN-SUFFIX,swagger.io",
+        "enabled": true,
+        "name": "",
+        "id": "b4c1ca22"
+      },
+      {
+        "type": "namespace",
+        "value": "smartbear.co",
+        "rule": "DOMAIN-SUFFIX,smartbear.co",
+        "enabled": true,
+        "name": "",
+        "id": "85b2a068"
+      },
+      {
+        "type": "namespace",
+        "value": "snort.org",
+        "rule": "DOMAIN-SUFFIX,snort.org",
+        "enabled": true,
+        "name": "",
+        "id": "d9b8eaf1"
+      },
+      {
+        "type": "namespace",
+        "value": "redis.io",
+        "rule": "DOMAIN-SUFFIX,redis.io",
+        "enabled": true,
+        "name": "",
+        "id": "3c094eba"
+      },
+      {
+        "type": "namespace",
+        "value": "redislabs.com",
+        "rule": "DOMAIN-SUFFIX,redislabs.com",
+        "enabled": true,
+        "name": "",
+        "id": "09143c8b"
+      },
+      {
+        "type": "namespace",
+        "value": "snyk.io",
+        "rule": "DOMAIN-SUFFIX,snyk.io",
+        "enabled": true,
+        "name": "",
+        "id": "18022d1d"
+      },
+      {
+        "type": "namespace",
+        "value": "pingdom.com",
+        "rule": "DOMAIN-SUFFIX,pingdom.com",
+        "enabled": true,
+        "name": "",
+        "id": "05e849db"
+      },
+      {
+        "type": "namespace",
+        "value": "intuitibits.com",
+        "rule": "DOMAIN-SUFFIX,intuitibits.com",
+        "enabled": true,
+        "name": "",
+        "id": "ea45dedb"
+      },
+      {
+        "type": "namespace",
+        "value": "cpu-monkey.com",
+        "rule": "DOMAIN-SUFFIX,cpu-monkey.com",
+        "enabled": true,
+        "name": "",
+        "id": "e1c0f0bd"
+      },
+      {
+        "type": "namespace",
+        "value": "ocstore.com",
+        "rule": "DOMAIN-SUFFIX,ocstore.com",
+        "enabled": true,
+        "name": "",
+        "id": "b1ccc0bb"
+      },
+      {
+        "type": "namespace",
+        "value": "itninja.com",
+        "rule": "DOMAIN-SUFFIX,itninja.com",
+        "enabled": true,
+        "name": "",
+        "id": "2170a9b4"
+      },
+      {
+        "type": "namespace",
+        "value": "smartdeploy.com",
+        "rule": "DOMAIN-SUFFIX,smartdeploy.com",
+        "enabled": true,
+        "name": "",
+        "id": "09e21633"
+      },
+      {
+        "type": "namespace",
+        "value": "docs.liquibase.com",
+        "rule": "DOMAIN-SUFFIX,docs.liquibase.com",
+        "enabled": true,
+        "name": "",
+        "id": "af40f12d"
+      },
+      {
+        "type": "namespace",
+        "value": "ai-chat.bsg.brave.com",
+        "rule": "DOMAIN-SUFFIX,ai-chat.bsg.brave.com",
+        "enabled": true,
+        "name": "",
+        "id": "e951167b"
+      },
+      {
+        "type": "namespace",
+        "value": "tsmc.com",
+        "rule": "DOMAIN-SUFFIX,tsmc.com",
+        "enabled": true,
+        "name": "",
+        "id": "ea6921e9"
+      },
+      {
+        "type": "namespace",
+        "value": "ti.com",
+        "rule": "DOMAIN-SUFFIX,ti.com",
+        "enabled": true,
+        "name": "",
+        "id": "01b91127"
+      },
+      {
+        "type": "namespace",
+        "value": "mouser.fi",
+        "rule": "DOMAIN-SUFFIX,mouser.fi",
+        "enabled": true,
+        "name": "",
+        "id": "6e5ececa"
+      },
+      {
+        "type": "namespace",
+        "value": "analog.com",
+        "rule": "DOMAIN-SUFFIX,analog.com",
+        "enabled": true,
+        "name": "",
+        "id": "6bd12969"
+      },
+      {
+        "type": "namespace",
+        "value": "bestbuy.com",
+        "rule": "DOMAIN-SUFFIX,bestbuy.com",
+        "enabled": true,
+        "name": "",
+        "id": "2ec66f23"
+      },
+      {
+        "type": "namespace",
+        "value": "alza.hu",
+        "rule": "DOMAIN-SUFFIX,alza.hu",
+        "enabled": true,
+        "name": "",
+        "id": "84e07a4d"
+      },
+      {
+        "type": "namespace",
+        "value": "kinogo.la",
+        "rule": "DOMAIN-SUFFIX,kinogo.la",
+        "enabled": true,
+        "name": "",
+        "id": "044668a7"
+      },
+      {
+        "type": "namespace",
+        "value": "flir.com",
+        "rule": "DOMAIN-SUFFIX,flir.com",
+        "enabled": true,
+        "name": "",
+        "id": "5ce993a9"
+      },
+      {
+        "type": "namespace",
+        "value": "flir.eu",
+        "rule": "DOMAIN-SUFFIX,flir.eu",
+        "enabled": true,
+        "name": "",
+        "id": "941fcb55"
+      },
+      {
+        "type": "namespace",
+        "value": "newsroom.porsche.com",
+        "rule": "DOMAIN-SUFFIX,newsroom.porsche.com",
+        "enabled": true,
+        "name": "",
+        "id": "2125999a"
+      },
+      {
+        "type": "namespace",
+        "value": "att.com",
+        "rule": "DOMAIN-SUFFIX,att.com",
+        "enabled": true,
+        "name": "",
+        "id": "482a2ebe"
+      },
+      {
+        "type": "namespace",
+        "value": "middlewareinventory.com",
+        "rule": "DOMAIN-SUFFIX,middlewareinventory.com",
+        "enabled": true,
+        "name": "",
+        "id": "c45e3866"
+      },
+      {
+        "type": "namespace",
+        "value": "telemetr.io",
+        "rule": "DOMAIN-SUFFIX,telemetr.io",
+        "enabled": true,
+        "name": "",
+        "id": "9f3f85d3"
+      },
+      {
+        "type": "namespace",
+        "value": "amazfitwatchfaces.com",
+        "rule": "DOMAIN-SUFFIX,amazfitwatchfaces.com",
+        "enabled": true,
+        "name": "",
+        "id": "334dfd7a"
+      },
+      {
+        "type": "namespace",
+        "value": "nitropdf.com",
+        "rule": "DOMAIN-SUFFIX,nitropdf.com",
+        "enabled": true,
+        "name": "",
+        "id": "3a5d2c40"
+      },
+      {
+        "type": "namespace",
+        "value": "solarwinds.com",
+        "rule": "DOMAIN-SUFFIX,solarwinds.com",
+        "enabled": true,
+        "name": "",
+        "id": "6db0f9f2"
+      },
+      {
+        "type": "namespace",
+        "value": "monoprice.com",
+        "rule": "DOMAIN-SUFFIX,monoprice.com",
+        "enabled": true,
+        "name": "",
+        "id": "03d7a7aa"
+      },
+      {
+        "type": "namespace",
+        "value": "smartbear.com",
+        "rule": "DOMAIN-SUFFIX,smartbear.com",
+        "enabled": true,
+        "name": "",
+        "id": "6d14d07f"
+      },
+      {
+        "type": "namespace",
+        "value": "disctech.com",
+        "rule": "DOMAIN-SUFFIX,disctech.com",
+        "enabled": true,
+        "name": "",
+        "id": "b4ec6b57"
+      },
+      {
+        "type": "namespace",
+        "value": "cdw.com",
+        "rule": "DOMAIN-SUFFIX,cdw.com",
+        "enabled": true,
+        "name": "",
+        "id": "f8201479"
+      },
+      {
+        "type": "namespace",
+        "value": "lidarr.audio",
+        "rule": "DOMAIN-SUFFIX,lidarr.audio",
+        "enabled": true,
+        "name": "",
+        "id": "8c752108"
+      },
+      {
+        "type": "namespace",
+        "value": "medicalnewstoday.com",
+        "rule": "DOMAIN-SUFFIX,medicalnewstoday.com",
+        "enabled": true,
+        "name": "",
+        "id": "e1759068"
+      },
+      {
+        "type": "namespace",
+        "value": "healthline.com",
+        "rule": "DOMAIN-SUFFIX,healthline.com",
+        "enabled": true,
+        "name": "",
+        "id": "827966cb"
+      },
+      {
+        "type": "namespace",
+        "value": "shinyhardware.co.uk",
+        "rule": "DOMAIN-SUFFIX,shinyhardware.co.uk",
+        "enabled": true,
+        "name": "",
+        "id": "f8df854f"
+      },
+      {
+        "type": "namespace",
+        "value": "daemon-tools.cc",
+        "rule": "DOMAIN-SUFFIX,daemon-tools.cc",
+        "enabled": true,
+        "name": "",
+        "id": "e6134d58"
+      },
+      {
+        "type": "namespace",
+        "value": "buf.build",
+        "rule": "DOMAIN-SUFFIX,buf.build",
+        "enabled": true,
+        "name": "",
+        "id": "88c6962e"
+      },
+      {
+        "type": "namespace",
+        "value": "jamf.com",
+        "rule": "DOMAIN-SUFFIX,jamf.com",
+        "enabled": true,
+        "name": "",
+        "id": "b2e566f2"
+      },
+      {
+        "type": "namespace",
+        "value": "tableau.com",
+        "rule": "DOMAIN-SUFFIX,tableau.com",
+        "enabled": true,
+        "name": "",
+        "id": "962885b1"
+      },
+      {
+        "type": "namespace",
+        "value": "alphacoders.com",
+        "rule": "DOMAIN-SUFFIX,alphacoders.com",
+        "enabled": true,
+        "name": "",
+        "id": "279970a5"
+      },
+      {
+        "type": "namespace",
+        "value": "zedge.net",
+        "rule": "DOMAIN-SUFFIX,zedge.net",
+        "enabled": true,
+        "name": "",
+        "id": "fb3bdb02"
+      },
+      {
+        "type": "namespace",
+        "value": "cats.com",
+        "rule": "DOMAIN-SUFFIX,cats.com",
+        "enabled": true,
+        "name": "",
+        "id": "fcdfcba7"
+      },
+      {
+        "type": "namespace",
+        "value": "ldoceonline.com",
+        "rule": "DOMAIN-SUFFIX,ldoceonline.com",
+        "enabled": true,
+        "name": "",
+        "id": "a08ab4d6"
+      },
+      {
+        "type": "namespace",
+        "value": "pcgamesn.com",
+        "rule": "DOMAIN-SUFFIX,pcgamesn.com",
+        "enabled": true,
+        "name": "",
+        "id": "45201b8b"
+      },
+      {
+        "type": "namespace",
+        "value": "wikidot.com",
+        "rule": "DOMAIN-SUFFIX,wikidot.com",
+        "enabled": true,
+        "name": "",
+        "id": "123a24e2"
+      },
+      {
+        "type": "namespace",
+        "value": "wdfiles.com",
+        "rule": "DOMAIN-SUFFIX,wdfiles.com",
+        "enabled": true,
+        "name": "",
+        "id": "5d9f9d5d"
+      },
+      {
+        "type": "namespace",
+        "value": "freeimages.com",
+        "rule": "DOMAIN-SUFFIX,freeimages.com",
+        "enabled": true,
+        "name": "",
+        "id": "35d20008"
+      },
+      {
+        "type": "namespace",
+        "value": "pexels.com",
+        "rule": "DOMAIN-SUFFIX,pexels.com",
+        "enabled": true,
+        "name": "",
+        "id": "ac45b7df"
+      },
+      {
+        "type": "namespace",
+        "value": "flukenetworks.com",
+        "rule": "DOMAIN-SUFFIX,flukenetworks.com",
+        "enabled": true,
+        "name": "",
+        "id": "79e416d0"
+      },
+      {
+        "type": "namespace",
+        "value": "surveymonkey.com",
+        "rule": "DOMAIN-SUFFIX,surveymonkey.com",
+        "enabled": true,
+        "name": "",
+        "id": "bd2e19d2"
+      },
+      {
+        "type": "namespace",
+        "value": "f1.com",
+        "rule": "DOMAIN-SUFFIX,f1.com",
+        "enabled": true,
+        "name": "",
+        "id": "f63b98d5"
+      },
+      {
+        "type": "namespace",
+        "value": "formula1.com",
+        "rule": "DOMAIN-SUFFIX,formula1.com",
+        "enabled": true,
+        "name": "",
+        "id": "6d579ca8"
+      },
+      {
+        "type": "namespace",
+        "value": "sdxcentral.com",
+        "rule": "DOMAIN-SUFFIX,sdxcentral.com",
+        "enabled": true,
+        "name": "",
+        "id": "206d33b2"
+      },
+      {
+        "type": "namespace",
+        "value": "premierleague.com",
+        "rule": "DOMAIN-SUFFIX,premierleague.com",
+        "enabled": true,
+        "name": "",
+        "id": "46c062c5"
+      },
+      {
+        "type": "namespace",
+        "value": "footballapi.pulselive.com",
+        "rule": "DOMAIN-SUFFIX,footballapi.pulselive.com",
+        "enabled": true,
+        "name": "",
+        "id": "1ebfb3f0"
+      },
+      {
+        "type": "namespace",
+        "value": "hotels.com",
+        "rule": "DOMAIN-SUFFIX,hotels.com",
+        "enabled": true,
+        "name": "",
+        "id": "b287d67f"
+      },
+      {
+        "type": "namespace",
+        "value": "plugshare.com",
+        "rule": "DOMAIN-SUFFIX,plugshare.com",
+        "enabled": true,
+        "name": "",
+        "id": "7fb778f4"
+      },
+      {
+        "type": "namespace",
+        "value": "volkswagen-classic-parts.com",
+        "rule": "DOMAIN-SUFFIX,volkswagen-classic-parts.com",
+        "enabled": true,
+        "name": "",
+        "id": "b497b345"
+      },
+      {
+        "type": "namespace",
+        "value": "bitdefender.com",
+        "rule": "DOMAIN-SUFFIX,bitdefender.com",
+        "enabled": true,
+        "name": "",
+        "id": "c073fa45"
+      },
+      {
+        "type": "namespace",
+        "value": "buymeacoffee.com",
+        "rule": "DOMAIN-SUFFIX,buymeacoffee.com",
+        "enabled": true,
+        "name": "",
+        "id": "ba2579ee"
+      },
+      {
+        "type": "namespace",
+        "value": "prowlarr.com",
+        "rule": "DOMAIN-SUFFIX,prowlarr.com",
+        "enabled": true,
+        "name": "",
+        "id": "4d67095b"
+      },
+      {
+        "type": "namespace",
+        "value": "gofundme.com",
+        "rule": "DOMAIN-SUFFIX,gofundme.com",
+        "enabled": true,
+        "name": "",
+        "id": "ec6b79eb"
+      },
+      {
+        "type": "namespace",
+        "value": "buanzo.org",
+        "rule": "DOMAIN-SUFFIX,buanzo.org",
+        "enabled": true,
+        "name": "",
+        "id": "3abe4557"
+      },
+      {
+        "type": "namespace",
+        "value": "keysight.com",
+        "rule": "DOMAIN-SUFFIX,keysight.com",
+        "enabled": true,
+        "name": "",
+        "id": "bdb1fb65"
+      },
+      {
+        "type": "namespace",
+        "value": "nxp.com",
+        "rule": "DOMAIN-SUFFIX,nxp.com",
+        "enabled": true,
+        "name": "",
+        "id": "7a3044fd"
+      },
+      {
+        "type": "namespace",
+        "value": "upwork.com",
+        "rule": "DOMAIN-SUFFIX,upwork.com",
+        "enabled": true,
+        "name": "",
+        "id": "5443c4b6"
+      },
+      {
+        "type": "namespace",
+        "value": "nike.com",
+        "rule": "DOMAIN-SUFFIX,nike.com",
+        "enabled": true,
+        "name": "",
+        "id": "a90e6538"
+      },
+      {
+        "type": "namespace",
+        "value": "adidas.com",
+        "rule": "DOMAIN-SUFFIX,adidas.com",
+        "enabled": true,
+        "name": "",
+        "id": "1ed0b6cc"
+      },
+      {
+        "type": "namespace",
+        "value": "abercrombie.com",
+        "rule": "DOMAIN-SUFFIX,abercrombie.com",
+        "enabled": true,
+        "name": "",
+        "id": "641d33a8"
+      },
+      {
+        "type": "namespace",
+        "value": "hollisterco.com",
+        "rule": "DOMAIN-SUFFIX,hollisterco.com",
+        "enabled": true,
+        "name": "",
+        "id": "09e2cf51"
+      },
+      {
+        "type": "namespace",
+        "value": "onshape.com",
+        "rule": "DOMAIN-SUFFIX,onshape.com",
+        "enabled": true,
+        "name": "",
+        "id": "e70b6061"
+      },
+      {
+        "type": "namespace",
+        "value": "newark.com",
+        "rule": "DOMAIN-SUFFIX,newark.com",
+        "enabled": true,
+        "name": "",
+        "id": "3f83e019"
+      },
+      {
+        "type": "namespace",
+        "value": "elevenlabs.io",
+        "rule": "DOMAIN-SUFFIX,elevenlabs.io",
+        "enabled": true,
+        "name": "",
+        "id": "f91cfc7e"
+      },
+      {
+        "type": "namespace",
+        "value": "lifehacker.com",
+        "rule": "DOMAIN-SUFFIX,lifehacker.com",
+        "enabled": true,
+        "name": "",
+        "id": "6fe5e7f9"
+      },
+      {
+        "type": "namespace",
+        "value": "blinkshot.io",
+        "rule": "DOMAIN-SUFFIX,blinkshot.io",
+        "enabled": true,
+        "name": "",
+        "id": "5670607b"
+      },
+      {
+        "type": "namespace",
+        "value": "weebly.com",
+        "rule": "DOMAIN-SUFFIX,weebly.com",
+        "enabled": true,
+        "name": "",
+        "id": "10a0fbaa"
+      },
+      {
+        "type": "namespace",
+        "value": "credly.com",
+        "rule": "DOMAIN-SUFFIX,credly.com",
+        "enabled": true,
+        "name": "",
+        "id": "ca6a1b38"
+      },
+      {
+        "type": "namespace",
+        "value": "hostinger.com",
+        "rule": "DOMAIN-SUFFIX,hostinger.com",
+        "enabled": true,
+        "name": "",
+        "id": "e39c3752"
+      },
+      {
+        "type": "namespace",
+        "value": "ngrok.com",
+        "rule": "DOMAIN-SUFFIX,ngrok.com",
+        "enabled": true,
+        "name": "",
+        "id": "97c415c1"
+      },
+      {
+        "type": "namespace",
+        "value": "getoutline.com",
+        "rule": "DOMAIN-SUFFIX,getoutline.com",
+        "enabled": true,
+        "name": "",
+        "id": "2735b747"
+      },
+      {
+        "type": "namespace",
+        "value": "sephora.com",
+        "rule": "DOMAIN-SUFFIX,sephora.com",
+        "enabled": true,
+        "name": "",
+        "id": "10dcb544"
+      },
+      {
+        "type": "namespace",
+        "value": "guilded.gg",
+        "rule": "DOMAIN-SUFFIX,guilded.gg",
+        "enabled": true,
+        "name": "",
+        "id": "aaaecad7"
+      },
+      {
+        "type": "namespace",
+        "value": "shop.gameloft.com",
+        "rule": "DOMAIN-SUFFIX,shop.gameloft.com",
+        "enabled": true,
+        "name": "",
+        "id": "a1030a61"
+      },
+      {
+        "type": "namespace",
+        "value": "extremetech.com",
+        "rule": "DOMAIN-SUFFIX,extremetech.com",
+        "enabled": true,
+        "name": "",
+        "id": "f0cbc1f2"
+      },
+      {
+        "type": "namespace",
+        "value": "nfl.com",
+        "rule": "DOMAIN-SUFFIX,nfl.com",
+        "enabled": true,
+        "name": "",
+        "id": "44ddf22a"
+      },
+      {
+        "type": "namespace",
+        "value": "mixcloud.com",
+        "rule": "DOMAIN-SUFFIX,mixcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "44b87f59"
+      },
+      {
+        "type": "namespace",
+        "value": "kmail-lists.com",
+        "rule": "DOMAIN-SUFFIX,kmail-lists.com",
+        "enabled": true,
+        "name": "",
+        "id": "1be2ec81"
+      },
+      {
+        "type": "namespace",
+        "value": "neo4j.com",
+        "rule": "DOMAIN-SUFFIX,neo4j.com",
+        "enabled": true,
+        "name": "",
+        "id": "8dcb1f5f"
+      },
+      {
+        "type": "namespace",
+        "value": "sora.com",
+        "rule": "DOMAIN-SUFFIX,sora.com",
+        "enabled": true,
+        "name": "",
+        "id": "b8c18a3a"
+      },
+      {
+        "type": "namespace",
+        "value": "coingate.com",
+        "rule": "DOMAIN-SUFFIX,coingate.com",
+        "enabled": true,
+        "name": "",
+        "id": "7c63c1e6"
+      },
+      {
+        "type": "namespace",
+        "value": "global.fncstatic.com",
+        "rule": "DOMAIN-SUFFIX,global.fncstatic.com",
+        "enabled": true,
+        "name": "",
+        "id": "98831c16"
+      },
+      {
+        "type": "namespace",
+        "value": "cvedetails.com",
+        "rule": "DOMAIN-SUFFIX,cvedetails.com",
+        "enabled": true,
+        "name": "",
+        "id": "e99045da"
+      },
+      {
+        "type": "namespace",
+        "value": "broncosportforum.com",
+        "rule": "DOMAIN-SUFFIX,broncosportforum.com",
+        "enabled": true,
+        "name": "",
+        "id": "7cad4cec"
+      },
+      {
+        "type": "namespace",
+        "value": "lightning.ai",
+        "rule": "DOMAIN-SUFFIX,lightning.ai",
+        "enabled": true,
+        "name": "",
+        "id": "faea2580"
+      },
+      {
+        "type": "namespace",
+        "value": "timberland.de",
+        "rule": "DOMAIN-SUFFIX,timberland.de",
+        "enabled": true,
+        "name": "",
+        "id": "224f5260"
+      },
+      {
+        "type": "namespace",
+        "value": "framer.com",
+        "rule": "DOMAIN-SUFFIX,framer.com",
+        "enabled": true,
+        "name": "",
+        "id": "3ba80553"
+      },
+      {
+        "type": "namespace",
+        "value": "framerstatic.com",
+        "rule": "DOMAIN-SUFFIX,framerstatic.com",
+        "enabled": true,
+        "name": "",
+        "id": "caacf519"
+      },
+      {
+        "type": "namespace",
+        "value": "framercanvas.com",
+        "rule": "DOMAIN-SUFFIX,framercanvas.com",
+        "enabled": true,
+        "name": "",
+        "id": "e3f321b6"
+      },
+      {
+        "type": "namespace",
+        "value": "framerusercontent.com",
+        "rule": "DOMAIN-SUFFIX,framerusercontent.com",
+        "enabled": true,
+        "name": "",
+        "id": "3b0821e0"
+      },
+      {
+        "type": "namespace",
+        "value": "framercdn.com",
+        "rule": "DOMAIN-SUFFIX,framercdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "cae25fa3"
+      },
+      {
+        "type": "namespace",
+        "value": "framer.app",
+        "rule": "DOMAIN-SUFFIX,framer.app",
+        "enabled": true,
+        "name": "",
+        "id": "26434eb5"
+      },
+      {
+        "type": "namespace",
+        "value": "squareup.com",
+        "rule": "DOMAIN-SUFFIX,squareup.com",
+        "enabled": true,
+        "name": "",
+        "id": "ca47398b"
+      },
+      {
+        "type": "namespace",
+        "value": "research.net",
+        "rule": "DOMAIN-SUFFIX,research.net",
+        "enabled": true,
+        "name": "",
+        "id": "f1f4c205"
+      },
+      {
+        "type": "namespace",
+        "value": "htmhell.dev",
+        "rule": "DOMAIN-SUFFIX,htmhell.dev",
+        "enabled": true,
+        "name": "",
+        "id": "a9f964e1"
+      },
+      {
+        "type": "namespace",
+        "value": "carrefouruae.com",
+        "rule": "DOMAIN-SUFFIX,carrefouruae.com",
+        "enabled": true,
+        "name": "",
+        "id": "a1dba3d8"
+      },
+      {
+        "type": "namespace",
+        "value": "synoforum.com",
+        "rule": "DOMAIN-SUFFIX,synoforum.com",
+        "enabled": true,
+        "name": "",
+        "id": "fcc38b8a"
+      },
+      {
+        "type": "namespace",
+        "value": "wpengine.com",
+        "rule": "DOMAIN-SUFFIX,wpengine.com",
+        "enabled": true,
+        "name": "",
+        "id": "63909f65"
+      },
+      {
+        "type": "namespace",
+        "value": "webnames.ca",
+        "rule": "DOMAIN-SUFFIX,webnames.ca",
+        "enabled": true,
+        "name": "",
+        "id": "9eab07ad"
+      },
+      {
+        "type": "namespace",
+        "value": "veeam.com",
+        "rule": "DOMAIN-SUFFIX,veeam.com",
+        "enabled": true,
+        "name": "",
+        "id": "2a8c0c01"
+      },
+      {
+        "type": "namespace",
+        "value": "flourish.studio",
+        "rule": "DOMAIN-SUFFIX,flourish.studio",
+        "enabled": true,
+        "name": "",
+        "id": "e24af2c2"
+      },
+      {
+        "type": "namespace",
+        "value": "groq.com",
+        "rule": "DOMAIN-SUFFIX,groq.com",
+        "enabled": true,
+        "name": "",
+        "id": "7e439bd4"
+      },
+      {
+        "type": "namespace",
+        "value": "walmart.com",
+        "rule": "DOMAIN-SUFFIX,walmart.com",
+        "enabled": true,
+        "name": "",
+        "id": "538f6774"
+      },
+      {
+        "type": "namespace",
+        "value": "codeium.com",
+        "rule": "DOMAIN-SUFFIX,codeium.com",
+        "enabled": true,
+        "name": "",
+        "id": "6b84f83e"
+      },
+      {
+        "type": "namespace",
+        "value": "digitalcontent.sky",
+        "rule": "DOMAIN-SUFFIX,digitalcontent.sky",
+        "enabled": true,
+        "name": "",
+        "id": "6abcc418"
+      },
+      {
+        "type": "namespace",
+        "value": "sky.com",
+        "rule": "DOMAIN-SUFFIX,sky.com",
+        "enabled": true,
+        "name": "",
+        "id": "9ab2cd5d"
+      },
+      {
+        "type": "namespace",
+        "value": "skycdp.com",
+        "rule": "DOMAIN-SUFFIX,skycdp.com",
+        "enabled": true,
+        "name": "",
+        "id": "d59a522b"
+      },
+      {
+        "type": "namespace",
+        "value": "broadcom.com",
+        "rule": "DOMAIN-SUFFIX,broadcom.com",
+        "enabled": true,
+        "name": "",
+        "id": "727066f1"
+      },
+      {
+        "type": "namespace",
+        "value": "bitnami.com",
+        "rule": "DOMAIN-SUFFIX,bitnami.com",
+        "enabled": true,
+        "name": "",
+        "id": "af908ecf"
+      },
+      {
+        "type": "namespace",
+        "value": "recraft.ai",
+        "rule": "DOMAIN-SUFFIX,recraft.ai",
+        "enabled": true,
+        "name": "",
+        "id": "b3d4e906"
+      },
+      {
+        "type": "namespace",
+        "value": "pkgs.tailscale.com",
+        "rule": "DOMAIN-SUFFIX,pkgs.tailscale.com",
+        "enabled": true,
+        "name": "",
+        "id": "4725d496"
+      },
+      {
+        "type": "namespace",
+        "value": "builds.parsec.app",
+        "rule": "DOMAIN-SUFFIX,builds.parsec.app",
+        "enabled": true,
+        "name": "",
+        "id": "072038a3"
+      },
+      {
+        "type": "namespace",
+        "value": "public.parsec.app",
+        "rule": "DOMAIN-SUFFIX,public.parsec.app",
+        "enabled": true,
+        "name": "",
+        "id": "b9100668"
+      },
+      {
+        "type": "namespace",
+        "value": "pcmag.com",
+        "rule": "DOMAIN-SUFFIX,pcmag.com",
+        "enabled": true,
+        "name": "",
+        "id": "e6d0a6c9"
+      },
+      {
+        "type": "namespace",
+        "value": "zapier.com",
+        "rule": "DOMAIN-SUFFIX,zapier.com",
+        "enabled": true,
+        "name": "",
+        "id": "672443ae"
+      },
+      {
+        "type": "namespace",
+        "value": "ducati.com",
+        "rule": "DOMAIN-SUFFIX,ducati.com",
+        "enabled": true,
+        "name": "",
+        "id": "74364055"
+      },
+      {
+        "type": "namespace",
+        "value": "btod.com",
+        "rule": "DOMAIN-SUFFIX,btod.com",
+        "enabled": true,
+        "name": "",
+        "id": "2cb92194"
+      },
+      {
+        "type": "namespace",
+        "value": "onfastspring.com",
+        "rule": "DOMAIN-SUFFIX,onfastspring.com",
+        "enabled": true,
+        "name": "",
+        "id": "c14a10c5"
+      },
+      {
+        "type": "namespace",
+        "value": "chaos.com",
+        "rule": "DOMAIN-SUFFIX,chaos.com",
+        "enabled": true,
+        "name": "",
+        "id": "bd6472b6"
+      },
+      {
+        "type": "namespace",
+        "value": "sketchup.com",
+        "rule": "DOMAIN-SUFFIX,sketchup.com",
+        "enabled": true,
+        "name": "",
+        "id": "41b1be81"
+      },
+      {
+        "type": "namespace",
+        "value": "data-cdn.mbamupdates.com",
+        "rule": "DOMAIN-SUFFIX,data-cdn.mbamupdates.com",
+        "enabled": true,
+        "name": "",
+        "id": "073bbcd0"
+      },
+      {
+        "type": "namespace",
+        "value": "community.sophos.com",
+        "rule": "DOMAIN-SUFFIX,community.sophos.com",
+        "enabled": true,
+        "name": "",
+        "id": "f0d9b304"
+      },
+      {
+        "type": "namespace",
+        "value": "intelix.sophos.com",
+        "rule": "DOMAIN-SUFFIX,intelix.sophos.com",
+        "enabled": true,
+        "name": "",
+        "id": "4203dd52"
+      },
+      {
+        "type": "namespace",
+        "value": "platform.activestate.com",
+        "rule": "DOMAIN-SUFFIX,platform.activestate.com",
+        "enabled": true,
+        "name": "",
+        "id": "669a8f3f"
+      },
+      {
+        "type": "namespace",
+        "value": "w.atwiki.jp",
+        "rule": "DOMAIN-SUFFIX,w.atwiki.jp",
+        "enabled": true,
+        "name": "",
+        "id": "fb1a2961"
+      },
+      {
+        "type": "namespace",
+        "value": "www3.corsair.com",
+        "rule": "DOMAIN-SUFFIX,www3.corsair.com",
+        "enabled": true,
+        "name": "",
+        "id": "0e16dad1"
+      },
+      {
+        "type": "namespace",
+        "value": "groupon.com",
+        "rule": "DOMAIN-SUFFIX,groupon.com",
+        "enabled": true,
+        "name": "",
+        "id": "5fb9a5a7"
+      },
+      {
+        "type": "namespace",
+        "value": "qt.io",
+        "rule": "DOMAIN-SUFFIX,qt.io",
+        "enabled": true,
+        "name": "",
+        "id": "b9c875d2"
+      },
+      {
+        "type": "namespace",
+        "value": "watermarkremover.io",
+        "rule": "DOMAIN-SUFFIX,watermarkremover.io",
+        "enabled": true,
+        "name": "",
+        "id": "7b19cd94"
+      },
+      {
+        "type": "namespace",
+        "value": "cdromance.org",
+        "rule": "DOMAIN-SUFFIX,cdromance.org",
+        "enabled": true,
+        "name": "",
+        "id": "9912c359"
+      },
+      {
+        "type": "namespace",
+        "value": "singlekey-id.com",
+        "rule": "DOMAIN-SUFFIX,singlekey-id.com",
+        "enabled": true,
+        "name": "",
+        "id": "1da1c890"
+      },
+      {
+        "type": "namespace",
+        "value": "home-connect.com",
+        "rule": "DOMAIN-SUFFIX,home-connect.com",
+        "enabled": true,
+        "name": "",
+        "id": "dc2f4236"
+      },
+      {
+        "type": "namespace",
+        "value": "omnissa.com",
+        "rule": "DOMAIN-SUFFIX,omnissa.com",
+        "enabled": true,
+        "name": "",
+        "id": "050a5e3d"
+      },
+      {
+        "type": "namespace",
+        "value": "dell.com",
+        "rule": "DOMAIN-SUFFIX,dell.com",
+        "enabled": true,
+        "name": "",
+        "id": "7028f27e"
+      },
+      {
+        "type": "namespace",
+        "value": "dellcdn.com",
+        "rule": "DOMAIN-SUFFIX,dellcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "730f9bfe"
+      },
+      {
+        "type": "namespace",
+        "value": "cisco.com",
+        "rule": "DOMAIN-SUFFIX,cisco.com",
+        "enabled": true,
+        "name": "",
+        "id": "5630b311"
+      },
+      {
+        "type": "namespace",
+        "value": "fluke.com",
+        "rule": "DOMAIN-SUFFIX,fluke.com",
+        "enabled": true,
+        "name": "",
+        "id": "a16c5e3f"
+      },
+      {
+        "type": "namespace",
+        "value": "iherb.com",
+        "rule": "DOMAIN-SUFFIX,iherb.com",
+        "enabled": true,
+        "name": "",
+        "id": "2631e253"
+      },
+      {
+        "type": "namespace",
+        "value": "spotify.com",
+        "rule": "DOMAIN-SUFFIX,spotify.com",
+        "enabled": true,
+        "name": "",
+        "id": "3fba93a3"
+      },
+      {
+        "type": "namespace",
+        "value": "widgetapp.stream",
+        "rule": "DOMAIN-SUFFIX,widgetapp.stream",
+        "enabled": true,
+        "name": "",
+        "id": "896cd847"
+      },
+      {
+        "type": "namespace",
+        "value": "weather.com",
+        "rule": "DOMAIN-SUFFIX,weather.com",
+        "enabled": true,
+        "name": "",
+        "id": "f563b917"
+      },
+      {
+        "type": "namespace",
+        "value": "typing.com",
+        "rule": "DOMAIN-SUFFIX,typing.com",
+        "enabled": true,
+        "name": "",
+        "id": "3799394d"
+      },
+      {
+        "type": "namespace",
+        "value": "remove.bg",
+        "rule": "DOMAIN-SUFFIX,remove.bg",
+        "enabled": true,
+        "name": "",
+        "id": "b73e87bc"
+      },
+      {
+        "type": "namespace",
+        "value": "unscreen.com",
+        "rule": "DOMAIN-SUFFIX,unscreen.com",
+        "enabled": true,
+        "name": "",
+        "id": "bbbea743"
+      },
+      {
+        "type": "namespace",
+        "value": "remna.st",
+        "rule": "DOMAIN-SUFFIX,remna.st",
+        "enabled": true,
+        "name": "",
+        "id": "e6248ecc"
+      },
+      {
+        "type": "namespace",
+        "value": "nordvpn.com",
+        "rule": "DOMAIN-SUFFIX,nordvpn.com",
+        "enabled": true,
+        "name": "",
+        "id": "6fb6391a"
+      },
+      {
+        "type": "namespace",
+        "value": "nordaccount.com",
+        "rule": "DOMAIN-SUFFIX,nordaccount.com",
+        "enabled": true,
+        "name": "",
+        "id": "e6b929b3"
+      },
+      {
+        "type": "namespace",
+        "value": "nordcdn.com",
+        "rule": "DOMAIN-SUFFIX,nordcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "233e0203"
+      },
+      {
+        "type": "namespace",
+        "value": "ghostrc.game.idtech.services",
+        "rule": "DOMAIN-SUFFIX,ghostrc.game.idtech.services",
+        "enabled": true,
+        "name": "",
+        "id": "9a35814b"
+      },
+      {
+        "type": "namespace",
+        "value": "spitfireaudio.com",
+        "rule": "DOMAIN-SUFFIX,spitfireaudio.com",
+        "enabled": true,
+        "name": "",
+        "id": "26651c22"
+      },
+      {
+        "type": "namespace",
+        "value": "uaudio.com",
+        "rule": "DOMAIN-SUFFIX,uaudio.com",
+        "enabled": true,
+        "name": "",
+        "id": "64006618"
+      },
+      {
+        "type": "namespace",
+        "value": "support.xerox.com",
+        "rule": "DOMAIN-SUFFIX,support.xerox.com",
+        "enabled": true,
+        "name": "",
+        "id": "60b5ab8b"
+      },
+      {
+        "type": "namespace",
+        "value": "tutanota.com",
+        "rule": "DOMAIN-SUFFIX,tutanota.com",
+        "enabled": true,
+        "name": "",
+        "id": "7f734ddf"
+      },
+      {
+        "type": "namespace",
+        "value": "contabo.com",
+        "rule": "DOMAIN-SUFFIX,contabo.com",
+        "enabled": true,
+        "name": "",
+        "id": "538cf343"
+      },
+      {
+        "type": "namespace",
+        "value": "forum.netgate.com",
+        "rule": "DOMAIN-SUFFIX,forum.netgate.com",
+        "enabled": true,
+        "name": "",
+        "id": "3fce8b73"
+      },
+      {
+        "type": "namespace",
+        "value": "talosintelligence.com",
+        "rule": "DOMAIN-SUFFIX,talosintelligence.com",
+        "enabled": true,
+        "name": "",
+        "id": "428b088f"
+      },
+      {
+        "type": "namespace",
+        "value": "tempmail.plus",
+        "rule": "DOMAIN-SUFFIX,tempmail.plus",
+        "enabled": true,
+        "name": "",
+        "id": "a5ba1f87"
+      },
+      {
+        "type": "namespace",
+        "value": "corsair.com",
+        "rule": "DOMAIN-SUFFIX,corsair.com",
+        "enabled": true,
+        "name": "",
+        "id": "6d769751"
+      },
+      {
+        "type": "namespace",
+        "value": "mattermost.com",
+        "rule": "DOMAIN-SUFFIX,mattermost.com",
+        "enabled": true,
+        "name": "",
+        "id": "89e00bae"
+      },
+      {
+        "type": "namespace",
+        "value": "sentry.io",
+        "rule": "DOMAIN-SUFFIX,sentry.io",
+        "enabled": true,
+        "name": "",
+        "id": "b6ef94c7"
+      },
+      {
+        "type": "namespace",
+        "value": "sentry.dev",
+        "rule": "DOMAIN-SUFFIX,sentry.dev",
+        "enabled": true,
+        "name": "",
+        "id": "820b85b7"
+      },
+      {
+        "type": "namespace",
+        "value": "torrenteditor.com",
+        "rule": "DOMAIN-SUFFIX,torrenteditor.com",
+        "enabled": true,
+        "name": "",
+        "id": "5d781559"
+      },
+      {
+        "type": "namespace",
+        "value": "ntp.msn.com",
+        "rule": "DOMAIN-SUFFIX,ntp.msn.com",
+        "enabled": true,
+        "name": "",
+        "id": "eceaa584"
+      },
+      {
+        "type": "namespace",
+        "value": "oracle.com",
+        "rule": "DOMAIN-SUFFIX,oracle.com",
+        "enabled": true,
+        "name": "",
+        "id": "e062cd3f"
+      },
+      {
+        "type": "namespace",
+        "value": "etsy.com",
+        "rule": "DOMAIN-SUFFIX,etsy.com",
+        "enabled": true,
+        "name": "",
+        "id": "d4f7ccdf"
+      },
+      {
+        "type": "namespace",
+        "value": "myheritage.com",
+        "rule": "DOMAIN-SUFFIX,myheritage.com",
+        "enabled": true,
+        "name": "",
+        "id": "9d949cfd"
+      },
+      {
+        "type": "namespace",
+        "value": "mssg.me",
+        "rule": "DOMAIN-SUFFIX,mssg.me",
+        "enabled": true,
+        "name": "",
+        "id": "f7385ae2"
+      },
+      {
+        "type": "namespace",
+        "value": "reve.art",
+        "rule": "DOMAIN-SUFFIX,reve.art",
+        "enabled": true,
+        "name": "",
+        "id": "2033a471"
+      },
+      {
+        "type": "namespace",
+        "value": "clip.opus.pro",
+        "rule": "DOMAIN-SUFFIX,clip.opus.pro",
+        "enabled": true,
+        "name": "",
+        "id": "c44a28e7"
+      },
+      {
+        "type": "namespace",
+        "value": "capacitorjs.com",
+        "rule": "DOMAIN-SUFFIX,capacitorjs.com",
+        "enabled": true,
+        "name": "",
+        "id": "4ae0bacd"
+      },
+      {
+        "type": "namespace",
+        "value": "manus.im",
+        "rule": "DOMAIN-SUFFIX,manus.im",
+        "enabled": true,
+        "name": "",
+        "id": "56c11788"
+      },
+      {
+        "type": "namespace",
+        "value": "files.manus.cdn",
+        "rule": "DOMAIN-SUFFIX,files.manus.cdn",
+        "enabled": true,
+        "name": "",
+        "id": "99763b56"
+      },
+      {
+        "type": "namespace",
+        "value": "gpu-monkey.com",
+        "rule": "DOMAIN-SUFFIX,gpu-monkey.com",
+        "enabled": true,
+        "name": "",
+        "id": "b2b24bfc"
+      },
+      {
+        "type": "namespace",
+        "value": "amplitude.com",
+        "rule": "DOMAIN-SUFFIX,amplitude.com",
+        "enabled": true,
+        "name": "",
+        "id": "59ebafcd"
+      },
+      {
+        "type": "namespace",
+        "value": "clamav.net",
+        "rule": "DOMAIN-SUFFIX,clamav.net",
+        "enabled": true,
+        "name": "",
+        "id": "76a043a0"
+      },
+      {
+        "type": "namespace",
+        "value": "max.com",
+        "rule": "DOMAIN-SUFFIX,max.com",
+        "enabled": true,
+        "name": "",
+        "id": "a4eb7447"
+      },
+      {
+        "type": "namespace",
+        "value": "disneyplus.com",
+        "rule": "DOMAIN-SUFFIX,disneyplus.com",
+        "enabled": true,
+        "name": "",
+        "id": "8df341ed"
+      },
+      {
+        "type": "namespace",
+        "value": "hbomax.com",
+        "rule": "DOMAIN-SUFFIX,hbomax.com",
+        "enabled": true,
+        "name": "",
+        "id": "f1cf646a"
+      },
+      {
+        "type": "namespace",
+        "value": "vyos.io",
+        "rule": "DOMAIN-SUFFIX,vyos.io",
+        "enabled": true,
+        "name": "",
+        "id": "bed854a7"
+      },
+      {
+        "type": "namespace",
+        "value": "watchguard.com",
+        "rule": "DOMAIN-SUFFIX,watchguard.com",
+        "enabled": true,
+        "name": "",
+        "id": "4e0f2d9d"
+      },
+      {
+        "type": "namespace",
+        "value": "truthsocial.com",
+        "rule": "DOMAIN-SUFFIX,truthsocial.com",
+        "enabled": true,
+        "name": "",
+        "id": "37c5790d"
+      },
+      {
+        "type": "namespace",
+        "value": "spiceworks.com",
+        "rule": "DOMAIN-SUFFIX,spiceworks.com",
+        "enabled": true,
+        "name": "",
+        "id": "11055652"
+      },
+      {
+        "type": "namespace",
+        "value": "windsurf.com",
+        "rule": "DOMAIN-SUFFIX,windsurf.com",
+        "enabled": true,
+        "name": "",
+        "id": "91c159ee"
+      },
+      {
+        "type": "namespace",
+        "value": "flyertalk.com",
+        "rule": "DOMAIN-SUFFIX,flyertalk.com",
+        "enabled": true,
+        "name": "",
+        "id": "12acdddf"
+      },
+      {
+        "type": "namespace",
+        "value": "techbargains.com",
+        "rule": "DOMAIN-SUFFIX,techbargains.com",
+        "enabled": true,
+        "name": "",
+        "id": "7885b713"
+      },
+      {
+        "type": "namespace",
+        "value": "bosch.com",
+        "rule": "DOMAIN-SUFFIX,bosch.com",
+        "enabled": true,
+        "name": "",
+        "id": "16186a84"
+      },
+      {
+        "type": "namespace",
+        "value": "boschautoparts.com",
+        "rule": "DOMAIN-SUFFIX,boschautoparts.com",
+        "enabled": true,
+        "name": "",
+        "id": "d7233c9b"
+      },
+      {
+        "type": "namespace",
+        "value": "boschaftermarket.com",
+        "rule": "DOMAIN-SUFFIX,boschaftermarket.com",
+        "enabled": true,
+        "name": "",
+        "id": "8b37e21d"
+      },
+      {
+        "type": "namespace",
+        "value": "langdock.com",
+        "rule": "DOMAIN-SUFFIX,langdock.com",
+        "enabled": true,
+        "name": "",
+        "id": "4834491e"
+      },
+      {
+        "type": "namespace",
+        "value": "mailinator.com",
+        "rule": "DOMAIN-SUFFIX,mailinator.com",
+        "enabled": true,
+        "name": "",
+        "id": "397c2bb5"
+      },
+      {
+        "type": "namespace",
+        "value": "marvelsnap.com",
+        "rule": "DOMAIN-SUFFIX,marvelsnap.com",
+        "enabled": true,
+        "name": "",
+        "id": "ecfcf768"
+      },
+      {
+        "type": "namespace",
+        "value": "seconddinnertech.com",
+        "rule": "DOMAIN-SUFFIX,seconddinnertech.com",
+        "enabled": true,
+        "name": "",
+        "id": "924aa36e"
+      },
+      {
+        "type": "namespace",
+        "value": "snapgametech.com",
+        "rule": "DOMAIN-SUFFIX,snapgametech.com",
+        "enabled": true,
+        "name": "",
+        "id": "9d1ac688"
+      },
+      {
+        "type": "namespace",
+        "value": "fxnetworks.com",
+        "rule": "DOMAIN-SUFFIX,fxnetworks.com",
+        "enabled": true,
+        "name": "",
+        "id": "eba0fa4f"
+      },
+      {
+        "type": "namespace",
+        "value": "deepl.com",
+        "rule": "DOMAIN-SUFFIX,deepl.com",
+        "enabled": true,
+        "name": "",
+        "id": "40c03d02"
+      },
+      {
+        "type": "namespace",
+        "value": "citrix.com",
+        "rule": "DOMAIN-SUFFIX,citrix.com",
+        "enabled": true,
+        "name": "",
+        "id": "494bf122"
+      },
+      {
+        "type": "namespace",
+        "value": "cisecurity.org",
+        "rule": "DOMAIN-SUFFIX,cisecurity.org",
+        "enabled": true,
+        "name": "",
+        "id": "8398f13d"
+      },
+      {
+        "type": "namespace",
+        "value": "home.by.me",
+        "rule": "DOMAIN-SUFFIX,home.by.me",
+        "enabled": true,
+        "name": "",
+        "id": "a4c7442f"
+      },
+      {
+        "type": "namespace",
+        "value": "penguinrandomhouse.com",
+        "rule": "DOMAIN-SUFFIX,penguinrandomhouse.com",
+        "enabled": true,
+        "name": "",
+        "id": "0dfcfa2c"
+      },
+      {
+        "type": "namespace",
+        "value": "metopera.org",
+        "rule": "DOMAIN-SUFFIX,metopera.org",
+        "enabled": true,
+        "name": "",
+        "id": "f4f95886"
+      },
+      {
+        "type": "namespace",
+        "value": "penguin.com",
+        "rule": "DOMAIN-SUFFIX,penguin.com",
+        "enabled": true,
+        "name": "",
+        "id": "0456736b"
+      },
+      {
+        "type": "namespace",
+        "value": "semrush.com",
+        "rule": "DOMAIN-SUFFIX,semrush.com",
+        "enabled": true,
+        "name": "",
+        "id": "aa51c575"
+      },
+      {
+        "type": "namespace",
+        "value": "filebin.net",
+        "rule": "DOMAIN-SUFFIX,filebin.net",
+        "enabled": true,
+        "name": "",
+        "id": "44bb8d4c"
+      },
+      {
+        "type": "namespace",
+        "value": "andrevi.ch",
+        "rule": "DOMAIN-SUFFIX,andrevi.ch",
+        "enabled": true,
+        "name": "",
+        "id": "a01160d0"
+      },
+      {
+        "type": "namespace",
+        "value": "ansys.com",
+        "rule": "DOMAIN-SUFFIX,ansys.com",
+        "enabled": true,
+        "name": "",
+        "id": "985e04f6"
+      },
+      {
+        "type": "namespace",
+        "value": "clickup.com",
+        "rule": "DOMAIN-SUFFIX,clickup.com",
+        "enabled": true,
+        "name": "",
+        "id": "b1993c00"
+      },
+      {
+        "type": "namespace",
+        "value": "mailerlite.com",
+        "rule": "DOMAIN-SUFFIX,mailerlite.com",
+        "enabled": true,
+        "name": "",
+        "id": "853e7d0e"
+      },
+      {
+        "type": "namespace",
+        "value": "hc-ping.com",
+        "rule": "DOMAIN-SUFFIX,hc-ping.com",
+        "enabled": true,
+        "name": "",
+        "id": "6199da5b"
+      },
+      {
+        "type": "namespace",
+        "value": "hchk.io",
+        "rule": "DOMAIN-SUFFIX,hchk.io",
+        "enabled": true,
+        "name": "",
+        "id": "35a896a1"
+      },
+      {
+        "type": "namespace",
+        "value": "expandrive.com",
+        "rule": "DOMAIN-SUFFIX,expandrive.com",
+        "enabled": true,
+        "name": "",
+        "id": "6ce2c7ee"
+      },
+      {
+        "type": "namespace",
+        "value": "editorx.com",
+        "rule": "DOMAIN-SUFFIX,editorx.com",
+        "enabled": true,
+        "name": "",
+        "id": "920d52c4"
+      },
+      {
+        "type": "namespace",
+        "value": "myqrcode.com",
+        "rule": "DOMAIN-SUFFIX,myqrcode.com",
+        "enabled": true,
+        "name": "",
+        "id": "d4d730dc"
+      },
+      {
+        "type": "namespace",
+        "value": "openrouter.ai",
+        "rule": "DOMAIN-SUFFIX,openrouter.ai",
+        "enabled": true,
+        "name": "",
+        "id": "1363b12e"
+      },
+      {
+        "type": "namespace",
+        "value": "trae.ai",
+        "rule": "DOMAIN-SUFFIX,trae.ai",
+        "enabled": true,
+        "name": "",
+        "id": "51bad732"
+      },
+      {
+        "type": "namespace",
+        "value": "yeggi.com",
+        "rule": "DOMAIN-SUFFIX,yeggi.com",
+        "enabled": true,
+        "name": "",
+        "id": "f01d85ca"
+      },
+      {
+        "type": "namespace",
+        "value": "openh264.org",
+        "rule": "DOMAIN-SUFFIX,openh264.org",
+        "enabled": true,
+        "name": "",
+        "id": "c84df155"
+      },
+      {
+        "type": "namespace",
+        "value": "wunderground.com",
+        "rule": "DOMAIN-SUFFIX,wunderground.com",
+        "enabled": true,
+        "name": "",
+        "id": "862f862e"
+      },
+      {
+        "type": "namespace",
+        "value": "intuit.com",
+        "rule": "DOMAIN-SUFFIX,intuit.com",
+        "enabled": true,
+        "name": "",
+        "id": "41eff1ab"
+      },
+      {
+        "type": "namespace",
+        "value": "deezer.com",
+        "rule": "DOMAIN-SUFFIX,deezer.com",
+        "enabled": true,
+        "name": "",
+        "id": "962c3f3d"
+      },
+      {
+        "type": "namespace",
+        "value": "imgur.com",
+        "rule": "DOMAIN-SUFFIX,imgur.com",
+        "enabled": true,
+        "name": "",
+        "id": "b8d270e9"
+      },
+      {
+        "type": "namespace",
+        "value": "zerossl.com",
+        "rule": "DOMAIN-SUFFIX,zerossl.com",
+        "enabled": true,
+        "name": "",
+        "id": "d115ca56"
+      },
+      {
+        "type": "namespace",
+        "value": "snapgene.com",
+        "rule": "DOMAIN-SUFFIX,snapgene.com",
+        "enabled": true,
+        "name": "",
+        "id": "4d208a1b"
+      },
+      {
+        "type": "namespace",
+        "value": "miracleptr.wordpress.com",
+        "rule": "DOMAIN-SUFFIX,miracleptr.wordpress.com",
+        "enabled": true,
+        "name": "",
+        "id": "6231b7e2"
+      },
+      {
+        "type": "namespace",
+        "value": "uizard.io",
+        "rule": "DOMAIN-SUFFIX,uizard.io",
+        "enabled": true,
+        "name": "",
+        "id": "c8a3d272"
+      },
+      {
+        "type": "namespace",
+        "value": "grizzlysms.com",
+        "rule": "DOMAIN-SUFFIX,grizzlysms.com",
+        "enabled": true,
+        "name": "",
+        "id": "45be043f"
+      },
+      {
+        "type": "namespace",
+        "value": "lgthinq.com",
+        "rule": "DOMAIN-SUFFIX,lgthinq.com",
+        "enabled": true,
+        "name": "",
+        "id": "59b969bf"
+      },
+      {
+        "type": "namespace",
+        "value": "lgeapi.com",
+        "rule": "DOMAIN-SUFFIX,lgeapi.com",
+        "enabled": true,
+        "name": "",
+        "id": "da6f812b"
+      },
+      {
+        "type": "namespace",
+        "value": "data.cline.bot",
+        "rule": "DOMAIN-SUFFIX,data.cline.bot",
+        "enabled": true,
+        "name": "",
+        "id": "a43d5fdf"
+      },
+      {
+        "type": "namespace",
+        "value": "exchanger.bits.media",
+        "rule": "DOMAIN-SUFFIX,exchanger.bits.media",
+        "enabled": true,
+        "name": "",
+        "id": "86b7bf9e"
+      },
+      {
+        "type": "namespace",
+        "value": "tidal.com",
+        "rule": "DOMAIN-SUFFIX,tidal.com",
+        "enabled": true,
+        "name": "",
+        "id": "c1047c4e"
+      },
+      {
+        "type": "namespace",
+        "value": "pandasecurity.com",
+        "rule": "DOMAIN-SUFFIX,pandasecurity.com",
+        "enabled": true,
+        "name": "",
+        "id": "4e9d341d"
+      },
+      {
+        "type": "namespace",
+        "value": "manybooks.net",
+        "rule": "DOMAIN-SUFFIX,manybooks.net",
+        "enabled": true,
+        "name": "",
+        "id": "e6e2a2bc"
+      },
+      {
+        "type": "namespace",
+        "value": "netapp.com",
+        "rule": "DOMAIN-SUFFIX,netapp.com",
+        "enabled": true,
+        "name": "",
+        "id": "4ff8d8bf"
+      },
+      {
+        "type": "namespace",
+        "value": "gamestop.com",
+        "rule": "DOMAIN-SUFFIX,gamestop.com",
+        "enabled": true,
+        "name": "",
+        "id": "9b9fdd06"
+      },
+      {
+        "type": "namespace",
+        "value": "g2a.com",
+        "rule": "DOMAIN-SUFFIX,g2a.com",
+        "enabled": true,
+        "name": "",
+        "id": "f05b5ebf"
+      },
+      {
+        "type": "namespace",
+        "value": "eneba.com",
+        "rule": "DOMAIN-SUFFIX,eneba.com",
+        "enabled": true,
+        "name": "",
+        "id": "18554208"
+      },
+      {
+        "type": "namespace",
+        "value": "genspark.ai",
+        "rule": "DOMAIN-SUFFIX,genspark.ai",
+        "enabled": true,
+        "name": "",
+        "id": "5ce1882a"
+      },
+      {
+        "type": "namespace",
+        "value": "arc.net",
+        "rule": "DOMAIN-SUFFIX,arc.net",
+        "enabled": true,
+        "name": "",
+        "id": "f3e629ff"
+      },
+      {
+        "type": "namespace",
+        "value": "clevelandclinic.org",
+        "rule": "DOMAIN-SUFFIX,clevelandclinic.org",
+        "enabled": true,
+        "name": "",
+        "id": "1962c527"
+      },
+      {
+        "type": "namespace",
+        "value": "housebrand.com",
+        "rule": "DOMAIN-SUFFIX,housebrand.com",
+        "enabled": true,
+        "name": "",
+        "id": "07a3db53"
+      },
+      {
+        "type": "namespace",
+        "value": "devexpress.com",
+        "rule": "DOMAIN-SUFFIX,devexpress.com",
+        "enabled": true,
+        "name": "",
+        "id": "60980ed6"
+      },
+      {
+        "type": "namespace",
+        "value": "quicknode.com",
+        "rule": "DOMAIN-SUFFIX,quicknode.com",
+        "enabled": true,
+        "name": "",
+        "id": "dfcec31e"
+      },
+      {
+        "type": "namespace",
+        "value": "dyson.com",
+        "rule": "DOMAIN-SUFFIX,dyson.com",
+        "enabled": true,
+        "name": "",
+        "id": "569f2594"
+      },
+      {
+        "type": "namespace",
+        "value": "easydmarc.com",
+        "rule": "DOMAIN-SUFFIX,easydmarc.com",
+        "enabled": true,
+        "name": "",
+        "id": "6c69dc52"
+      },
+      {
+        "type": "namespace",
+        "value": "hume.ai",
+        "rule": "DOMAIN-SUFFIX,hume.ai",
+        "enabled": true,
+        "name": "",
+        "id": "3ee41075"
+      },
+      {
+        "type": "namespace",
+        "value": "hybrid-analysis.com",
+        "rule": "DOMAIN-SUFFIX,hybrid-analysis.com",
+        "enabled": true,
+        "name": "",
+        "id": "e7ea3a01"
+      },
+      {
+        "type": "namespace",
+        "value": "posthog.com",
+        "rule": "DOMAIN-SUFFIX,posthog.com",
+        "enabled": true,
+        "name": "",
+        "id": "82029e1f"
+      },
+      {
+        "type": "namespace",
+        "value": "qwant.com",
+        "rule": "DOMAIN-SUFFIX,qwant.com",
+        "enabled": true,
+        "name": "",
+        "id": "4c0137f8"
+      },
+      {
+        "type": "namespace",
+        "value": "tria.ge",
+        "rule": "DOMAIN-SUFFIX,tria.ge",
+        "enabled": true,
+        "name": "",
+        "id": "8a723ed6"
+      },
+      {
+        "type": "namespace",
+        "value": "akc.org",
+        "rule": "DOMAIN-SUFFIX,akc.org",
+        "enabled": true,
+        "name": "",
+        "id": "3d7ca71d"
+      },
+      {
+        "type": "namespace",
+        "value": "aircanada.com",
+        "rule": "DOMAIN-SUFFIX,aircanada.com",
+        "enabled": true,
+        "name": "",
+        "id": "dfab016f"
+      },
+      {
+        "type": "namespace",
+        "value": "connect.ngrok-agent.com",
+        "rule": "DOMAIN-SUFFIX,connect.ngrok-agent.com",
+        "enabled": true,
+        "name": "",
+        "id": "9e98d84f"
+      },
+      {
+        "type": "namespace",
+        "value": "diabrowser.com",
+        "rule": "DOMAIN-SUFFIX,diabrowser.com",
+        "enabled": true,
+        "name": "",
+        "id": "c173abc1"
+      },
+      {
+        "type": "namespace",
+        "value": "siteground.com",
+        "rule": "DOMAIN-SUFFIX,siteground.com",
+        "enabled": true,
+        "name": "",
+        "id": "2d8f9a70"
+      },
+      {
+        "type": "namespace",
+        "value": "indeed.com",
+        "rule": "DOMAIN-SUFFIX,indeed.com",
+        "enabled": true,
+        "name": "",
+        "id": "582e757f"
+      },
+      {
+        "type": "namespace",
+        "value": "sonara.ai",
+        "rule": "DOMAIN-SUFFIX,sonara.ai",
+        "enabled": true,
+        "name": "",
+        "id": "a11494c3"
+      },
+      {
+        "type": "namespace",
+        "value": "atlassian.com",
+        "rule": "DOMAIN-SUFFIX,atlassian.com",
+        "enabled": true,
+        "name": "",
+        "id": "fedda4b5"
+      },
+      {
+        "type": "namespace",
+        "value": "netacad.com",
+        "rule": "DOMAIN-SUFFIX,netacad.com",
+        "enabled": true,
+        "name": "",
+        "id": "2a03a5c7"
+      },
+      {
+        "type": "namespace",
+        "value": "transferwise.com",
+        "rule": "DOMAIN-SUFFIX,transferwise.com",
+        "enabled": true,
+        "name": "",
+        "id": "c94e6221"
+      },
+      {
+        "type": "namespace",
+        "value": "wise.com",
+        "rule": "DOMAIN-SUFFIX,wise.com",
+        "enabled": true,
+        "name": "",
+        "id": "adecdb9e"
+      },
+      {
+        "type": "namespace",
+        "value": "mouser.com",
+        "rule": "DOMAIN-SUFFIX,mouser.com",
+        "enabled": true,
+        "name": "",
+        "id": "f96acf12"
+      },
+      {
+        "type": "namespace",
+        "value": "xiaomi.eu",
+        "rule": "DOMAIN-SUFFIX,xiaomi.eu",
+        "enabled": true,
+        "name": "",
+        "id": "a0509025"
+      },
+      {
+        "type": "namespace",
+        "value": "arduino.cc",
+        "rule": "DOMAIN-SUFFIX,arduino.cc",
+        "enabled": true,
+        "name": "",
+        "id": "68bfc392"
+      },
+      {
+        "type": "namespace",
+        "value": "legalshield.com",
+        "rule": "DOMAIN-SUFFIX,legalshield.com",
+        "enabled": true,
+        "name": "",
+        "id": "cce1c4df"
+      },
+      {
+        "type": "namespace",
+        "value": "new.abb.com",
+        "rule": "DOMAIN-SUFFIX,new.abb.com",
+        "enabled": true,
+        "name": "",
+        "id": "53df83ff"
+      },
+      {
+        "type": "namespace",
+        "value": "swapd.co",
+        "rule": "DOMAIN-SUFFIX,swapd.co",
+        "enabled": true,
+        "name": "",
+        "id": "3af3dfa4"
+      },
+      {
+        "type": "namespace",
+        "value": "qualcomm.com",
+        "rule": "DOMAIN-SUFFIX,qualcomm.com",
+        "enabled": true,
+        "name": "",
+        "id": "091cae04"
+      },
+      {
+        "type": "namespace",
+        "value": "support.anydesk.com",
+        "rule": "DOMAIN-SUFFIX,support.anydesk.com",
+        "enabled": true,
+        "name": "",
+        "id": "df005a72"
+      },
+      {
+        "type": "namespace",
+        "value": "document360.io",
+        "rule": "DOMAIN-SUFFIX,document360.io",
+        "enabled": true,
+        "name": "",
+        "id": "e80024ea"
+      },
+      {
+        "type": "namespace",
+        "value": "document360.com",
+        "rule": "DOMAIN-SUFFIX,document360.com",
+        "enabled": true,
+        "name": "",
+        "id": "daf5364a"
+      },
+      {
+        "type": "namespace",
+        "value": "augmentcode.com",
+        "rule": "DOMAIN-SUFFIX,augmentcode.com",
+        "enabled": true,
+        "name": "",
+        "id": "60bda9ad"
+      },
+      {
+        "type": "namespace",
+        "value": "klarna.com",
+        "rule": "DOMAIN-SUFFIX,klarna.com",
+        "enabled": true,
+        "name": "",
+        "id": "44f18f22"
+      },
+      {
+        "type": "namespace",
+        "value": "mintmobile.com",
+        "rule": "DOMAIN-SUFFIX,mintmobile.com",
+        "enabled": true,
+        "name": "",
+        "id": "444db053"
+      },
+      {
+        "type": "namespace",
+        "value": "lyst.com",
+        "rule": "DOMAIN-SUFFIX,lyst.com",
+        "enabled": true,
+        "name": "",
+        "id": "dccbd0b7"
+      },
+      {
+        "type": "namespace",
+        "value": "affinity.studio",
+        "rule": "DOMAIN-SUFFIX,affinity.studio",
+        "enabled": true,
+        "name": "",
+        "id": "f073cdea"
+      },
+      {
+        "type": "namespace",
+        "value": "x-minus.pro",
+        "rule": "DOMAIN-SUFFIX,x-minus.pro",
+        "enabled": true,
+        "name": "",
+        "id": "47fe9e0f"
+      },
+      {
+        "type": "namespace",
+        "value": "primark.com",
+        "rule": "DOMAIN-SUFFIX,primark.com",
+        "enabled": true,
+        "name": "",
+        "id": "93515e7c"
+      },
+      {
+        "type": "namespace",
+        "value": "octopus.do",
+        "rule": "DOMAIN-SUFFIX,octopus.do",
+        "enabled": true,
+        "name": "",
+        "id": "657b8e55"
+      },
+      {
+        "type": "namespace",
+        "value": "all3dp.com",
+        "rule": "DOMAIN-SUFFIX,all3dp.com",
+        "enabled": true,
+        "name": "",
+        "id": "d1cf0f60"
+      },
+      {
+        "type": "namespace",
+        "value": "chainreactioncycles.com",
+        "rule": "DOMAIN-SUFFIX,chainreactioncycles.com",
+        "enabled": true,
+        "name": "",
+        "id": "c720dcdf"
+      },
+      {
+        "type": "namespace",
+        "value": "backend-v2.crixet.com",
+        "rule": "DOMAIN-SUFFIX,backend-v2.crixet.com",
+        "enabled": true,
+        "name": "",
+        "id": "d06103fe"
+      },
+      {
+        "type": "namespace",
+        "value": "xrite.com",
+        "rule": "DOMAIN-SUFFIX,xrite.com",
+        "enabled": true,
+        "name": "",
+        "id": "43dd2661"
+      },
+      {
+        "type": "namespace",
+        "value": "qodana.cloud",
+        "rule": "DOMAIN-SUFFIX,qodana.cloud",
+        "enabled": true,
+        "name": "",
+        "id": "4fae50f4"
+      },
+      {
+        "type": "namespace",
+        "value": "qoder.com",
+        "rule": "DOMAIN-SUFFIX,qoder.com",
+        "enabled": true,
+        "name": "",
+        "id": "57f27bc1"
+      },
+      {
+        "type": "namespace",
+        "value": "httptoolkit.com",
+        "rule": "DOMAIN-SUFFIX,httptoolkit.com",
+        "enabled": true,
+        "name": "",
+        "id": "01e58b60"
+      },
+      {
+        "type": "namespace",
+        "value": "fivetran.com",
+        "rule": "DOMAIN-SUFFIX,fivetran.com",
+        "enabled": true,
+        "name": "",
+        "id": "d815a05f"
+      },
+      {
+        "type": "namespace",
+        "value": "dashboard.gitguardian.com",
+        "rule": "DOMAIN-SUFFIX,dashboard.gitguardian.com",
+        "enabled": true,
+        "name": "",
+        "id": "f5f84d3a"
+      },
+      {
+        "type": "namespace",
+        "value": "gofund.me",
+        "rule": "DOMAIN-SUFFIX,gofund.me",
+        "enabled": true,
+        "name": "",
+        "id": "cb7589d8"
+      },
+      {
+        "type": "namespace",
+        "value": "oraclecloud.com",
+        "rule": "DOMAIN-SUFFIX,oraclecloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "afe558ce"
+      },
+      {
+        "type": "namespace",
+        "value": "philiascans.org",
+        "rule": "DOMAIN-SUFFIX,philiascans.org",
+        "enabled": true,
+        "name": "",
+        "id": "4ae50379"
+      },
+      {
+        "type": "namespace",
+        "value": "streamable.com",
+        "rule": "DOMAIN-SUFFIX,streamable.com",
+        "enabled": true,
+        "name": "",
+        "id": "0bcc1f69"
+      },
+      {
+        "type": "namespace",
+        "value": "wetransfer.com",
+        "rule": "DOMAIN-SUFFIX,wetransfer.com",
+        "enabled": true,
+        "name": "",
+        "id": "fa3fddf5"
+      },
+      {
+        "type": "namespace",
+        "value": "joesandbox.com",
+        "rule": "DOMAIN-SUFFIX,joesandbox.com",
+        "enabled": true,
+        "name": "",
+        "id": "33a8d0ac"
+      },
+      {
+        "type": "namespace",
+        "value": "dashboard.algolia.com",
+        "rule": "DOMAIN-SUFFIX,dashboard.algolia.com",
+        "enabled": true,
+        "name": "",
+        "id": "c7dd91ee"
+      },
+      {
+        "type": "namespace",
+        "value": "multisim.com",
+        "rule": "DOMAIN-SUFFIX,multisim.com",
+        "enabled": true,
+        "name": "",
+        "id": "33f3d5bd"
+      },
+      {
+        "type": "namespace",
+        "value": "ni.com",
+        "rule": "DOMAIN-SUFFIX,ni.com",
+        "enabled": true,
+        "name": "",
+        "id": "97c8efef"
+      },
+      {
+        "type": "namespace",
+        "value": "verificationacademy.com",
+        "rule": "DOMAIN-SUFFIX,verificationacademy.com",
+        "enabled": true,
+        "name": "",
+        "id": "72e98a3a"
+      },
+      {
+        "type": "namespace",
+        "value": "meetup.com",
+        "rule": "DOMAIN-SUFFIX,meetup.com",
+        "enabled": true,
+        "name": "",
+        "id": "1a597383"
+      },
+      {
+        "type": "namespace",
+        "value": "gonift.com",
+        "rule": "DOMAIN-SUFFIX,gonift.com",
+        "enabled": true,
+        "name": "",
+        "id": "c15948db"
+      },
+      {
+        "type": "namespace",
+        "value": "last.fm",
+        "rule": "DOMAIN-SUFFIX,last.fm",
+        "enabled": true,
+        "name": "",
+        "id": "a4885ea7"
+      },
+      {
+        "type": "namespace",
+        "value": "se.com",
+        "rule": "DOMAIN-SUFFIX,se.com",
+        "enabled": true,
+        "name": "",
+        "id": "0fc3ea2f"
+      },
+      {
+        "type": "namespace",
+        "value": "schneider-electric.com",
+        "rule": "DOMAIN-SUFFIX,schneider-electric.com",
+        "enabled": true,
+        "name": "",
+        "id": "31312390"
+      },
+      {
+        "type": "namespace",
+        "value": "iedb.org",
+        "rule": "DOMAIN-SUFFIX,iedb.org",
+        "enabled": true,
+        "name": "",
+        "id": "e93bec9a"
+      },
+      {
+        "type": "namespace",
+        "value": "sharefile.com",
+        "rule": "DOMAIN-SUFFIX,sharefile.com",
+        "enabled": true,
+        "name": "",
+        "id": "e393e059"
+      },
+      {
+        "type": "namespace",
+        "value": "sharefile.io",
+        "rule": "DOMAIN-SUFFIX,sharefile.io",
+        "enabled": true,
+        "name": "",
+        "id": "4a144436"
+      },
+      {
+        "type": "namespace",
+        "value": "syslog-ng.com",
+        "rule": "DOMAIN-SUFFIX,syslog-ng.com",
+        "enabled": true,
+        "name": "",
+        "id": "0d1997ec"
+      },
+      {
+        "type": "namespace",
+        "value": "patreon.com",
+        "rule": "DOMAIN-SUFFIX,patreon.com",
+        "enabled": true,
+        "name": "",
+        "id": "4398ab4e"
+      },
+      {
+        "type": "namespace",
+        "value": "patreonusercontent.com",
+        "rule": "DOMAIN-SUFFIX,patreonusercontent.com",
+        "enabled": true,
+        "name": "",
+        "id": "ee139227"
+      },
+      {
+        "type": "namespace",
+        "value": "qobuz.com",
+        "rule": "DOMAIN-SUFFIX,qobuz.com",
+        "enabled": true,
+        "name": "",
+        "id": "7c7bba7e"
+      },
+      {
+        "type": "namespace",
+        "value": "sigsauer.com",
+        "rule": "DOMAIN-SUFFIX,sigsauer.com",
+        "enabled": true,
+        "name": "",
+        "id": "7e7c9235"
+      },
+      {
+        "type": "namespace",
+        "value": "paywithmoon.com",
+        "rule": "DOMAIN-SUFFIX,paywithmoon.com",
+        "enabled": true,
+        "name": "",
+        "id": "dcb4665a"
+      }
+    ]
+  },
+  {
+    "id": "ab3acdb4",
+    "name": "HODCA",
+    "enabled": true,
+    "entries": [
+      {
+        "type": "namespace",
+        "value": "cloudflare.com",
+        "rule": "DOMAIN-SUFFIX,cloudflare.com",
+        "enabled": true,
+        "name": "",
+        "id": "fb12a752"
+      },
+      {
+        "type": "namespace",
+        "value": "cloudflarestorage.com",
+        "rule": "DOMAIN-SUFFIX,cloudflarestorage.com",
+        "enabled": true,
+        "name": "",
+        "id": "1ef13471"
+      },
+      {
+        "type": "namespace",
+        "value": "artstation.com",
+        "rule": "DOMAIN-SUFFIX,artstation.com",
+        "enabled": true,
+        "name": "",
+        "id": "96affb96"
+      },
+      {
+        "type": "namespace",
+        "value": "bitru.org",
+        "rule": "DOMAIN-SUFFIX,bitru.org",
+        "enabled": true,
+        "name": "",
+        "id": "eb0807fc"
+      },
+      {
+        "type": "namespace",
+        "value": "clerk.com",
+        "rule": "DOMAIN-SUFFIX,clerk.com",
+        "enabled": true,
+        "name": "",
+        "id": "e30cc793"
+      },
+      {
+        "type": "namespace",
+        "value": "clerk.dev",
+        "rule": "DOMAIN-SUFFIX,clerk.dev",
+        "enabled": true,
+        "name": "",
+        "id": "d7c14fca"
+      },
+      {
+        "type": "namespace",
+        "value": "clashverge.dev",
+        "rule": "DOMAIN-SUFFIX,clashverge.dev",
+        "enabled": true,
+        "name": "",
+        "id": "9e20ca58"
+      },
+      {
+        "type": "namespace",
+        "value": "discogs.com",
+        "rule": "DOMAIN-SUFFIX,discogs.com",
+        "enabled": true,
+        "name": "",
+        "id": "414b6fc0"
+      },
+      {
+        "type": "namespace",
+        "value": "ezgif.com",
+        "rule": "DOMAIN-SUFFIX,ezgif.com",
+        "enabled": true,
+        "name": "",
+        "id": "5688ee0a"
+      },
+      {
+        "type": "namespace",
+        "value": "flclash.cc",
+        "rule": "DOMAIN-SUFFIX,flclash.cc",
+        "enabled": true,
+        "name": "",
+        "id": "483e0fd8"
+      },
+      {
+        "type": "namespace",
+        "value": "fosshub.com",
+        "rule": "DOMAIN-SUFFIX,fosshub.com",
+        "enabled": true,
+        "name": "",
+        "id": "09cef69d"
+      },
+      {
+        "type": "namespace",
+        "value": "heavyfetish.com",
+        "rule": "DOMAIN-SUFFIX,heavyfetish.com",
+        "enabled": true,
+        "name": "",
+        "id": "e29c4fb4"
+      },
+      {
+        "type": "namespace",
+        "value": "ikea.com",
+        "rule": "DOMAIN-SUFFIX,ikea.com",
+        "enabled": true,
+        "name": "",
+        "id": "79556c39"
+      },
+      {
+        "type": "namespace",
+        "value": "ipinfo.app",
+        "rule": "DOMAIN-SUFFIX,ipinfo.app",
+        "enabled": true,
+        "name": "",
+        "id": "6a900af9"
+      },
+      {
+        "type": "namespace",
+        "value": "ixxx.com",
+        "rule": "DOMAIN-SUFFIX,ixxx.com",
+        "enabled": true,
+        "name": "",
+        "id": "59113bf3"
+      },
+      {
+        "type": "namespace",
+        "value": "jinxxy.com",
+        "rule": "DOMAIN-SUFFIX,jinxxy.com",
+        "enabled": true,
+        "name": "",
+        "id": "0dfe1d6c"
+      },
+      {
+        "type": "namespace",
+        "value": "karing.app",
+        "rule": "DOMAIN-SUFFIX,karing.app",
+        "enabled": true,
+        "name": "",
+        "id": "5babecb8"
+      },
+      {
+        "type": "namespace",
+        "value": "magicalchemy.org",
+        "rule": "DOMAIN-SUFFIX,magicalchemy.org",
+        "enabled": true,
+        "name": "",
+        "id": "8144f5a9"
+      },
+      {
+        "type": "namespace",
+        "value": "nexusmods.com",
+        "rule": "DOMAIN-SUFFIX,nexusmods.com",
+        "enabled": true,
+        "name": "",
+        "id": "08a71a2a"
+      },
+      {
+        "type": "namespace",
+        "value": "pastebin.com",
+        "rule": "DOMAIN-SUFFIX,pastebin.com",
+        "enabled": true,
+        "name": "",
+        "id": "09bb297c"
+      },
+      {
+        "type": "namespace",
+        "value": "protondb.com",
+        "rule": "DOMAIN-SUFFIX,protondb.com",
+        "enabled": true,
+        "name": "",
+        "id": "18b67086"
+      },
+      {
+        "type": "namespace",
+        "value": "rulet.tv",
+        "rule": "DOMAIN-SUFFIX,rulet.tv",
+        "enabled": true,
+        "name": "",
+        "id": "97d04a97"
+      },
+      {
+        "type": "namespace",
+        "value": "rutracker.org",
+        "rule": "DOMAIN-SUFFIX,rutracker.org",
+        "enabled": true,
+        "name": "",
+        "id": "1770e475"
+      },
+      {
+        "type": "namespace",
+        "value": "sing-box.sagernet.org",
+        "rule": "DOMAIN-SUFFIX,sing-box.sagernet.org",
+        "enabled": true,
+        "name": "",
+        "id": "6f6a6584"
+      },
+      {
+        "type": "namespace",
+        "value": "spankbang.com",
+        "rule": "DOMAIN-SUFFIX,spankbang.com",
+        "enabled": true,
+        "name": "",
+        "id": "0f94070b"
+      },
+      {
+        "type": "namespace",
+        "value": "sb-cd.com",
+        "rule": "DOMAIN-SUFFIX,sb-cd.com",
+        "enabled": true,
+        "name": "",
+        "id": "5825aef6"
+      },
+      {
+        "type": "namespace",
+        "value": "sxyprn.com",
+        "rule": "DOMAIN-SUFFIX,sxyprn.com",
+        "enabled": true,
+        "name": "",
+        "id": "5755588f"
+      },
+      {
+        "type": "namespace",
+        "value": "sxyprn.net",
+        "rule": "DOMAIN-SUFFIX,sxyprn.net",
+        "enabled": true,
+        "name": "",
+        "id": "4867d653"
+      },
+      {
+        "type": "namespace",
+        "value": "teamviewer.com",
+        "rule": "DOMAIN-SUFFIX,teamviewer.com",
+        "enabled": true,
+        "name": "",
+        "id": "a4f5b652"
+      },
+      {
+        "type": "namespace",
+        "value": "trueachievements.com",
+        "rule": "DOMAIN-SUFFIX,trueachievements.com",
+        "enabled": true,
+        "name": "",
+        "id": "05fbf8a4"
+      },
+      {
+        "type": "namespace",
+        "value": "yarnpkg.com",
+        "rule": "DOMAIN-SUFFIX,yarnpkg.com",
+        "enabled": true,
+        "name": "",
+        "id": "366c4df8"
+      },
+      {
+        "type": "namespace",
+        "value": "check-host.net",
+        "rule": "DOMAIN-SUFFIX,check-host.net",
+        "enabled": true,
+        "name": "",
+        "id": "e555b824"
+      },
+      {
+        "type": "namespace",
+        "value": "inoreader.com",
+        "rule": "DOMAIN-SUFFIX,inoreader.com",
+        "enabled": true,
+        "name": "",
+        "id": "082cdaa5"
+      },
+      {
+        "type": "namespace",
+        "value": "edx.org",
+        "rule": "DOMAIN-SUFFIX,edx.org",
+        "enabled": true,
+        "name": "",
+        "id": "a2743936"
+      },
+      {
+        "type": "namespace",
+        "value": "pinterest.com",
+        "rule": "DOMAIN-SUFFIX,pinterest.com",
+        "enabled": true,
+        "name": "",
+        "id": "2018910a"
+      },
+      {
+        "type": "namespace",
+        "value": "reddit.com",
+        "rule": "DOMAIN-SUFFIX,reddit.com",
+        "enabled": true,
+        "name": "",
+        "id": "59635a27"
+      },
+      {
+        "type": "namespace",
+        "value": "openrailwaymap.org",
+        "rule": "DOMAIN-SUFFIX,openrailwaymap.org",
+        "enabled": true,
+        "name": "",
+        "id": "a789a351"
+      },
+      {
+        "type": "namespace",
+        "value": "succurity.com",
+        "rule": "DOMAIN-SUFFIX,succurity.com",
+        "enabled": true,
+        "name": "",
+        "id": "7eb9c300"
+      },
+      {
+        "type": "namespace",
+        "value": "lenso.ai",
+        "rule": "DOMAIN-SUFFIX,lenso.ai",
+        "enabled": true,
+        "name": "",
+        "id": "c2192ce0"
+      },
+      {
+        "type": "namespace",
+        "value": "imagedelivery.net",
+        "rule": "DOMAIN-SUFFIX,imagedelivery.net",
+        "enabled": true,
+        "name": "",
+        "id": "05c020a5"
+      },
+      {
+        "type": "namespace",
+        "value": "ds-servers.com",
+        "rule": "DOMAIN-SUFFIX,ds-servers.com",
+        "enabled": true,
+        "name": "",
+        "id": "e1f5a259"
+      },
+      {
+        "type": "namespace",
+        "value": "alterportal.net",
+        "rule": "DOMAIN-SUFFIX,alterportal.net",
+        "enabled": true,
+        "name": "",
+        "id": "a621829e"
+      },
+      {
+        "type": "namespace",
+        "value": "feeds.feedburner.com",
+        "rule": "DOMAIN-SUFFIX,feeds.feedburner.com",
+        "enabled": true,
+        "name": "",
+        "id": "1b5ebeed"
+      },
+      {
+        "type": "namespace",
+        "value": "crdroid.net",
+        "rule": "DOMAIN-SUFFIX,crdroid.net",
+        "enabled": true,
+        "name": "",
+        "id": "50e7d86e"
+      },
+      {
+        "type": "namespace",
+        "value": "russianfood.com",
+        "rule": "DOMAIN-SUFFIX,russianfood.com",
+        "enabled": true,
+        "name": "",
+        "id": "ff76dd5c"
+      },
+      {
+        "type": "namespace",
+        "value": "wwnd.space",
+        "rule": "DOMAIN-SUFFIX,wwnd.space",
+        "enabled": true,
+        "name": "",
+        "id": "8aee406b"
+      },
+      {
+        "type": "namespace",
+        "value": "smods.ru",
+        "rule": "DOMAIN-SUFFIX,smods.ru",
+        "enabled": true,
+        "name": "",
+        "id": "fdcb4518"
+      },
+      {
+        "type": "namespace",
+        "value": "fastpic.org",
+        "rule": "DOMAIN-SUFFIX,fastpic.org",
+        "enabled": true,
+        "name": "",
+        "id": "d1f9ffb5"
+      },
+      {
+        "type": "namespace",
+        "value": "drpool.io",
+        "rule": "DOMAIN-SUFFIX,drpool.io",
+        "enabled": true,
+        "name": "",
+        "id": "715679ae"
+      },
+      {
+        "type": "namespace",
+        "value": "kyoceradocumentsolutions.com",
+        "rule": "DOMAIN-SUFFIX,kyoceradocumentsolutions.com",
+        "enabled": true,
+        "name": "",
+        "id": "ce7e6015"
+      },
+      {
+        "type": "namespace",
+        "value": "eaaccounts.akamaized.net",
+        "rule": "DOMAIN-SUFFIX,eaaccounts.akamaized.net",
+        "enabled": true,
+        "name": "",
+        "id": "a3ea07af"
+      },
+      {
+        "type": "namespace",
+        "value": "friendlyelec.com",
+        "rule": "DOMAIN-SUFFIX,friendlyelec.com",
+        "enabled": true,
+        "name": "",
+        "id": "b6c22ca7"
+      },
+      {
+        "type": "namespace",
+        "value": "discourse-cdn.com",
+        "rule": "DOMAIN-SUFFIX,discourse-cdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "8eb9b32a"
+      },
+      {
+        "type": "namespace",
+        "value": "xraycore.org",
+        "rule": "DOMAIN-SUFFIX,xraycore.org",
+        "enabled": true,
+        "name": "",
+        "id": "57d1932d"
+      },
+      {
+        "type": "namespace",
+        "value": "opensubtitles.org",
+        "rule": "DOMAIN-SUFFIX,opensubtitles.org",
+        "enabled": true,
+        "name": "",
+        "id": "87d11496"
+      },
+      {
+        "type": "namespace",
+        "value": "localsend.org",
+        "rule": "DOMAIN-SUFFIX,localsend.org",
+        "enabled": true,
+        "name": "",
+        "id": "a0330df1"
+      },
+      {
+        "type": "namespace",
+        "value": "adbappcontrol.com",
+        "rule": "DOMAIN-SUFFIX,adbappcontrol.com",
+        "enabled": true,
+        "name": "",
+        "id": "64c90c43"
+      },
+      {
+        "type": "namespace",
+        "value": "tunemymusic.com",
+        "rule": "DOMAIN-SUFFIX,tunemymusic.com",
+        "enabled": true,
+        "name": "",
+        "id": "eec07662"
+      },
+      {
+        "type": "namespace",
+        "value": "use.typekit.net",
+        "rule": "DOMAIN-SUFFIX,use.typekit.net",
+        "enabled": true,
+        "name": "",
+        "id": "c20eca2c"
+      },
+      {
+        "type": "namespace",
+        "value": "jellyfin.org",
+        "rule": "DOMAIN-SUFFIX,jellyfin.org",
+        "enabled": true,
+        "name": "",
+        "id": "8c6b3ee9"
+      },
+      {
+        "type": "namespace",
+        "value": "htx.com",
+        "rule": "DOMAIN-SUFFIX,htx.com",
+        "enabled": true,
+        "name": "",
+        "id": "fc0923cf"
+      },
+      {
+        "type": "namespace",
+        "value": "cochrane.org",
+        "rule": "DOMAIN-SUFFIX,cochrane.org",
+        "enabled": true,
+        "name": "",
+        "id": "455263cd"
+      },
+      {
+        "type": "namespace",
+        "value": "thelancet.com",
+        "rule": "DOMAIN-SUFFIX,thelancet.com",
+        "enabled": true,
+        "name": "",
+        "id": "40ee11b5"
+      },
+      {
+        "type": "namespace",
+        "value": "rottentomatoes.com",
+        "rule": "DOMAIN-SUFFIX,rottentomatoes.com",
+        "enabled": true,
+        "name": "",
+        "id": "0f2b50dc"
+      },
+      {
+        "type": "namespace",
+        "value": "resizing.flixster.com",
+        "rule": "DOMAIN-SUFFIX,resizing.flixster.com",
+        "enabled": true,
+        "name": "",
+        "id": "67ec6afa"
+      },
+      {
+        "type": "namespace",
+        "value": "heltec.org",
+        "rule": "DOMAIN-SUFFIX,heltec.org",
+        "enabled": true,
+        "name": "",
+        "id": "d63305bc"
+      },
+      {
+        "type": "namespace",
+        "value": "silabs.com",
+        "rule": "DOMAIN-SUFFIX,silabs.com",
+        "enabled": true,
+        "name": "",
+        "id": "d8d40800"
+      },
+      {
+        "type": "namespace",
+        "value": "meshtastic.org",
+        "rule": "DOMAIN-SUFFIX,meshtastic.org",
+        "enabled": true,
+        "name": "",
+        "id": "3c171510"
+      },
+      {
+        "type": "namespace",
+        "value": "maximoff.su",
+        "rule": "DOMAIN-SUFFIX,maximoff.su",
+        "enabled": true,
+        "name": "",
+        "id": "84d8ec37"
+      },
+      {
+        "type": "namespace",
+        "value": "strapi.io",
+        "rule": "DOMAIN-SUFFIX,strapi.io",
+        "enabled": true,
+        "name": "",
+        "id": "3b5176ac"
+      },
+      {
+        "type": "namespace",
+        "value": "coderabbit.ai",
+        "rule": "DOMAIN-SUFFIX,coderabbit.ai",
+        "enabled": true,
+        "name": "",
+        "id": "80c48482"
+      },
+      {
+        "type": "namespace",
+        "value": "storybook.js.org",
+        "rule": "DOMAIN-SUFFIX,storybook.js.org",
+        "enabled": true,
+        "name": "",
+        "id": "cd024e4f"
+      },
+      {
+        "type": "namespace",
+        "value": "aniliberty.top",
+        "rule": "DOMAIN-SUFFIX,aniliberty.top",
+        "enabled": true,
+        "name": "",
+        "id": "bc9109c5"
+      },
+      {
+        "type": "namespace",
+        "value": "libria.fun",
+        "rule": "DOMAIN-SUFFIX,libria.fun",
+        "enabled": true,
+        "name": "",
+        "id": "494967a6"
+      },
+      {
+        "type": "namespace",
+        "value": "userbenchmark.com",
+        "rule": "DOMAIN-SUFFIX,userbenchmark.com",
+        "enabled": true,
+        "name": "",
+        "id": "e65ae5b4"
+      },
+      {
+        "type": "namespace",
+        "value": "plantuml.com",
+        "rule": "DOMAIN-SUFFIX,plantuml.com",
+        "enabled": true,
+        "name": "",
+        "id": "3e1e523e"
+      },
+      {
+        "type": "namespace",
+        "value": "imigo.ai",
+        "rule": "DOMAIN-SUFFIX,imigo.ai",
+        "enabled": true,
+        "name": "",
+        "id": "98df3b66"
+      },
+      {
+        "type": "namespace",
+        "value": "tefl.org",
+        "rule": "DOMAIN-SUFFIX,tefl.org",
+        "enabled": true,
+        "name": "",
+        "id": "9643191b"
+      },
+      {
+        "type": "namespace",
+        "value": "britishcouncil.org",
+        "rule": "DOMAIN-SUFFIX,britishcouncil.org",
+        "enabled": true,
+        "name": "",
+        "id": "8345c49f"
+      },
+      {
+        "type": "namespace",
+        "value": "imgbb.com",
+        "rule": "DOMAIN-SUFFIX,imgbb.com",
+        "enabled": true,
+        "name": "",
+        "id": "4dc9692b"
+      },
+      {
+        "type": "namespace",
+        "value": "gnome.org",
+        "rule": "DOMAIN-SUFFIX,gnome.org",
+        "enabled": true,
+        "name": "",
+        "id": "fd5946a9"
+      },
+      {
+        "type": "namespace",
+        "value": "kde.org",
+        "rule": "DOMAIN-SUFFIX,kde.org",
+        "enabled": true,
+        "name": "",
+        "id": "f01e9c31"
+      },
+      {
+        "type": "namespace",
+        "value": "fwupd.org",
+        "rule": "DOMAIN-SUFFIX,fwupd.org",
+        "enabled": true,
+        "name": "",
+        "id": "3b78b0d4"
+      },
+      {
+        "type": "namespace",
+        "value": "flathub.org",
+        "rule": "DOMAIN-SUFFIX,flathub.org",
+        "enabled": true,
+        "name": "",
+        "id": "86ec3b50"
+      },
+      {
+        "type": "namespace",
+        "value": "joeysretrohandhelds.com",
+        "rule": "DOMAIN-SUFFIX,joeysretrohandhelds.com",
+        "enabled": true,
+        "name": "",
+        "id": "66d6f835"
+      },
+      {
+        "type": "namespace",
+        "value": "customfw.xyz",
+        "rule": "DOMAIN-SUFFIX,customfw.xyz",
+        "enabled": true,
+        "name": "",
+        "id": "a590dd52"
+      },
+      {
+        "type": "namespace",
+        "value": "youngliving.com",
+        "rule": "DOMAIN-SUFFIX,youngliving.com",
+        "enabled": true,
+        "name": "",
+        "id": "a929d5bb"
+      },
+      {
+        "type": "namespace",
+        "value": "gopro.com",
+        "rule": "DOMAIN-SUFFIX,gopro.com",
+        "enabled": true,
+        "name": "",
+        "id": "3963f5df"
+      },
+      {
+        "type": "namespace",
+        "value": "artixlinux.org",
+        "rule": "DOMAIN-SUFFIX,artixlinux.org",
+        "enabled": true,
+        "name": "",
+        "id": "e42ed068"
+      },
+      {
+        "type": "namespace",
+        "value": "beatsaver.com",
+        "rule": "DOMAIN-SUFFIX,beatsaver.com",
+        "enabled": true,
+        "name": "",
+        "id": "dfa4658b"
+      },
+      {
+        "type": "namespace",
+        "value": "beatmods.com",
+        "rule": "DOMAIN-SUFFIX,beatmods.com",
+        "enabled": true,
+        "name": "",
+        "id": "bfd1c675"
+      },
+      {
+        "type": "namespace",
+        "value": "bsmanager.io",
+        "rule": "DOMAIN-SUFFIX,bsmanager.io",
+        "enabled": true,
+        "name": "",
+        "id": "0bdaf76a"
+      },
+      {
+        "type": "namespace",
+        "value": "ajay.app",
+        "rule": "DOMAIN-SUFFIX,ajay.app",
+        "enabled": true,
+        "name": "",
+        "id": "7e42cbcf"
+      },
+      {
+        "type": "namespace",
+        "value": "opencode.ai",
+        "rule": "DOMAIN-SUFFIX,opencode.ai",
+        "enabled": true,
+        "name": "",
+        "id": "da3a339b"
+      },
+      {
+        "type": "namespace",
+        "value": "dvprogram.state.gov",
+        "rule": "DOMAIN-SUFFIX,dvprogram.state.gov",
+        "enabled": true,
+        "name": "",
+        "id": "291fa843"
+      },
+      {
+        "type": "namespace",
+        "value": "static.wixstatic.com",
+        "rule": "DOMAIN-SUFFIX,static.wixstatic.com",
+        "enabled": true,
+        "name": "",
+        "id": "b1dee9db"
+      },
+      {
+        "type": "namespace",
+        "value": "steamos.cloud",
+        "rule": "DOMAIN-SUFFIX,steamos.cloud",
+        "enabled": true,
+        "name": "",
+        "id": "68378f4f"
+      },
+      {
+        "type": "namespace",
+        "value": "pstatic.net",
+        "rule": "DOMAIN-SUFFIX,pstatic.net",
+        "enabled": true,
+        "name": "",
+        "id": "bca0ec65"
+      },
+      {
+        "type": "namespace",
+        "value": "nuxt.com",
+        "rule": "DOMAIN-SUFFIX,nuxt.com",
+        "enabled": true,
+        "name": "",
+        "id": "76427cd0"
+      },
+      {
+        "type": "namespace",
+        "value": "patterns.dev",
+        "rule": "DOMAIN-SUFFIX,patterns.dev",
+        "enabled": true,
+        "name": "",
+        "id": "c6750b68"
+      },
+      {
+        "type": "namespace",
+        "value": "redux.js.org",
+        "rule": "DOMAIN-SUFFIX,redux.js.org",
+        "enabled": true,
+        "name": "",
+        "id": "82e5a9d0"
+      },
+      {
+        "type": "namespace",
+        "value": "tailwind-variants.org",
+        "rule": "DOMAIN-SUFFIX,tailwind-variants.org",
+        "enabled": true,
+        "name": "",
+        "id": "75ac4161"
+      },
+      {
+        "type": "namespace",
+        "value": "pinia-colada.esm.dev",
+        "rule": "DOMAIN-SUFFIX,pinia-colada.esm.dev",
+        "enabled": true,
+        "name": "",
+        "id": "8f31e8c5"
+      },
+      {
+        "type": "namespace",
+        "value": "curseforge.com",
+        "rule": "DOMAIN-SUFFIX,curseforge.com",
+        "enabled": true,
+        "name": "",
+        "id": "5eeb80cd"
+      },
+      {
+        "type": "namespace",
+        "value": "mediafilez.forgecdn.net",
+        "rule": "DOMAIN-SUFFIX,mediafilez.forgecdn.net",
+        "enabled": true,
+        "name": "",
+        "id": "70333dec"
+      },
+      {
+        "type": "namespace",
+        "value": "dockhand.pro",
+        "rule": "DOMAIN-SUFFIX,dockhand.pro",
+        "enabled": true,
+        "name": "",
+        "id": "a05b27c9"
+      },
+      {
+        "type": "namespace",
+        "value": "pantone.com",
+        "rule": "DOMAIN-SUFFIX,pantone.com",
+        "enabled": true,
+        "name": "",
+        "id": "4095646f"
+      },
+      {
+        "type": "namespace",
+        "value": "pplx-res.cloudinary.com",
+        "rule": "DOMAIN-SUFFIX,pplx-res.cloudinary.com",
+        "enabled": true,
+        "name": "",
+        "id": "0a705b8d"
+      },
+      {
+        "type": "namespace",
+        "value": "elsevier.com",
+        "rule": "DOMAIN-SUFFIX,elsevier.com",
+        "enabled": true,
+        "name": "",
+        "id": "9d17f4eb"
+      },
+      {
+        "type": "namespace",
+        "value": "elsevier.com.cdn.cloudflare.net",
+        "rule": "DOMAIN-SUFFIX,elsevier.com.cdn.cloudflare.net",
+        "enabled": true,
+        "name": "",
+        "id": "2d7b4189"
+      },
+      {
+        "type": "namespace",
+        "value": "mdpi.com",
+        "rule": "DOMAIN-SUFFIX,mdpi.com",
+        "enabled": true,
+        "name": "",
+        "id": "439f8438"
+      },
+      {
+        "type": "namespace",
+        "value": "fedoraproject.org",
+        "rule": "DOMAIN-SUFFIX,fedoraproject.org",
+        "enabled": true,
+        "name": "",
+        "id": "ab099016"
+      },
+      {
+        "type": "namespace",
+        "value": "dev.to",
+        "rule": "DOMAIN-SUFFIX,dev.to",
+        "enabled": true,
+        "name": "",
+        "id": "24add7d2"
+      },
+      {
+        "type": "namespace",
+        "value": "snikket.org",
+        "rule": "DOMAIN-SUFFIX,snikket.org",
+        "enabled": true,
+        "name": "",
+        "id": "799c73f2"
+      },
+      {
+        "type": "namespace",
+        "value": "tiny.cloud",
+        "rule": "DOMAIN-SUFFIX,tiny.cloud",
+        "enabled": true,
+        "name": "",
+        "id": "aad8994e"
+      },
+      {
+        "type": "namespace",
+        "value": "vecpea.com",
+        "rule": "DOMAIN-SUFFIX,vecpea.com",
+        "enabled": true,
+        "name": "",
+        "id": "1ff19a28"
+      },
+      {
+        "type": "namespace",
+        "value": "lifeforge.dev",
+        "rule": "DOMAIN-SUFFIX,lifeforge.dev",
+        "enabled": true,
+        "name": "",
+        "id": "03db3090"
+      },
+      {
+        "type": "namespace",
+        "value": "cdn.web-global.fds.api.mi-img.com",
+        "rule": "DOMAIN-SUFFIX,cdn.web-global.fds.api.mi-img.com",
+        "enabled": true,
+        "name": "",
+        "id": "beaa7b7b"
+      },
+      {
+        "type": "namespace",
+        "value": "3os.org",
+        "rule": "DOMAIN-SUFFIX,3os.org",
+        "enabled": true,
+        "name": "",
+        "id": "b4eb20aa"
+      },
+      {
+        "type": "namespace",
+        "value": "easysimplesolution.net",
+        "rule": "DOMAIN-SUFFIX,easysimplesolution.net",
+        "enabled": true,
+        "name": "",
+        "id": "862bbb53"
+      },
+      {
+        "type": "namespace",
+        "value": "imazing.com",
+        "rule": "DOMAIN-SUFFIX,imazing.com",
+        "enabled": true,
+        "name": "",
+        "id": "87fbd92e"
+      },
+      {
+        "type": "namespace",
+        "value": "acclaimedvideogames.com",
+        "rule": "DOMAIN-SUFFIX,acclaimedvideogames.com",
+        "enabled": true,
+        "name": "",
+        "id": "ef859af6"
+      },
+      {
+        "type": "namespace",
+        "value": "cdn.polyhaven.com",
+        "rule": "DOMAIN-SUFFIX,cdn.polyhaven.com",
+        "enabled": true,
+        "name": "",
+        "id": "531025fc"
+      },
+      {
+        "type": "namespace",
+        "value": "cdn-service.space",
+        "rule": "DOMAIN-SUFFIX,cdn-service.space",
+        "enabled": true,
+        "name": "",
+        "id": "60840563"
+      },
+      {
+        "type": "namespace",
+        "value": "wayground.com",
+        "rule": "DOMAIN-SUFFIX,wayground.com",
+        "enabled": true,
+        "name": "",
+        "id": "79b7ec87"
+      },
+      {
+        "type": "namespace",
+        "value": "nextdirect.com",
+        "rule": "DOMAIN-SUFFIX,nextdirect.com",
+        "enabled": true,
+        "name": "",
+        "id": "4d3b021b"
+      },
+      {
+        "type": "namespace",
+        "value": "rosepinetheme.com",
+        "rule": "DOMAIN-SUFFIX,rosepinetheme.com",
+        "enabled": true,
+        "name": "",
+        "id": "07c67f3c"
+      },
+      {
+        "type": "namespace",
+        "value": "convertunits.com",
+        "rule": "DOMAIN-SUFFIX,convertunits.com",
+        "enabled": true,
+        "name": "",
+        "id": "22f1bb8c"
+      },
+      {
+        "type": "namespace",
+        "value": "opentext.com",
+        "rule": "DOMAIN-SUFFIX,opentext.com",
+        "enabled": true,
+        "name": "",
+        "id": "7682840e"
+      },
+      {
+        "type": "namespace",
+        "value": "qualtrics.com",
+        "rule": "DOMAIN-SUFFIX,qualtrics.com",
+        "enabled": true,
+        "name": "",
+        "id": "f7bc27cb"
+      },
+      {
+        "type": "namespace",
+        "value": "tremendous.com",
+        "rule": "DOMAIN-SUFFIX,tremendous.com",
+        "enabled": true,
+        "name": "",
+        "id": "b5b35cca"
+      },
+      {
+        "type": "namespace",
+        "value": "xda-developers.com",
+        "rule": "DOMAIN-SUFFIX,xda-developers.com",
+        "enabled": true,
+        "name": "",
+        "id": "0e0f98dc"
+      },
+      {
+        "type": "namespace",
+        "value": "xdaforums.com",
+        "rule": "DOMAIN-SUFFIX,xdaforums.com",
+        "enabled": true,
+        "name": "",
+        "id": "ba59bce0"
+      },
+      {
+        "type": "namespace",
+        "value": "nintendo.com",
+        "rule": "DOMAIN-SUFFIX,nintendo.com",
+        "enabled": true,
+        "name": "",
+        "id": "9d700347"
+      },
+      {
+        "type": "namespace",
+        "value": "fandom.com",
+        "rule": "DOMAIN-SUFFIX,fandom.com",
+        "enabled": true,
+        "name": "",
+        "id": "f976554b"
+      },
+      {
+        "type": "namespace",
+        "value": "music.apple.com",
+        "rule": "DOMAIN-SUFFIX,music.apple.com",
+        "enabled": true,
+        "name": "",
+        "id": "6d81ce81"
+      },
+      {
+        "type": "namespace",
+        "value": "linuxserver.io",
+        "rule": "DOMAIN-SUFFIX,linuxserver.io",
+        "enabled": true,
+        "name": "",
+        "id": "6e6f3c2d"
+      },
+      {
+        "type": "namespace",
+        "value": "skillsforall.com",
+        "rule": "DOMAIN-SUFFIX,skillsforall.com",
+        "enabled": true,
+        "name": "",
+        "id": "95bf0885"
+      },
+      {
+        "type": "namespace",
+        "value": "pstmn.io",
+        "rule": "DOMAIN-SUFFIX,pstmn.io",
+        "enabled": true,
+        "name": "",
+        "id": "d1fbf662"
+      },
+      {
+        "type": "namespace",
+        "value": "dosvid.tk",
+        "rule": "DOMAIN-SUFFIX,dosvid.tk",
+        "enabled": true,
+        "name": "",
+        "id": "a03f4b14"
+      },
+      {
+        "type": "namespace",
+        "value": "livechatinc.com",
+        "rule": "DOMAIN-SUFFIX,livechatinc.com",
+        "enabled": true,
+        "name": "",
+        "id": "2a22afbc"
+      },
+      {
+        "type": "namespace",
+        "value": "livechat.com",
+        "rule": "DOMAIN-SUFFIX,livechat.com",
+        "enabled": true,
+        "name": "",
+        "id": "46b57d26"
+      },
+      {
+        "type": "namespace",
+        "value": "text.com",
+        "rule": "DOMAIN-SUFFIX,text.com",
+        "enabled": true,
+        "name": "",
+        "id": "3c23e4a9"
+      },
+      {
+        "type": "namespace",
+        "value": "helpdesk.com",
+        "rule": "DOMAIN-SUFFIX,helpdesk.com",
+        "enabled": true,
+        "name": "",
+        "id": "dc58b357"
+      },
+      {
+        "type": "namespace",
+        "value": "helpdesk-static.com",
+        "rule": "DOMAIN-SUFFIX,helpdesk-static.com",
+        "enabled": true,
+        "name": "",
+        "id": "ffdda054"
+      },
+      {
+        "type": "namespace",
+        "value": "pypi.org",
+        "rule": "DOMAIN-SUFFIX,pypi.org",
+        "enabled": true,
+        "name": "",
+        "id": "bbd52930"
+      },
+      {
+        "type": "namespace",
+        "value": "utils.docs.rw",
+        "rule": "DOMAIN-SUFFIX,utils.docs.rw",
+        "enabled": true,
+        "name": "",
+        "id": "08e2befe"
+      },
+      {
+        "type": "namespace",
+        "value": "howtogeek.com",
+        "rule": "DOMAIN-SUFFIX,howtogeek.com",
+        "enabled": true,
+        "name": "",
+        "id": "258aedb7"
+      },
+      {
+        "type": "namespace",
+        "value": "clickup-attachments.com",
+        "rule": "DOMAIN-SUFFIX,clickup-attachments.com",
+        "enabled": true,
+        "name": "",
+        "id": "9fb257c1"
+      },
+      {
+        "type": "namespace",
+        "value": "clubtv.pro",
+        "rule": "DOMAIN-SUFFIX,clubtv.pro",
+        "enabled": true,
+        "name": "",
+        "id": "376aafed"
+      },
+      {
+        "type": "namespace",
+        "value": "shara-mail.com",
+        "rule": "DOMAIN-SUFFIX,shara-mail.com",
+        "enabled": true,
+        "name": "",
+        "id": "546af216"
+      },
+      {
+        "type": "namespace",
+        "value": "nvidia.com",
+        "rule": "DOMAIN-SUFFIX,nvidia.com",
+        "enabled": true,
+        "name": "",
+        "id": "c4bdc983"
+      },
+      {
+        "type": "namespace",
+        "value": "monochrome.tf",
+        "rule": "DOMAIN-SUFFIX,monochrome.tf",
+        "enabled": true,
+        "name": "",
+        "id": "53b2ec1f"
+      },
+      {
+        "type": "namespace",
+        "value": "nixos.org",
+        "rule": "DOMAIN-SUFFIX,nixos.org",
+        "enabled": true,
+        "name": "",
+        "id": "7e2ce991"
+      },
+      {
+        "type": "namespace",
+        "value": "grafana.net",
+        "rule": "DOMAIN-SUFFIX,grafana.net",
+        "enabled": true,
+        "name": "",
+        "id": "58dcc5d2"
+      },
+      {
+        "type": "namespace",
+        "value": "porkbun.com",
+        "rule": "DOMAIN-SUFFIX,porkbun.com",
+        "enabled": true,
+        "name": "",
+        "id": "98c5d9d4"
+      },
+      {
+        "type": "namespace",
+        "value": "pinata.cloud",
+        "rule": "DOMAIN-SUFFIX,pinata.cloud",
+        "enabled": true,
+        "name": "",
+        "id": "3fd14f8f"
+      },
+      {
+        "type": "namespace",
+        "value": "galaxy.ansible.com",
+        "rule": "DOMAIN-SUFFIX,galaxy.ansible.com",
+        "enabled": true,
+        "name": "",
+        "id": "ca38ec4d"
+      },
+      {
+        "type": "namespace",
+        "value": "litellm.ai",
+        "rule": "DOMAIN-SUFFIX,litellm.ai",
+        "enabled": true,
+        "name": "",
+        "id": "ba26b933"
+      },
+      {
+        "type": "namespace",
+        "value": "geekbench.com",
+        "rule": "DOMAIN-SUFFIX,geekbench.com",
+        "enabled": true,
+        "name": "",
+        "id": "757e257f"
+      },
+      {
+        "type": "namespace",
+        "value": "memepedia.ru",
+        "rule": "DOMAIN-SUFFIX,memepedia.ru",
+        "enabled": true,
+        "name": "",
+        "id": "4d700cce"
+      },
+      {
+        "type": "namespace",
+        "value": "armbian.com",
+        "rule": "DOMAIN-SUFFIX,armbian.com",
+        "enabled": true,
+        "name": "",
+        "id": "8e0b4922"
+      },
+      {
+        "type": "namespace",
+        "value": "armbian.de",
+        "rule": "DOMAIN-SUFFIX,armbian.de",
+        "enabled": true,
+        "name": "",
+        "id": "5a93c60f"
+      },
+      {
+        "type": "namespace",
+        "value": "ovh.ie",
+        "rule": "DOMAIN-SUFFIX,ovh.ie",
+        "enabled": true,
+        "name": "",
+        "id": "fc2acdd7"
+      },
+      {
+        "type": "namespace",
+        "value": "ubuntu-touch.io",
+        "rule": "DOMAIN-SUFFIX,ubuntu-touch.io",
+        "enabled": true,
+        "name": "",
+        "id": "0200936b"
+      },
+      {
+        "type": "namespace",
+        "value": "llhost.eu",
+        "rule": "DOMAIN-SUFFIX,llhost.eu",
+        "enabled": true,
+        "name": "",
+        "id": "8b7134e1"
+      },
+      {
+        "type": "namespace",
+        "value": "hostero.eu",
+        "rule": "DOMAIN-SUFFIX,hostero.eu",
+        "enabled": true,
+        "name": "",
+        "id": "01eef466"
+      },
+      {
+        "type": "namespace",
+        "value": "cloudns.net",
+        "rule": "DOMAIN-SUFFIX,cloudns.net",
+        "enabled": true,
+        "name": "",
+        "id": "3bfd8a28"
+      },
+      {
+        "type": "namespace",
+        "value": "luadns.com",
+        "rule": "DOMAIN-SUFFIX,luadns.com",
+        "enabled": true,
+        "name": "",
+        "id": "d2fc47cb"
+      },
+      {
+        "type": "namespace",
+        "value": "filmix.my",
+        "rule": "DOMAIN-SUFFIX,filmix.my",
+        "enabled": true,
+        "name": "",
+        "id": "19f64a93"
+      },
+      {
+        "type": "namespace",
+        "value": "bitbucket.org",
+        "rule": "DOMAIN-SUFFIX,bitbucket.org",
+        "enabled": true,
+        "name": "",
+        "id": "1e0a145f"
+      },
+      {
+        "type": "namespace",
+        "value": "gitlab.com",
+        "rule": "DOMAIN-SUFFIX,gitlab.com",
+        "enabled": true,
+        "name": "",
+        "id": "ff6bd3eb"
+      },
+      {
+        "type": "namespace",
+        "value": "callfilter.app",
+        "rule": "DOMAIN-SUFFIX,callfilter.app",
+        "enabled": true,
+        "name": "",
+        "id": "b99da652"
+      },
+      {
+        "type": "namespace",
+        "value": "vivo.com.cn",
+        "rule": "DOMAIN-SUFFIX,vivo.com.cn",
+        "enabled": true,
+        "name": "",
+        "id": "4d2eb039"
+      },
+      {
+        "type": "namespace",
+        "value": "pusher.com",
+        "rule": "DOMAIN-SUFFIX,pusher.com",
+        "enabled": true,
+        "name": "",
+        "id": "f70f9533"
+      },
+      {
+        "type": "namespace",
+        "value": "irc-ws.chat.twitch.tv",
+        "rule": "DOMAIN-SUFFIX,irc-ws.chat.twitch.tv",
+        "enabled": true,
+        "name": "",
+        "id": "2ecd66a2"
+      },
+      {
+        "type": "namespace",
+        "value": "bitvise.com",
+        "rule": "DOMAIN-SUFFIX,bitvise.com",
+        "enabled": true,
+        "name": "",
+        "id": "8d178713"
+      },
+      {
+        "type": "namespace",
+        "value": "higgsfield.ai",
+        "rule": "DOMAIN-SUFFIX,higgsfield.ai",
+        "enabled": true,
+        "name": "",
+        "id": "59fe3b6e"
+      },
+      {
+        "type": "namespace",
+        "value": "sbox.game",
+        "rule": "DOMAIN-SUFFIX,sbox.game",
+        "enabled": true,
+        "name": "",
+        "id": "b964e2eb"
+      },
+      {
+        "type": "namespace",
+        "value": "gizmochina.com",
+        "rule": "DOMAIN-SUFFIX,gizmochina.com",
+        "enabled": true,
+        "name": "",
+        "id": "002f1470"
+      },
+      {
+        "type": "namespace",
+        "value": "lowendtalk.com",
+        "rule": "DOMAIN-SUFFIX,lowendtalk.com",
+        "enabled": true,
+        "name": "",
+        "id": "d09a5e12"
+      },
+      {
+        "type": "namespace",
+        "value": "seriesgraph.com",
+        "rule": "DOMAIN-SUFFIX,seriesgraph.com",
+        "enabled": true,
+        "name": "",
+        "id": "a7466806"
+      },
+      {
+        "type": "namespace",
+        "value": "blackhatworld.com",
+        "rule": "DOMAIN-SUFFIX,blackhatworld.com",
+        "enabled": true,
+        "name": "",
+        "id": "0c4bb8b4"
+      },
+      {
+        "type": "namespace",
+        "value": "ping-admin.com",
+        "rule": "DOMAIN-SUFFIX,ping-admin.com",
+        "enabled": true,
+        "name": "",
+        "id": "e5caf835"
+      },
+      {
+        "type": "namespace",
+        "value": "scribd.com",
+        "rule": "DOMAIN-SUFFIX,scribd.com",
+        "enabled": true,
+        "name": "",
+        "id": "fe38db4e"
+      },
+      {
+        "type": "namespace",
+        "value": "pdfcoffee.com",
+        "rule": "DOMAIN-SUFFIX,pdfcoffee.com",
+        "enabled": true,
+        "name": "",
+        "id": "d7c5b58f"
+      },
+      {
+        "type": "namespace",
+        "value": "consensus.app",
+        "rule": "DOMAIN-SUFFIX,consensus.app",
+        "enabled": true,
+        "name": "",
+        "id": "1c272306"
+      },
+      {
+        "type": "namespace",
+        "value": "whoer.net",
+        "rule": "DOMAIN-SUFFIX,whoer.net",
+        "enabled": true,
+        "name": "",
+        "id": "b4e30bd1"
+      },
+      {
+        "type": "namespace",
+        "value": "vpnjantit.com",
+        "rule": "DOMAIN-SUFFIX,vpnjantit.com",
+        "enabled": true,
+        "name": "",
+        "id": "acd580f0"
+      },
+      {
+        "type": "namespace",
+        "value": "figshare.com",
+        "rule": "DOMAIN-SUFFIX,figshare.com",
+        "enabled": true,
+        "name": "",
+        "id": "68fa568b"
+      },
+      {
+        "type": "namespace",
+        "value": "opintopolku.fi",
+        "rule": "DOMAIN-SUFFIX,opintopolku.fi",
+        "enabled": true,
+        "name": "",
+        "id": "5d684eb6"
+      },
+      {
+        "type": "namespace",
+        "value": "studyinfinland.fi",
+        "rule": "DOMAIN-SUFFIX,studyinfinland.fi",
+        "enabled": true,
+        "name": "",
+        "id": "8ee63805"
+      },
+      {
+        "type": "namespace",
+        "value": "transistor.fm",
+        "rule": "DOMAIN-SUFFIX,transistor.fm",
+        "enabled": true,
+        "name": "",
+        "id": "99b350f4"
+      },
+      {
+        "type": "namespace",
+        "value": "walletbot.me",
+        "rule": "DOMAIN-SUFFIX,walletbot.me",
+        "enabled": true,
+        "name": "",
+        "id": "6c450a4a"
+      },
+      {
+        "type": "namespace",
+        "value": "allawnos.com",
+        "rule": "DOMAIN-SUFFIX,allawnos.com",
+        "enabled": true,
+        "name": "",
+        "id": "0eab9b20"
+      },
+      {
+        "type": "namespace",
+        "value": "hetzner.com",
+        "rule": "DOMAIN-SUFFIX,hetzner.com",
+        "enabled": true,
+        "name": "",
+        "id": "2bafd0fd"
+      },
+      {
+        "type": "namespace",
+        "value": "hetzner.cloud",
+        "rule": "DOMAIN-SUFFIX,hetzner.cloud",
+        "enabled": true,
+        "name": "",
+        "id": "21e02cad"
+      },
+      {
+        "type": "namespace",
+        "value": "desec.io",
+        "rule": "DOMAIN-SUFFIX,desec.io",
+        "enabled": true,
+        "name": "",
+        "id": "4147e115"
+      },
+      {
+        "type": "namespace",
+        "value": "izzysoft.de",
+        "rule": "DOMAIN-SUFFIX,izzysoft.de",
+        "enabled": true,
+        "name": "",
+        "id": "49b38ef7"
+      },
+      {
+        "type": "namespace",
+        "value": "manjaro.org",
+        "rule": "DOMAIN-SUFFIX,manjaro.org",
+        "enabled": true,
+        "name": "",
+        "id": "75cf19e0"
+      },
+      {
+        "type": "namespace",
+        "value": "mirror.chaotic.cx",
+        "rule": "DOMAIN-SUFFIX,mirror.chaotic.cx",
+        "enabled": true,
+        "name": "",
+        "id": "ab89db2f"
+      },
+      {
+        "type": "namespace",
+        "value": "nextcloud.com",
+        "rule": "DOMAIN-SUFFIX,nextcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "49d06f3b"
+      },
+      {
+        "type": "namespace",
+        "value": "ocbase.com",
+        "rule": "DOMAIN-SUFFIX,ocbase.com",
+        "enabled": true,
+        "name": "",
+        "id": "fa1074c5"
+      },
+      {
+        "type": "namespace",
+        "value": "archlinux.org",
+        "rule": "DOMAIN-SUFFIX,archlinux.org",
+        "enabled": true,
+        "name": "",
+        "id": "2745ac4a"
+      },
+      {
+        "type": "namespace",
+        "value": "beamng.com",
+        "rule": "DOMAIN-SUFFIX,beamng.com",
+        "enabled": true,
+        "name": "",
+        "id": "b4bfd71c"
+      },
+      {
+        "type": "namespace",
+        "value": "media5.cdnbase.com",
+        "rule": "DOMAIN-SUFFIX,media5.cdnbase.com",
+        "enabled": true,
+        "name": "",
+        "id": "e3debd5e"
+      },
+      {
+        "type": "namespace",
+        "value": "amazon.com",
+        "rule": "DOMAIN-SUFFIX,amazon.com",
+        "enabled": true,
+        "name": "",
+        "id": "20fed30a"
+      },
+      {
+        "type": "namespace",
+        "value": "fossorial.io",
+        "rule": "DOMAIN-SUFFIX,fossorial.io",
+        "enabled": true,
+        "name": "",
+        "id": "57ce7438"
+      },
+      {
+        "type": "namespace",
+        "value": "netbird.io",
+        "rule": "DOMAIN-SUFFIX,netbird.io",
+        "enabled": true,
+        "name": "",
+        "id": "f0678c21"
+      },
+      {
+        "type": "namespace",
+        "value": "protonvpn.com",
+        "rule": "DOMAIN-SUFFIX,protonvpn.com",
+        "enabled": true,
+        "name": "",
+        "id": "ee8cf220"
+      },
+      {
+        "type": "namespace",
+        "value": "strava.com",
+        "rule": "DOMAIN-SUFFIX,strava.com",
+        "enabled": true,
+        "name": "",
+        "id": "203721be"
+      },
+      {
+        "type": "namespace",
+        "value": "vrchat.com",
+        "rule": "DOMAIN-SUFFIX,vrchat.com",
+        "enabled": true,
+        "name": "",
+        "id": "ea6b11ef"
+      },
+      {
+        "type": "namespace",
+        "value": "vrchat.cloud",
+        "rule": "DOMAIN-SUFFIX,vrchat.cloud",
+        "enabled": true,
+        "name": "",
+        "id": "c2232ddd"
+      },
+      {
+        "type": "namespace",
+        "value": "mongodb.com",
+        "rule": "DOMAIN-SUFFIX,mongodb.com",
+        "enabled": true,
+        "name": "",
+        "id": "88e268b2"
+      },
+      {
+        "type": "namespace",
+        "value": "amazonaws.com",
+        "rule": "DOMAIN-SUFFIX,amazonaws.com",
+        "enabled": true,
+        "name": "",
+        "id": "4991790d"
+      },
+      {
+        "type": "namespace",
+        "value": "cloudfront.net",
+        "rule": "DOMAIN-SUFFIX,cloudfront.net",
+        "enabled": true,
+        "name": "",
+        "id": "a9dd5332"
+      },
+      {
+        "type": "namespace",
+        "value": "zerotier.com",
+        "rule": "DOMAIN-SUFFIX,zerotier.com",
+        "enabled": true,
+        "name": "",
+        "id": "6f98d608"
+      },
+      {
+        "type": "namespace",
+        "value": "forum.syncthing.net",
+        "rule": "DOMAIN-SUFFIX,forum.syncthing.net",
+        "enabled": true,
+        "name": "",
+        "id": "69f2bd7c"
+      },
+      {
+        "type": "namespace",
+        "value": "openwrt.org",
+        "rule": "DOMAIN-SUFFIX,openwrt.org",
+        "enabled": true,
+        "name": "",
+        "id": "7d4c0262"
+      },
+      {
+        "type": "namespace",
+        "value": "vod.streamgum.com",
+        "rule": "DOMAIN-SUFFIX,vod.streamgum.com",
+        "enabled": true,
+        "name": "",
+        "id": "7fdbfb29"
+      },
+      {
+        "type": "namespace",
+        "value": "windowsupdate.com",
+        "rule": "DOMAIN-SUFFIX,windowsupdate.com",
+        "enabled": true,
+        "name": "",
+        "id": "bb425453"
+      },
+      {
+        "type": "namespace",
+        "value": "tuya.com",
+        "rule": "DOMAIN-SUFFIX,tuya.com",
+        "enabled": true,
+        "name": "",
+        "id": "687d0d0f"
+      },
+      {
+        "type": "namespace",
+        "value": "tuyaeu.com",
+        "rule": "DOMAIN-SUFFIX,tuyaeu.com",
+        "enabled": true,
+        "name": "",
+        "id": "7bc5317d"
+      },
+      {
+        "type": "namespace",
+        "value": "tuyacn.com",
+        "rule": "DOMAIN-SUFFIX,tuyacn.com",
+        "enabled": true,
+        "name": "",
+        "id": "3f0f670f"
+      },
+      {
+        "type": "namespace",
+        "value": "tuyaus.com",
+        "rule": "DOMAIN-SUFFIX,tuyaus.com",
+        "enabled": true,
+        "name": "",
+        "id": "14690d6a"
+      },
+      {
+        "type": "namespace",
+        "value": "tuyaaf.com",
+        "rule": "DOMAIN-SUFFIX,tuyaaf.com",
+        "enabled": true,
+        "name": "",
+        "id": "a2f3a2ba"
+      },
+      {
+        "type": "namespace",
+        "value": "tuya-inc.cn",
+        "rule": "DOMAIN-SUFFIX,tuya-inc.cn",
+        "enabled": true,
+        "name": "",
+        "id": "46b3f564"
+      },
+      {
+        "type": "namespace",
+        "value": "tuyain.com",
+        "rule": "DOMAIN-SUFFIX,tuyain.com",
+        "enabled": true,
+        "name": "",
+        "id": "9ca2a79a"
+      },
+      {
+        "type": "namespace",
+        "value": "iot334.com",
+        "rule": "DOMAIN-SUFFIX,iot334.com",
+        "enabled": true,
+        "name": "",
+        "id": "fd89ef9d"
+      },
+      {
+        "type": "namespace",
+        "value": "wbagora.com",
+        "rule": "DOMAIN-SUFFIX,wbagora.com",
+        "enabled": true,
+        "name": "",
+        "id": "337686b8"
+      },
+      {
+        "type": "namespace",
+        "value": "wbinsights.com",
+        "rule": "DOMAIN-SUFFIX,wbinsights.com",
+        "enabled": true,
+        "name": "",
+        "id": "7014c3b4"
+      },
+      {
+        "type": "namespace",
+        "value": "wbgames.com",
+        "rule": "DOMAIN-SUFFIX,wbgames.com",
+        "enabled": true,
+        "name": "",
+        "id": "d634ddf2"
+      },
+      {
+        "type": "namespace",
+        "value": "capcut.com",
+        "rule": "DOMAIN-SUFFIX,capcut.com",
+        "enabled": true,
+        "name": "",
+        "id": "d45fa762"
+      },
+      {
+        "type": "namespace",
+        "value": "capcutstatic.com",
+        "rule": "DOMAIN-SUFFIX,capcutstatic.com",
+        "enabled": true,
+        "name": "",
+        "id": "218e15d8"
+      },
+      {
+        "type": "namespace",
+        "value": "capcutvod.com",
+        "rule": "DOMAIN-SUFFIX,capcutvod.com",
+        "enabled": true,
+        "name": "",
+        "id": "ce151bc0"
+      },
+      {
+        "type": "namespace",
+        "value": "capcutapi.com",
+        "rule": "DOMAIN-SUFFIX,capcutapi.com",
+        "enabled": true,
+        "name": "",
+        "id": "322b7a76"
+      },
+      {
+        "type": "namespace",
+        "value": "huggingface.co",
+        "rule": "DOMAIN-SUFFIX,huggingface.co",
+        "enabled": true,
+        "name": "",
+        "id": "4d2ad850"
+      },
+      {
+        "type": "namespace",
+        "value": "cdn-lfs.hf.co",
+        "rule": "DOMAIN-SUFFIX,cdn-lfs.hf.co",
+        "enabled": true,
+        "name": "",
+        "id": "298a8d37"
+      },
+      {
+        "type": "namespace",
+        "value": "cdn-lfs.huggingface.co",
+        "rule": "DOMAIN-SUFFIX,cdn-lfs.huggingface.co",
+        "enabled": true,
+        "name": "",
+        "id": "cbe29b31"
+      },
+      {
+        "type": "namespace",
+        "value": "cdn-lfs-us-1.hf.co",
+        "rule": "DOMAIN-SUFFIX,cdn-lfs-us-1.hf.co",
+        "enabled": true,
+        "name": "",
+        "id": "4de0eca4"
+      },
+      {
+        "type": "namespace",
+        "value": "cdn-lfs-eu-1.hf.co",
+        "rule": "DOMAIN-SUFFIX,cdn-lfs-eu-1.hf.co",
+        "enabled": true,
+        "name": "",
+        "id": "37edafcb"
+      },
+      {
+        "type": "namespace",
+        "value": "stripe.com",
+        "rule": "DOMAIN-SUFFIX,stripe.com",
+        "enabled": true,
+        "name": "",
+        "id": "55d97a20"
+      },
+      {
+        "type": "namespace",
+        "value": "stripecdn.com",
+        "rule": "DOMAIN-SUFFIX,stripecdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "23d238a4"
+      },
+      {
+        "type": "namespace",
+        "value": "scira.ai",
+        "rule": "DOMAIN-SUFFIX,scira.ai",
+        "enabled": true,
+        "name": "",
+        "id": "b9b37d1b"
+      },
+      {
+        "type": "namespace",
+        "value": "cdn.embedly.com",
+        "rule": "DOMAIN-SUFFIX,cdn.embedly.com",
+        "enabled": true,
+        "name": "",
+        "id": "0c84c9fa"
+      },
+      {
+        "type": "namespace",
+        "value": "dodopayments.com",
+        "rule": "DOMAIN-SUFFIX,dodopayments.com",
+        "enabled": true,
+        "name": "",
+        "id": "830c4ae0"
+      },
+      {
+        "type": "namespace",
+        "value": "d4c.nintendo.net",
+        "rule": "DOMAIN-SUFFIX,d4c.nintendo.net",
+        "enabled": true,
+        "name": "",
+        "id": "9e926850"
+      },
+      {
+        "type": "namespace",
+        "value": "eshop.nintendo.net",
+        "rule": "DOMAIN-SUFFIX,eshop.nintendo.net",
+        "enabled": true,
+        "name": "",
+        "id": "bdfecb2b"
+      },
+      {
+        "type": "namespace",
+        "value": "srv.nintendo.net",
+        "rule": "DOMAIN-SUFFIX,srv.nintendo.net",
+        "enabled": true,
+        "name": "",
+        "id": "2cc502a6"
+      },
+      {
+        "type": "namespace",
+        "value": "dragons.nintendo.net",
+        "rule": "DOMAIN-SUFFIX,dragons.nintendo.net",
+        "enabled": true,
+        "name": "",
+        "id": "7df6f441"
+      }
+    ]
+  },
+  {
+    "id": "47b856bf",
+    "name": "Youtube",
+    "enabled": true,
+    "entries": [
+      {
+        "type": "namespace",
+        "value": "youtube.com",
+        "rule": "DOMAIN-SUFFIX,youtube.com",
+        "enabled": true,
+        "name": "",
+        "id": "f5569ced"
+      },
+      {
+        "type": "namespace",
+        "value": "googlevideo.com",
+        "rule": "DOMAIN-SUFFIX,googlevideo.com",
+        "enabled": true,
+        "name": "",
+        "id": "28cb8484"
+      },
+      {
+        "type": "namespace",
+        "value": "ytimg.com",
+        "rule": "DOMAIN-SUFFIX,ytimg.com",
+        "enabled": true,
+        "name": "",
+        "id": "e85b486c"
+      },
+      {
+        "type": "namespace",
+        "value": "ggpht.com",
+        "rule": "DOMAIN-SUFFIX,ggpht.com",
+        "enabled": true,
+        "name": "",
+        "id": "cdbd54e5"
+      },
+      {
+        "type": "namespace",
+        "value": "youtu.be",
+        "rule": "DOMAIN-SUFFIX,youtu.be",
+        "enabled": true,
+        "name": "",
+        "id": "447369fe"
+      },
+      {
+        "type": "namespace",
+        "value": "youtube-nocookie.com",
+        "rule": "DOMAIN-SUFFIX,youtube-nocookie.com",
+        "enabled": true,
+        "name": "",
+        "id": "1984ab03"
+      },
+      {
+        "type": "namespace",
+        "value": "youtubekids.com",
+        "rule": "DOMAIN-SUFFIX,youtubekids.com",
+        "enabled": true,
+        "name": "",
+        "id": "aed5f5e8"
+      },
+      {
+        "type": "namespace",
+        "value": "withyoutube.com",
+        "rule": "DOMAIN-SUFFIX,withyoutube.com",
+        "enabled": true,
+        "name": "",
+        "id": "710d58c4"
+      },
+      {
+        "type": "namespace",
+        "value": "yt.be",
+        "rule": "DOMAIN-SUFFIX,yt.be",
+        "enabled": true,
+        "name": "",
+        "id": "04a02c3e"
+      },
+      {
+        "type": "namespace",
+        "value": "youtubeembeddedplayer.googleapis.com",
+        "rule": "DOMAIN-SUFFIX,youtubeembeddedplayer.googleapis.com",
+        "enabled": true,
+        "name": "",
+        "id": "9ad35d09"
+      },
+      {
+        "type": "namespace",
+        "value": "yt3.googleusercontent.com",
+        "rule": "DOMAIN-SUFFIX,yt3.googleusercontent.com",
+        "enabled": true,
+        "name": "",
+        "id": "ead81fcf"
+      },
+      {
+        "type": "namespace",
+        "value": "yt4.googleusercontent.com",
+        "rule": "DOMAIN-SUFFIX,yt4.googleusercontent.com",
+        "enabled": true,
+        "name": "",
+        "id": "225bd8cf"
+      },
+      {
+        "type": "namespace",
+        "value": "wide-youtube.l.google.com",
+        "rule": "DOMAIN-SUFFIX,wide-youtube.l.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "1574be54"
+      },
+      {
+        "type": "namespace",
+        "value": "youtube-ui.l.google.com",
+        "rule": "DOMAIN-SUFFIX,youtube-ui.l.google.com",
+        "enabled": true,
+        "name": "",
+        "id": "0ae84887"
+      }
+    ]
+  },
+  {
+    "id": "47a6a42c",
+    "name": "SoundCloud",
+    "enabled": true,
+    "entries": [
+      {
+        "type": "namespace",
+        "value": "soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "f1be9f60"
+      },
+      {
+        "type": "namespace",
+        "value": "sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "85bc36b3"
+      },
+      {
+        "type": "namespace",
+        "value": "soundcloud.cloud",
+        "rule": "DOMAIN-SUFFIX,soundcloud.cloud",
+        "enabled": true,
+        "name": "",
+        "id": "61136085"
+      },
+      {
+        "type": "namespace",
+        "value": "soundcloud.app.goo.gl",
+        "rule": "DOMAIN-SUFFIX,soundcloud.app.goo.gl",
+        "enabled": true,
+        "name": "",
+        "id": "f4bfc52d"
+      },
+      {
+        "type": "namespace",
+        "value": "api.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,api.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "cb64e2db"
+      },
+      {
+        "type": "namespace",
+        "value": "api-v2.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,api-v2.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "6864c3ea"
+      },
+      {
+        "type": "namespace",
+        "value": "api-auth.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,api-auth.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "d1205adb"
+      },
+      {
+        "type": "namespace",
+        "value": "api-mobile.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,api-mobile.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "ef698e52"
+      },
+      {
+        "type": "namespace",
+        "value": "api-mobi.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,api-mobi.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "657a2ed8"
+      },
+      {
+        "type": "namespace",
+        "value": "api-widget.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,api-widget.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "fe0f3ada"
+      },
+      {
+        "type": "namespace",
+        "value": "m.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,m.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "b1c1e4cd"
+      },
+      {
+        "type": "namespace",
+        "value": "w.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,w.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "982581b5"
+      },
+      {
+        "type": "namespace",
+        "value": "secure.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,secure.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "1607ec75"
+      },
+      {
+        "type": "namespace",
+        "value": "connect.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,connect.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "1de1eca7"
+      },
+      {
+        "type": "namespace",
+        "value": "checkout.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,checkout.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "8a066b4c"
+      },
+      {
+        "type": "namespace",
+        "value": "help.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,help.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "b5c8ee34"
+      },
+      {
+        "type": "namespace",
+        "value": "developers.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,developers.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "3654a9bf"
+      },
+      {
+        "type": "namespace",
+        "value": "artists.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,artists.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "0cd398ab"
+      },
+      {
+        "type": "namespace",
+        "value": "status.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,status.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "e8e5ffdc"
+      },
+      {
+        "type": "namespace",
+        "value": "blog.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,blog.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "70d5a1ff"
+      },
+      {
+        "type": "namespace",
+        "value": "dwt.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,dwt.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "b99236eb"
+      },
+      {
+        "type": "namespace",
+        "value": "eventgateway.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,eventgateway.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "d6de92e3"
+      },
+      {
+        "type": "namespace",
+        "value": "eventlogger.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,eventlogger.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "f0cb40c6"
+      },
+      {
+        "type": "namespace",
+        "value": "events-api.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,events-api.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "f81a3542"
+      },
+      {
+        "type": "namespace",
+        "value": "feeds.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,feeds.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "0e8b3c97"
+      },
+      {
+        "type": "namespace",
+        "value": "graph.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,graph.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "0251c54a"
+      },
+      {
+        "type": "namespace",
+        "value": "promoted.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,promoted.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "790db6d7"
+      },
+      {
+        "type": "namespace",
+        "value": "telemetry.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,telemetry.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "4b891bf7"
+      },
+      {
+        "type": "namespace",
+        "value": "velvetcake.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,velvetcake.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "1dd8e0d2"
+      },
+      {
+        "type": "namespace",
+        "value": "l9bjkkhaycw6f8f4.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,l9bjkkhaycw6f8f4.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "d0e30f89"
+      },
+      {
+        "type": "namespace",
+        "value": "legacy-community.soundcloud.com",
+        "rule": "DOMAIN-SUFFIX,legacy-community.soundcloud.com",
+        "enabled": true,
+        "name": "",
+        "id": "f5edec79"
+      },
+      {
+        "type": "namespace",
+        "value": "i1.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,i1.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "f8614b24"
+      },
+      {
+        "type": "namespace",
+        "value": "i2.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,i2.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "c0d0686c"
+      },
+      {
+        "type": "namespace",
+        "value": "i3.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,i3.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "f8bd770b"
+      },
+      {
+        "type": "namespace",
+        "value": "i4.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,i4.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "99a2e4f6"
+      },
+      {
+        "type": "namespace",
+        "value": "a-v2.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,a-v2.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "2467f22b"
+      },
+      {
+        "type": "namespace",
+        "value": "al.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,al.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "45ca5758"
+      },
+      {
+        "type": "namespace",
+        "value": "cf-media.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,cf-media.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "7d1886ae"
+      },
+      {
+        "type": "namespace",
+        "value": "cf-hls-media.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,cf-hls-media.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "735652c8"
+      },
+      {
+        "type": "namespace",
+        "value": "cf-hls-opus-media.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,cf-hls-opus-media.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "82d5868c"
+      },
+      {
+        "type": "namespace",
+        "value": "secure.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,secure.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "4d4a5986"
+      },
+      {
+        "type": "namespace",
+        "value": "style.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,style.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "48873a96"
+      },
+      {
+        "type": "namespace",
+        "value": "va.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,va.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "36f37b52"
+      },
+      {
+        "type": "namespace",
+        "value": "w1.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,w1.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "3ba79616"
+      },
+      {
+        "type": "namespace",
+        "value": "wave.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,wave.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "7f5f95d6"
+      },
+      {
+        "type": "namespace",
+        "value": "widget.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,widget.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "80dc2bed"
+      },
+      {
+        "type": "namespace",
+        "value": "wis.sndcdn.com",
+        "rule": "DOMAIN-SUFFIX,wis.sndcdn.com",
+        "enabled": true,
+        "name": "",
+        "id": "ca65682e"
+      },
+      {
+        "type": "namespace",
+        "value": "playback.media-streaming.soundcloud.cloud",
+        "rule": "DOMAIN-SUFFIX,playback.media-streaming.soundcloud.cloud",
+        "enabled": true,
+        "name": "",
+        "id": "ea1035e2"
+      }
+    ]
+  }
+]

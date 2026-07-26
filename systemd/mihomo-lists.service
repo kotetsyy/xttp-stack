@@ -1,0 +1,17 @@
+[Unit]
+Description=xttp panel (mihomo-lists web UI)
+After=network.target mihomo.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/mihomo-lists/app.py
+Restart=on-failure
+RestartSec=2
+User=root
+WorkingDirectory=/opt/mihomo-lists
+# git commit of groups/ when rules are saved (optional; set to 0 to disable)
+Environment=XTTP_GIT_REPO=/opt/xttp-stack
+Environment=XTTP_GIT_COMMIT=1
+
+[Install]
+WantedBy=multi-user.target

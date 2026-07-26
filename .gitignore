@@ -1,17 +1,73 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Secrets & runtime data (NEVER commit) ---
 .env
 .env.*
+!.env.example
 session.secret
 users.json
+**/users.json
 activity.json
 prefs.json
 traffic_history.json
+
+# Real service configs with credentials (examples/ only)
+/etc/
 **/config.json
 **/config.yaml
 !configs/examples/**
+!configs/examples/**/*
+
+# Explicit secret material
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+*.secret
+
+# VLESS share links (if ever dumped into files)
+**/vless-*.txt
+*vless://*
+
+# --- Binaries & backups ---
+/mihomo
+/xray
 mihomo
 xray
 *.bak
 *.bak.*
 bin-backups/
 xray-backups/
+groups-backups/
+groups-yaml-quarantine/
 *.tar.gz
+*.zip
+!configs/**/*.json
+
+# --- Editor / OS ---
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# --- Local deploy junk ---
+app.py.patched
+remote_app_*.py
+*.pyc
