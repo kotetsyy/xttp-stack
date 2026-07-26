@@ -1,0 +1,13 @@
+[Unit]
+Description=xttp-stack fleet update timer (every 30 min)
+Requires=xttp-update.service
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=30min
+AccuracySec=1min
+Persistent=true
+Unit=xttp-update.service
+
+[Install]
+WantedBy=timers.target

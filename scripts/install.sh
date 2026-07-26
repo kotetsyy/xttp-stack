@@ -103,6 +103,18 @@ systemctl daemon-reload
 systemctl enable mihomo xray mihomo-lists
 
 echo
+
+echo "==> fleet auto-update timer (enabled, not started)"
+install -m 644 "$INSTALL_ROOT/systemd/xttp-update.service" /etc/systemd/system/xttp-update.service
+install -m 644 "$INSTALL_ROOT/systemd/xttp-update.timer" /etc/systemd/system/xttp-update.timer
+# point repo path in service
+sed -i "s|Environment=XTTP_GIT_REPO=.*|Environment=XTTP_GIT_REPO=$INSTALL_ROOT|" \
+  /etc/systemd/system/xttp-update.service 2>/dev/null || true
+systemctl daemon-reload
+systemctl enable xttp-update.timer
+# do not start timer until first manual run — same spirit as not auto-starting mihomo
+echo "    enabled xttp-update.timer (start later: systemctl start xttp-update.timer)"
+
 echo "=============================================="
 echo "  Fill secrets BEFORE starting services:"
 echo "    $MIHOMO_CFG"

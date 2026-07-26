@@ -28,6 +28,9 @@ install -m 644 "$REPO_ROOT/systemd/xray.service" /etc/systemd/system/xray.servic
 install -m 644 "$REPO_ROOT/systemd/mihomo-lists.service" /etc/systemd/system/mihomo-lists.service
 sed -i "s|^Environment=XTTP_GIT_REPO=.*|Environment=XTTP_GIT_REPO=$REPO_ROOT|" \
   /etc/systemd/system/mihomo-lists.service 2>/dev/null || true
+install -m 644 "$REPO_ROOT/systemd/xttp-update.service" /etc/systemd/system/xttp-update.service 2>/dev/null || true
+install -m 644 "$REPO_ROOT/systemd/xttp-update.timer" /etc/systemd/system/xttp-update.timer 2>/dev/null || true
+sed -i "s|Environment=XTTP_GIT_REPO=.*|Environment=XTTP_GIT_REPO=$REPO_ROOT|" /etc/systemd/system/xttp-update.service 2>/dev/null || true
 systemctl daemon-reload
 
 # Sync groups.json from repo → live path if repo file is newer or live missing

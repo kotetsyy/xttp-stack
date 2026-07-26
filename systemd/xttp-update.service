@@ -1,0 +1,15 @@
+[Unit]
+Description=xttp-stack fleet check-and-update (oneshot)
+After=network-online.target mihomo-lists.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+Environment=XTTP_GIT_REPO=/opt/xttp-stack
+Environment=XTTP_PANEL_APP=/opt/mihomo-lists/app.py
+Environment=XTTP_FLEET_INITIATOR=автообновление (timer)
+ExecStart=/bin/bash /opt/xttp-stack/scripts/check-and-update.sh
+Nice=10
+
+[Install]
+WantedBy=multi-user.target
