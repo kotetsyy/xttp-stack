@@ -1,7 +1,7 @@
 {
-  "panel": "0.18.0",
+  "panel": "0.18.1",
   "mihomo": "v1.19.29",
   "xray": "v26.6.22",
-  "updated_at": "2026-07-26T00:00:00Z",
-  "notes": ""
+  "updated_at": "2026-07-26T15:30:00Z",
+  "notes": "panel chip: GitHub check + update via update.sh"
 }
