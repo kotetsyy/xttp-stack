@@ -13,7 +13,29 @@ cd "$REPO_ROOT"
 
 echo "==> git pull ($REPO_ROOT)"
 if [[ -d .git ]]; then
-  git pull --ff-only || git pull
+  # Skip if caller already synced (panel UI update_component_panel)
+  if [[ "${XTTP_GIT_SYNCED:-0}" == "1" ]]; then
+    echo "    skip git (XTTP_GIT_SYNCED=1)"
+  else
+    BRANCH="${XTTP_GITHUB_BRANCH:-main}"
+    set +e
+    if git remote get-url origin >/dev/null 2>&1; then
+      git fetch origin "$BRANCH"
+      # prefer explicit remote/branch (no upstream required)
+      if ! git pull --ff-only origin "$BRANCH"; then
+        echo "    ff-only failed — reset --hard origin/$BRANCH (pull-only device)"
+        git reset --hard "origin/$BRANCH"
+      fi
+      git branch --set-upstream-to="origin/$BRANCH" HEAD 2>/dev/null || true
+    else
+      git pull --ff-only || git pull
+    fi
+    git_rc=$?
+    set -e
+    if [[ $git_rc -ne 0 ]]; then
+      echo "    WARNING: git sync rc=$git_rc — installing current tree anyway"
+    fi
+  fi
 else
   echo "    WARNING: not a git checkout — only local files will be installed"
 fi
@@ -49,11 +71,15 @@ if [[ -f "$GROUPS_REPO" ]]; then
   fi
 fi
 
-echo "==> restart panel (mihomo/xray not restarted)"
-systemctl restart mihomo-lists
-sleep 1
-systemctl is-active mihomo-lists
-curl -sS -o /dev/null -w "panel http=%{http_code}\n" http://127.0.0.1:9080/ || true
+if [[ "${XTTP_NO_RESTART:-0}" == "1" ]]; then
+  echo "==> skip restart (XTTP_NO_RESTART=1) — caller will restart"
+else
+  echo "==> restart panel (mihomo/xray not restarted)"
+  systemctl restart mihomo-lists
+  sleep 1
+  systemctl is-active mihomo-lists
+  curl -sS -o /dev/null -w "panel http=%{http_code}\n" http://127.0.0.1:9080/ || true
+fi
 
 if [[ "${XTTP_UPDATE_BINARIES:-0}" == "1" ]]; then
   echo "==> optional binary version check (panel API, if running)"
