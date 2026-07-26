@@ -43,21 +43,29 @@ cd /opt/xttp-stack
 sudo bash scripts/install.sh
 ```
 
+`install.sh` will:
+
+- install packages (`python3`, `curl`, `git`, …)
+- **download** `mihomo` + `xray` into `/usr/local/bin/` (amd64/arm64) if missing  
+  - skip: `XTTP_SKIP_BINARIES=1`  
+  - re-download: `XTTP_FORCE_BINARIES=1`
+- install panel, example configs, groups, systemd units (+ fleet timer enabled, not started)
+- add hostname to `/etc/hosts` (avoids `sudo: unable to resolve host`)
+
 Then:
 
-1. Install binaries to `/usr/local/bin/mihomo` and `/usr/local/bin/xray`  
-   (from [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo/releases) and [XTLS/Xray-core](https://github.com/XTLS/Xray-core/releases)).
-2. **Edit secrets** in `/etc/mihomo/config.yaml` and `/etc/xray/config.json`  
-   (created from examples if missing).
-3. Start services:
+1. **Edit secrets** in `/etc/mihomo/config.yaml` and `/etc/xray/config.json`  
+   (created from examples if missing), **or** after start paste `vless://` in the panel (Settings → Connection).
+2. Start services:
 
 ```bash
 sudo systemctl start mihomo xray mihomo-lists
+sudo systemctl enable --now xttp-update.timer   # optional fleet auto-update
 ```
 
-4. Open `http://<host>:9080` — default bootstrap user `admin` / `changeme` (change immediately).
+3. Open `http://<host>:9080` — default bootstrap user `admin` / `changeme` (change immediately).
 
-`install.sh` **enables** units but **does not start** them until you finish configs.
+Services are **enabled** but **not started** until configs/secrets are ready.
 
 ## Update (code + groups)
 

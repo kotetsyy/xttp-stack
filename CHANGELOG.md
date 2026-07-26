@@ -5,6 +5,14 @@ UI читает этот файл с GitHub (`main` / `CHANGELOG.md`).
 
 Формат: [Keep a Changelog](https://keepachangelog.com/) (упрощённо).
 
+## [0.18.4] - 2026-07-26
+
+### Features
+- `install.sh`: автозагрузка mihomo + xray в `/usr/local/bin` (amd64/arm64), проверка до конца install
+- `install.sh`: hostname → `/etc/hosts` (без `sudo: unable to resolve host`)
+- `install.sh`: мягкий apt (не падает сразу при сбое зеркала, если tools уже есть)
+- Env: `XTTP_SKIP_BINARIES=1`, `XTTP_FORCE_BINARIES=1`
+
 ## [0.18.3] - 2026-07-26
 
 ### Features
