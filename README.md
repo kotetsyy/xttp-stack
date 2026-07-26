@@ -108,7 +108,8 @@ mihomo and Xray are third-party projects with their own licenses.
 3. `git commit` + `git push` в `main`.
 4. На каждом устройстве таймер `xttp-update.timer` (до 30 мин) подхватит манифест и применит обновления.
 
-Сигнал флоту = **push `version-manifest.json` в main**, не только тег.
+Сигнал флоту = **push `version-manifest.json` в main**, не только тег.  
+Поле `panel` сравнивается с `VERSION` в коде панели (semver); `mihomo`/`xray` — с установленными бинарниками.
 
 ## Автообновление флота
 

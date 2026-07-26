@@ -3978,6 +3978,8 @@ def fleet_apply_from_manifest(
                 {"component": comp, "want": want, "have": have, "result": "up_to_date"}
             )
 
+    # Panel signal = version-manifest "panel" vs VERSION (semver).
+    # Do not use git behind alone: diverged origin history would false-trigger update.sh.
     want_panel = _parse_version_token(str(manifest.get("panel") or ""))
     have_panel = _parse_version_token(VERSION)
     behind = 0
@@ -3992,7 +3994,7 @@ def fleet_apply_from_manifest(
     except Exception:
         behind = 0
 
-    if behind > 0 or (want_panel and _is_remote_newer(want_panel, have_panel)):
+    if want_panel and _is_remote_newer(want_panel, have_panel):
         report["panel_update"] = True
         report["actions"].append(
             {
