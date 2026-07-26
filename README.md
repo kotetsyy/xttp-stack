@@ -143,3 +143,10 @@ systemctl list-timers xttp-update.timer
 ```
 
 Также: панель → **Операции → Журнал** (записи fleet_*).
+
+## Changelog
+
+История версий панели — файл **CHANGELOG.md** в корне репозитория (GitHub).
+
+Чип **v…** в topbar панели подгружает его через GET /api/changelog.
+Чтобы добавить запись при релизе: допишите секцию ## [x.y.z] - YYYY-MM-DD сверху файла, поднимите VERSION в panel/app.py и panel в ersion-manifest.json, commit + push.
