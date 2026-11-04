@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Update panel code + groups from git; restart panel only.
+# Update panel code from git; keep device-local rules and restart panel only.
 # Never overwrites secret configs under /etc/mihomo/config.yaml or /etc/xray/config.json.
 set -euo pipefail
 
@@ -18,22 +18,20 @@ if [[ -d .git ]]; then
     echo "    skip git (XTTP_GIT_SYNCED=1)"
   else
     BRANCH="${XTTP_GITHUB_BRANCH:-main}"
-    set +e
     if git remote get-url origin >/dev/null 2>&1; then
-      git fetch origin "$BRANCH"
-      # prefer explicit remote/branch (no upstream required)
-      if ! git pull --ff-only origin "$BRANCH"; then
-        echo "    ff-only failed — reset --hard origin/$BRANCH (pull-only device)"
-        git reset --hard "origin/$BRANCH"
+      if ! git fetch origin "$BRANCH"; then
+        echo "ERROR: git fetch failed; no files installed. Fix remote/network access and retry." >&2
+        exit 1
+      fi
+      # Never discard local commits or tracked edits, including old panel rule commits.
+      if ! git merge --ff-only FETCH_HEAD; then
+        echo "ERROR: cannot fast-forward code; no files installed. Preserve and reconcile local commits/edits (including old groups commits), then retry." >&2
+        exit 1
       fi
       git branch --set-upstream-to="origin/$BRANCH" HEAD 2>/dev/null || true
-    else
-      git pull --ff-only || git pull
-    fi
-    git_rc=$?
-    set -e
-    if [[ $git_rc -ne 0 ]]; then
-      echo "    WARNING: git sync rc=$git_rc — installing current tree anyway"
+    elif ! git pull --ff-only; then
+      echo "ERROR: git sync failed; no files installed. Fix the upstream/network or reconcile local commits/edits, then retry." >&2
+      exit 1
     fi
   fi
 else
@@ -55,19 +53,16 @@ install -m 644 "$REPO_ROOT/systemd/xttp-update.timer" /etc/systemd/system/xttp-u
 sed -i "s|Environment=XTTP_GIT_REPO=.*|Environment=XTTP_GIT_REPO=$REPO_ROOT|" /etc/systemd/system/xttp-update.service 2>/dev/null || true
 systemctl daemon-reload
 
-# Sync groups.json from repo → live path if repo file is newer or live missing
+# Bundled rules only bootstrap a missing live file; device rules are always local.
 GROUPS_REPO="$REPO_ROOT/groups/groups.json"
 GROUPS_LIVE=/etc/mihomo/rule-providers/groups.json
 if [[ -f "$GROUPS_REPO" ]]; then
   install -d -m 755 /etc/mihomo/rule-providers/groups
-  if [[ ! -f "$GROUPS_LIVE" ]] || [[ "$GROUPS_REPO" -nt "$GROUPS_LIVE" ]]; then
-    # only auto-copy if env XTTP_SYNC_GROUPS=1 (default on for git-based fleet)
-    if [[ "${XTTP_SYNC_GROUPS:-1}" != "0" ]]; then
-      install -m 644 "$GROUPS_REPO" "$GROUPS_LIVE"
-      echo "==> groups.json synced → $GROUPS_LIVE"
-    fi
+  if [[ ! -e "$GROUPS_LIVE" && ! -L "$GROUPS_LIVE" ]]; then
+    install -m 644 "$GROUPS_REPO" "$GROUPS_LIVE"
+    echo "==> groups.json bootstrapped → $GROUPS_LIVE"
   else
-    echo "==> groups.json live is newer or same — left unchanged"
+    echo "==> groups.json is device-local — left unchanged"
   fi
 fi
 

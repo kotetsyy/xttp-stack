@@ -194,9 +194,13 @@ MIHOMO_CFG=/etc/mihomo/config.yaml
 XRAY_CFG=/etc/xray/config.json
 EXAMPLE_M="$INSTALL_ROOT/configs/examples/mihomo.config.example.yaml"
 EXAMPLE_X="$INSTALL_ROOT/configs/examples/xray.config.example.json"
+PREPARE_STATE="${MIHOMO_CFG}.xttp-prepare.sha256"
 
 if [[ ! -f "$MIHOMO_CFG" ]]; then
   if [[ -f "$EXAMPLE_M" ]]; then
+    # Persist intent before publishing the config so interrupted installs can resume.
+    (umask 077; sha256sum "$EXAMPLE_M" | cut -d' ' -f1 > "${PREPARE_STATE}.tmp")
+    mv -f "${PREPARE_STATE}.tmp" "$PREPARE_STATE"
     install -m 644 "$EXAMPLE_M" "$MIHOMO_CFG"
     echo "    created $MIHOMO_CFG from example"
   fi
@@ -213,16 +217,29 @@ else
   echo "    keep existing $XRAY_CFG"
 fi
 
-echo "==> groups.json"
+echo "==> device-local groups.json (bundled rules bootstrap only)"
 GROUPS_LIVE=/etc/mihomo/rule-providers/groups.json
 GROUPS_REPO="$INSTALL_ROOT/groups/groups.json"
 if [[ -f "$GROUPS_REPO" ]]; then
-  if [[ ! -f "$GROUPS_LIVE" ]]; then
+  if [[ ! -e "$GROUPS_LIVE" && ! -L "$GROUPS_LIVE" ]]; then
     install -m 644 "$GROUPS_REPO" "$GROUPS_LIVE"
     echo "    installed groups from repo → $GROUPS_LIVE"
   else
     echo "    keep existing $GROUPS_LIVE (not overwritten)"
   fi
+fi
+
+if [[ -f "$PREPARE_STATE" ]]; then
+  expected="$(cat "$PREPARE_STATE")"
+  actual="$(sha256sum "$MIHOMO_CFG" | cut -d' ' -f1)"
+  if [[ "$actual" != "$expected" ]]; then
+    echo "ERROR: pending initial config was modified; preserving $MIHOMO_CFG." >&2
+    echo "       Review config/providers and remove $PREPARE_STATE only after completing preparation." >&2
+    exit 1
+  fi
+  echo "==> prepare fresh mihomo config and rule providers (resuming if needed)"
+  python3 /opt/mihomo-lists/app.py --prepare-config
+  rm -f "$PREPARE_STATE"
 fi
 
 echo "==> hostname → /etc/hosts (avoid sudo: unable to resolve host)"
@@ -240,7 +257,7 @@ echo "==> systemd units"
 install -m 644 "$INSTALL_ROOT/systemd/mihomo.service" /etc/systemd/system/mihomo.service
 install -m 644 "$INSTALL_ROOT/systemd/xray.service" /etc/systemd/system/xray.service
 install -m 644 "$INSTALL_ROOT/systemd/mihomo-lists.service" /etc/systemd/system/mihomo-lists.service
-# point git repo for optional commits
+# Point the panel updater at the installed code checkout; rules remain device-local.
 sed -i "s|^Environment=XTTP_GIT_REPO=.*|Environment=XTTP_GIT_REPO=$INSTALL_ROOT|" \
   /etc/systemd/system/mihomo-lists.service 2>/dev/null || true
 
@@ -284,7 +301,9 @@ echo "    $XRAY_CFG"
 echo "  Or paste vless:// in panel after start (Settings → Connection)."
 echo "  Then:  systemctl start mihomo xray mihomo-lists"
 echo "  Fleet: systemctl enable --now xttp-update.timer"
-echo "  UI:    http://<host>:9080  (admin / changeme — change it)"
+echo "  UI:    ssh -N -L 9080:127.0.0.1:9080 <user>@<host>, then http://127.0.0.1:9080"
+echo "  Login: admin; initial password: sudo cat /etc/mihomo-lists/bootstrap.password"
+echo "         (created on first panel start; change it after login)"
 echo "=============================================="
 echo "Services were ENABLED but NOT started."
 echo "Env: XTTP_SKIP_BINARIES=1  XTTP_FORCE_BINARIES=1  XTTP_INSTALL_ROOT=…"
