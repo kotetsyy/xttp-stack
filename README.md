@@ -183,11 +183,17 @@ mihomo and Xray are third-party projects with their own licenses.
 sudo systemctl enable --now xttp-update.timer
 # первый ручной прогон:
 sudo systemctl start xttp-update.service
-# или из панели: Настройки → Ядро → «Проверить обновления сейчас»
+# или из панели: Настройки → Ядро → «Проверить и обновить»
 ```
 
 Интервал по умолчанию: **каждые 30 минут** (`OnUnitActiveSec=30min`).  
 Переопределение: `systemctl edit xttp-update.timer`.
+
+При открытии авторизованной панели выполняется проверка версии из опубликованного `main`.
+Только новая версия открывает предложение обновления; само открытие панели ничего не устанавливает.
+Для установки нужно нажать «Обновить» и подтвердить действие. Совпадающая версия не вызывает диалог.
+Кнопка «Проверить и обновить» запускает fleet-скрипт в фоне и может применять обновления ядер и панели:
+успешный старт ещё не означает завершение. Результаты смотрите в журнале операций.
 
 ### Что делает check-and-update.sh
 
@@ -211,11 +217,11 @@ systemctl list-timers xttp-update.timer
 
 ```bash
 python3 -B -m unittest discover -s tests -v
-bash -n scripts/install.sh scripts/update.sh scripts/check-and-update.sh
+for script in scripts/*.sh; do bash -n "$script" || exit; done
 ```
 
 Tests isolate credentials, generated rules, binary archives, and Git history in temporary directories.
-They do not update real services. Full installer/systemd and native ARM64 smoke checks still require a disposable Linux host.
+They do not update real services. Full fresh-install and native ARM64 smoke checks still require a disposable Linux host.
 
 ## Changelog
 
