@@ -127,7 +127,7 @@ If fetch or fast-forward fails, the updater stops before installing files.
 Older installations may have local `update rules: …` commits: preserve those commits
 and back up live rules before manually reconciling the checkout. The updater does not discard local work.
 
-### Upgrading to 0.19.0
+### Upgrading to 0.19.1
 
 Use the persistent checkout named by the service's `XTTP_GIT_REPO`; replace `/opt/xttp-stack` in examples if yours differs.
 The exact 0.18.5 SSH updater can perform this transition: the new unit starts the complete source tree, not a copied singleton `app.py`.
@@ -139,9 +139,9 @@ Stop the timer, let any active update finish, and back up device data and the ol
 ```bash
 sudo systemctl stop xttp-update.timer
 # Back up /etc/mihomo, /etc/xray, /etc/mihomo-lists, units/drop-ins and the old checkout.
-sudo git clone https://github.com/kotetsyy/xttp-stack.git /opt/xttp-stack-0.19.0
-# Verify VERSION and version-manifest.json contain 0.19.0 or later.
-sudo bash /opt/xttp-stack-0.19.0/scripts/update.sh
+sudo git clone https://github.com/kotetsyy/xttp-stack.git /opt/xttp-stack-0.19.1
+# Verify VERSION and version-manifest.json contain 0.19.1 or later.
+sudo bash /opt/xttp-stack-0.19.1/scripts/update.sh
 ```
 
 Keep that checkout: the service now runs its `panel/app.py` and adjacent frontend.
@@ -151,6 +151,7 @@ Unrelated non-Git install targets are refused without deletion. An intentional n
 
 A failed panel activation restores the prior complete clean source and units, then verifies readiness. Recovery deliberately detaches the checkout at the old commit while retaining branch history.
 Concurrent tracked edits are never discarded: recovery reports failure and retains private backup material for manual repair instead of claiming success.
+Recovery checks the pre-update service version, including when the updater runs from a newer sibling checkout. An unidentified prior version is not reported as verified recovery.
 Config/provider and Xray activations likewise validate candidates before publication and verify restoration on failure.
 Xray configs and credential backups are 0600; the secret-backup directory is 0700. Startup hardens existing managed files without changing bytes or restarting cores.
 

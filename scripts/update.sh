@@ -25,13 +25,50 @@ for name in required:
 PY
 }
 
-panel_ready() {
+previous_panel_version() {
   python3 - <<'PY'
-import ast, os, pathlib, re, subprocess, time, urllib.request
+import ast, pathlib, shlex, subprocess
+paths = []
+try:
+    pid = subprocess.run(["systemctl", "show", "mihomo-lists", "--property=MainPID", "--value"],
+                         capture_output=True, text=True, timeout=3).stdout.strip()
+    if pid.isdecimal() and int(pid) > 0:
+        paths.extend(value.decode() for value in pathlib.Path("/proc", pid, "cmdline").read_bytes().split(b"\0")
+                     if value.endswith(b".py"))
+except (OSError, ValueError, subprocess.TimeoutExpired):
+    pass
+try:
+    raw = subprocess.run(["systemctl", "show", "mihomo-lists", "--property=Environment", "--value"],
+                         capture_output=True, text=True, timeout=3).stdout
+    env = dict(value.split("=", 1) for value in shlex.split(raw) if "=" in value)
+    if env.get("XTTP_GIT_REPO"):
+        paths.append(str(pathlib.Path(env["XTTP_GIT_REPO"], "panel/app.py")))
+except (OSError, ValueError, subprocess.TimeoutExpired):
+    pass
+paths.append("/opt/mihomo-lists/app.py")
+for path in paths:
+    try:
+        tree = ast.parse(pathlib.Path(path).read_text(encoding="utf-8"))
+        version = next((node.value.value for node in tree.body
+                        if isinstance(node, ast.Assign) and isinstance(node.value, ast.Constant)
+                        and any(isinstance(target, ast.Name) and target.id == "VERSION" for target in node.targets)), "")
+        if isinstance(version, str) and version:
+            print(version)
+            break
+    except (OSError, ValueError, SyntaxError):
+        continue
+else:
+    print("")
+PY
+}
+
+panel_ready() {
+  python3 - "${1:-}" <<'PY'
+import ast, os, pathlib, re, subprocess, sys, time, urllib.request
 source = pathlib.Path(os.environ["XTTP_GIT_REPO"], "panel/app.py").read_text()
-expected = next((node.value.value for node in ast.parse(source).body
-                 if isinstance(node, ast.Assign) and isinstance(node.value, ast.Constant)
-                 and any(isinstance(target, ast.Name) and target.id == "VERSION" for target in node.targets)), "")
+expected = sys.argv[1] or next((node.value.value for node in ast.parse(source).body
+                              if isinstance(node, ast.Assign) and isinstance(node.value, ast.Constant)
+                              and any(isinstance(target, ast.Name) and target.id == "VERSION" for target in node.targets)), "")
 end = time.monotonic() + 15
 last = "panel did not become ready"
 while time.monotonic() < end:
@@ -104,7 +141,7 @@ finish_update() {
       done
       systemctl daemon-reload || recovery=1
       if [[ "${XTTP_NO_RESTART:-0}" != "1" ]]; then
-        systemctl restart mihomo-lists && panel_ready || recovery=1
+        systemctl restart mihomo-lists && [[ -n "$OLD_PANEL_VERSION" ]] && panel_ready "$OLD_PANEL_VERSION" || recovery=1
       fi
     fi
     if [[ "$recovery" == "0" && "$CODE_CHANGED" == "0" && "$UNITS_CHANGED" == "0" ]]; then
@@ -156,13 +193,17 @@ main() {
 
   install -d -m 700 /etc/mihomo-lists/panel-backups
   WORK="$(mktemp -d /etc/mihomo-lists/panel-backups/manual.XXXXXX)"
-  OLD_COMMIT="" NEW_COMMIT="" CODE_CHANGED=0 UNITS_CHANGED=0
+  OLD_COMMIT="" NEW_COMMIT="" OLD_PANEL_VERSION="" CODE_CHANGED=0 UNITS_CHANGED=0
   trap finish_update EXIT
   for unit in mihomo-lists.service xttp-update.service xttp-update.timer; do
     if [[ -e "/etc/systemd/system/$unit" || -L "/etc/systemd/system/$unit" ]]; then
       cp -a "/etc/systemd/system/$unit" "$WORK/old-$unit"
     fi
   done
+  if [[ "${XTTP_NO_RESTART:-0}" != "1" ]]; then
+    # A sibling checkout may differ from the service restored after failure.
+    OLD_PANEL_VERSION="$(previous_panel_version)"
+  fi
 
   echo "==> code source: $REPO"
   if [[ -e "$REPO/.git" ]]; then

@@ -1,7 +1,7 @@
 {
-  "panel": "0.19.0",
+  "panel": "0.19.1",
   "mihomo": "v1.19.29",
   "xray": "v26.6.22",
-  "updated_at": "2026-11-04T22:27:06Z",
-  "notes": "Complete operator UI, atomic rule/config activation, private Xray backups and durable verified updates; native core pins unchanged"
+  "updated_at": "2026-11-04T22:55:17Z",
+  "notes": "Complete operator UI and durable verified updates; manual sibling-checkout recovery verifies the prior panel version; native core pins unchanged"
 }
