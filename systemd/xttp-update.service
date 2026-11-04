@@ -8,7 +8,7 @@ Type=oneshot
 Environment=XTTP_GIT_REPO=/opt/xttp-stack
 Environment=XTTP_PANEL_APP=/opt/mihomo-lists/app.py
 Environment="XTTP_FLEET_INITIATOR=автообновление (timer)"
-ExecStart=/bin/bash /opt/xttp-stack/scripts/check-and-update.sh
+ExecStart=/bin/bash ${XTTP_GIT_REPO}/scripts/check-and-update.sh
 Nice=10
 
 [Install]

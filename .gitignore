@@ -19,6 +19,9 @@ env/
 session.secret
 users.json
 **/users.json
+sessions.json
+sessions.json.invalid.*
+bootstrap.password
 activity.json
 prefs.json
 traffic_history.json
