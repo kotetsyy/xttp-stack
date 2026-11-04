@@ -1,84 +1,66 @@
 #!/usr/bin/env bash
-# Fleet auto-update: fetch manifest, health-check, update binaries via panel code, panel via update.sh.
+# Timer/CLI entrypoint. The durable Python worker owns the one shared OS lock.
 set -euo pipefail
 
 if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
-  echo "Run as root"
+  echo "Run as root" >&2
+  exit 1
+fi
+if [[ "${XTTP_BIN_DIR:-/usr/local/bin}" != "/usr/local/bin" ]]; then
+  echo "ERROR: XTTP_BIN_DIR must be /usr/local/bin (service and panel binary paths)." >&2
   exit 1
 fi
 
-REPO="${XTTP_GIT_REPO:-/opt/xttp-stack}"
-APP="${XTTP_PANEL_APP:-/opt/mihomo-lists/app.py}"
-LOCK="${XTTP_UPDATE_LOCK:-/run/xttp-update.lock}"
-INITIATOR="${XTTP_FLEET_INITIATOR:-автообновление (timer)}"
-export XTTP_FLEET_INITIATOR="$INITIATOR"
+REPO="${XTTP_GIT_REPO:-$(cd "$(dirname "$0")/.." && pwd -P)}"
+APP="$REPO/panel/app.py"
+export XTTP_GIT_REPO="$REPO"
+export XTTP_UPDATE_LOCK="${XTTP_UPDATE_LOCK:-/run/xttp-update.lock}"
+export XTTP_FLEET_INITIATOR="${XTTP_FLEET_INITIATOR:-автообновление (timer)}"
+# Never inherit a different process's shell descriptor into a new lock owner.
+unset XTTP_UPDATE_LOCK_FD
 
 log() { echo "$(date -Is) xttp-update: $*"; }
-
-mkdir -p "$(dirname "$LOCK")" 2>/dev/null || true
-exec 9>"$LOCK"
-if ! flock -n 9; then
-  log "already running — skip"
-  exit 0
-fi
-
-if [[ ! -f "$APP" ]]; then
-  log "panel app missing: $APP"
-  exit 1
-fi
-if [[ ! -d "$REPO" ]]; then
-  log "repo missing: $REPO"
-  exit 1
-fi
-
-log "start (initiator=$INITIATOR)"
-
-if ! python3 "$APP" --fleet-cmd health; then
-  log "пропущено: система нездорова, требуется ручная проверка"
-  python3 "$APP" --fleet-cmd log-skip --reason "система нездорова, требуется ручная проверка" || true
-  exit 0
-fi
-
-cd "$REPO"
-if [[ -d .git ]]; then
-  log "git fetch origin"
-  git fetch origin 2>&1 | while IFS= read -r line; do log "git: $line"; done || true
-  if ! git show origin/main:version-manifest.json > /tmp/xttp-version-manifest.json 2>/dev/null; then
-    if [[ -f "$REPO/version-manifest.json" ]]; then
-      cp -f "$REPO/version-manifest.json" /tmp/xttp-version-manifest.json
-      log "using local version-manifest.json"
-    else
-      log "version-manifest.json not found"
-      exit 1
+MANIFEST=""
+STAGE="source validation"
+WORKER_STARTED=0
+finish() {
+  local rc=$?
+  trap - EXIT
+  if [[ -n "$MANIFEST" ]]; then
+    rm -f "$MANIFEST"
+  fi
+  if [[ "$rc" -ne 0 ]]; then
+    log "FAILED stage=$STAGE rc=$rc"
+    if [[ "$WORKER_STARTED" == "0" && -f "$APP" ]]; then
+      python3 "$APP" --fleet-cmd log-skip --reason "fleet failed: $STAGE (rc=$rc)" || true
     fi
   fi
-else
-  if [[ -f "$REPO/version-manifest.json" ]]; then
-    cp -f "$REPO/version-manifest.json" /tmp/xttp-version-manifest.json
-  else
-    log "not a git repo and no manifest"
-    exit 1
-  fi
-fi
-
-set +e
-python3 "$APP" --fleet-cmd apply \
-  --manifest /tmp/xttp-version-manifest.json \
-  --repo "$REPO"
-rc=$?
-set -e
-
-if [[ $rc -eq 10 ]]; then
-  log "panel outdated — running update.sh"
-  bash "$REPO/scripts/update.sh"
-  python3 "$APP" --fleet-cmd log-panel --manifest /tmp/xttp-version-manifest.json || true
-  log "panel update finished"
-elif [[ $rc -eq 0 ]]; then
-  log "done (panel up-to-date or only binaries updated)"
-else
-  log "fleet apply failed rc=$rc"
   exit "$rc"
+}
+trap finish EXIT
+
+if [[ ! -f "$APP" || ! -d "$REPO" ]]; then
+  log "canonical source app missing: $APP"
+  exit 1
+fi
+log "start (initiator=$XTTP_FLEET_INITIATOR, source=$REPO)"
+umask 077
+MANIFEST="$(mktemp "${TMPDIR:-/tmp}/xttp-version-manifest.XXXXXX")"
+STAGE="manifest fetch"
+if [[ -e "$REPO/.git" ]]; then
+  BRANCH="${XTTP_GITHUB_BRANCH:-main}"
+  # Fetching never changes working files. Failed fetch must not silently apply
+  # a stale manifest; checkout mutation is fast-forward-only inside the worker.
+  git -C "$REPO" fetch origin "$BRANCH"
+  git -C "$REPO" show FETCH_HEAD:version-manifest.json > "$MANIFEST"
+else
+  log "local-only source; remote panel updates unavailable"
+  cp "$REPO/version-manifest.json" "$MANIFEST"
 fi
 
-log "done"
-exit 0
+STAGE="durable fleet operation"
+WORKER_STARTED=1
+# run accepts a durable operation and executes the same --operation-run path as
+# UI jobs. No shell flock: nested independent descriptors would deadlock.
+python3 "$APP" --fleet-cmd run --manifest "$MANIFEST" --repo "$REPO"
+log "done (all requested components succeeded; see durable operation result)"

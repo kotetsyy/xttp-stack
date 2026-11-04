@@ -4,14 +4,15 @@ After=network.target mihomo.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /opt/mihomo-lists/app.py
+ExecStart=/usr/bin/python3 ${XTTP_GIT_REPO}/panel/app.py
 Restart=on-failure
 RestartSec=2
 User=root
-WorkingDirectory=/opt/mihomo-lists
+WorkingDirectory=/
 # Bind to loopback; access through an SSH tunnel or HTTPS reverse proxy.
 Environment=XTTP_HOST=127.0.0.1
 Environment=XTTP_GIT_REPO=/opt/xttp-stack
+Environment=XTTP_UPDATE_LOCK=/run/xttp-update.lock
 
 [Install]
 WantedBy=multi-user.target

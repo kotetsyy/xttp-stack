@@ -51,6 +51,10 @@ class AuthenticationTests(unittest.TestCase):
         headers = {"Content-Type": "application/x-www-form-urlencoded"}
         if cookie:
             headers["Cookie"] = cookie
+            if method in ("POST", "DELETE"):
+                status, _, body = self.request("GET", "/api/session", cookie=cookie)
+                self.assertEqual(status, 200, body)
+                headers["X-CSRF-Token"] = json.loads(body)["csrf"]
         conn.request(method, path, urllib.parse.urlencode(fields) if fields is not None else None, headers)
         response = conn.getresponse()
         result = response.status, response.getheaders(), response.read()

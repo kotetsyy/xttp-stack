@@ -44,6 +44,16 @@ class UpdateTests(unittest.TestCase):
     def setUp(self):
         app._UPDATE_CHECK_CACHE.clear()
         self.addCleanup(app._UPDATE_CHECK_CACHE.clear)
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        root = Path(self.temp.name)
+        environment = patch.dict(app.os.environ, {"XTTP_UPDATE_LOCK": str(root / "update.lock")})
+        environment.start()
+        self.addCleanup(environment.stop)
+        for name in ("DATA_DIR", "XRAY_BACKUP_DIR", "GROUPS_BACKUP_DIR", "GROUPS_YAML_QUARANTINE"):
+            replacement = patch.object(app, name, str(root / name))
+            replacement.start()
+            self.addCleanup(replacement.stop)
 
     def http_responses(self, responses):
         def open_url(request, timeout=None):
@@ -238,13 +248,19 @@ class UpdateTests(unittest.TestCase):
                     release("v1.2.3", [asset(name)]),
                 "https://downloads.example/" + name: gzip.compress(b"unhealthy replacement"),
             }
+            clock = [0.0]
+            def sleep(seconds):
+                clock[0] += seconds
+            def health(**kwargs):
+                return binary.read_bytes() == b"working original" and clock[0] >= 15.5
             with patch("platform.machine", return_value="arm64"), self.http_responses(responses), \
                     patch.object(app, "MIHOMO_BIN", str(binary)), \
                     patch.object(app, "BIN_BACKUP_DIR", str(backups)), \
                     patch.object(app, "_ensure_bin_backup_dir"), \
                     patch.object(app, "_version_mihomo", return_value={"version": "1.0.0"}), \
-                    patch.object(app, "_health_mihomo", return_value=False), \
-                    patch.object(app, "log_activity"), patch.object(app.time, "sleep"), \
+                    patch.object(app, "_health_mihomo", side_effect=health), \
+                    patch.object(app.time, "monotonic", side_effect=lambda: clock[0]), \
+                    patch.object(app, "log_activity"), patch.object(app.time, "sleep", side_effect=sleep), \
                     patch.object(app.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, "", "")):
                 result = app.update_component_binary("mihomo", target_version="1.2.3")
             self.assertFalse(result["ok"])

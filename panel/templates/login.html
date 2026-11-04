@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Вход — xttp</title>
+<link rel="stylesheet" href="/static/panel.css">
+</head>
+<body class="login-page">
+<main class="login-panel">
+<div class="brand">xttp<span>панель оператора · v@@VERSION@@</span></div>
+<h1>Вход в панель</h1>
+<p class="muted">Управление правилами, подключением и сервисами.</p>
+<p class="login-message" role="status">@@CONTENT@@</p>
+<form action="/login" method="post" class="form-stack">
+<label for="username">Имя пользователя</label>
+<input id="username" name="user" autocomplete="username" required autofocus>
+<label for="password">Пароль</label>
+<input id="password" name="pass" type="password" autocomplete="current-password" required>
+<button type="submit" class="primary">Войти</button>
+</form>
+<p class="muted">Доступ только для авторизованных операторов.</p>
+</main>
+</body>
+</html>

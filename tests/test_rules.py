@@ -1,4 +1,6 @@
 import importlib.util
+import hashlib
+import re
 import json
 from pathlib import Path
 import sys
@@ -35,14 +37,18 @@ class ProviderGenerationTests(unittest.TestCase):
             Path(app.GROUPS_FILE).write_text(json.dumps(groups), encoding="utf-8")
             original_groups = Path(app.GROUPS_FILE).read_bytes()
             Path(app.CONFIG_FILE).write_text("mode: rule\nproxies: []\nrule-providers: {}\nrules: []\n", encoding="utf-8")
+            Path(app.CONFIG_FILE + ".xttp-prepare.sha256").write_text(
+                hashlib.sha256(Path(app.CONFIG_FILE).read_bytes()).hexdigest(), encoding="ascii")
             app.prepare_config()
-            generated = Path(app.GROUPS_DIR) / "g_Active.yaml"
+            config = Path(app.CONFIG_FILE).read_text(encoding="utf-8")
+            provider_path = re.search(r"(?m)^    path: (.+)$", config).group(1)
+            generated = Path(json.loads(provider_path))
             self.assertTrue(generated.is_file(), "fresh install must create the provider it references")
             payload = [line.strip()[2:] for line in generated.read_text(encoding="utf-8").splitlines()
                        if line.strip().startswith("- ")]
-            self.assertEqual(payload, ["DOMAIN-SUFFIX,example.org"])
-            self.assertFalse((Path(app.GROUPS_DIR) / "g_Disabled.yaml").exists())
-            config = Path(app.CONFIG_FILE).read_text(encoding="utf-8")
+            self.assertEqual([json.loads(item) for item in payload], ["DOMAIN-SUFFIX,example.org"])
+            self.assertNotIn("disabled.example.org", generated.read_text(encoding="utf-8"))
+            self.assertNotIn("hidden.example.org", generated.read_text(encoding="utf-8"))
             self.assertIn("RULE-SET,g_Active,PROXY", config)
             self.assertNotIn("g_Disabled", config)
             self.assertEqual(Path(app.GROUPS_FILE).read_bytes(), original_groups)

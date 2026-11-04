@@ -1,7 +1,7 @@
 {
-  "panel": "0.18.5",
+  "panel": "0.19.0",
   "mihomo": "v1.19.29",
   "xray": "v26.6.22",
-  "updated_at": "2026-11-04T00:00:00Z",
-  "notes": "Device-local rules, secure sessions, native architecture and pinned core updates"
+  "updated_at": "2026-11-04T22:27:06Z",
+  "notes": "Complete operator UI, atomic rule/config activation, private Xray backups and durable verified updates; native core pins unchanged"
 }

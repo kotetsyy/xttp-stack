@@ -6,8 +6,10 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 Environment=XTTP_GIT_REPO=/opt/xttp-stack
-Environment=XTTP_PANEL_APP=/opt/mihomo-lists/app.py
 Environment="XTTP_FLEET_INITIATOR=автообновление (timer)"
+Environment=XTTP_UPDATE_LOCK=/run/xttp-update.lock
+WorkingDirectory=/
+TimeoutStartSec=1h
 ExecStart=/bin/bash ${XTTP_GIT_REPO}/scripts/check-and-update.sh
 Nice=10
 

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>xttp — панель оператора</title>
+<link rel="stylesheet" href="/static/panel.css">
+<script type="module" src="/static/app.js"></script>
+</head>
+<body data-version="@@VERSION@@">
+<a class="skip-link" href="#main">К содержимому</a>
+<aside class="sidebar" aria-label="Навигация панели">
+<a class="brand" href="/rules">xttp<span>панель оператора</span></a>
+<nav class="primary-nav" aria-label="Основные разделы">
+<a href="/rules" data-section="rules">Правила</a>
+<a href="/monitoring/traffic" data-section="monitoring">Мониторинг</a>
+<a href="/system/core" data-section="system">Система</a>
+</nav>
+<div class="identity"><span>@@USERNAME@@</span><span class="muted">v@@VERSION@@</span><button type="button" id="logout">Выйти</button></div>
+</aside>
+<div class="workspace">
+<header class="page-header"><div><h1 id="page-title">Загрузка панели</h1><p id="page-description" class="muted"></p></div><span id="session-user" class="mobile-identity">@@USERNAME@@</span></header>
+<nav id="section-nav" class="section-nav" aria-label="Страницы раздела" hidden></nav>
+<aside id="update-offer" class="notice" hidden></aside>
+<aside id="bundle-notice" class="notice" role="status" hidden></aside>
+<main id="main" tabindex="-1"><p class="loading" role="status">Загрузка…</p></main>
+</div>
+<div id="notifications" class="notifications" aria-live="polite" aria-atomic="false"></div>
+<dialog id="confirm-dialog" aria-labelledby="confirm-title"><form method="dialog"><h2 id="confirm-title">Подтверждение</h2><p id="confirm-message"></p><div class="actions"><button value="cancel" autofocus>Отмена</button><button value="confirm" id="confirm-action" class="primary">Подтвердить</button></div></form></dialog>
+<noscript><p class="notice">Для панели нужен JavaScript. Включите его и обновите страницу.</p></noscript>
+</body>
+</html>
