@@ -7,8 +7,23 @@ let csrf = '';
 let dirtyGuard = () => false;
 let leaving = false;
 const pendingActions = new WeakSet();
+const settingsPages = [['core','Ядро'],['users','Пользователи'],['connection','Подключение'],['activity','Операции']];
+let settingsView, openSettings;
 export function guardNavigation(check) { dirtyGuard = check; }
-export function setTitle(title, description = '') { $('#page-title').textContent = title; $('#page-description').textContent = description; document.title = `${title} — xttp`; }
+export function hasUnsavedChanges() { return !!(dirtyGuard() || settingsView?.hasDraft()); }
+export function goToLogin() { leaving = true; location.assign('/login'); }
+export function logout(button, output) {
+  return action(button, async () => {
+    const message = hasUnsavedChanges() ? 'Несохранённые изменения в правилах или настройках будут потеряны. Завершить сессию?' : 'Завершить текущую сессию?';
+    if (!await confirmAction('Выйти из панели', message, 'Выйти')) return;
+    await post('/logout'); goToLogin();
+  }, output);
+}
+export function setTitle(title, description = '') {
+  $('#page-title').textContent = location.pathname.startsWith('/system/') ? 'Настройки' : title;
+  $('#page-description').textContent = description;
+  document.title = `${title} — xttp panel`;
+}
 export function status(node, text, kind = '') { node.textContent = text; node.className = `status ${kind}`; node.setAttribute('role', kind === 'error' ? 'alert' : 'status'); }
 export function notify(text, error = false) {
   const item = document.createElement('div'); item.className = `notification${error ? ' error' : ''}`;
@@ -27,7 +42,7 @@ function offerReload(version) {
   const button = document.createElement('button');
   button.type = 'button'; button.textContent = 'Обновить страницу';
   button.addEventListener('click', async () => {
-    if (dirtyGuard() && !await confirmAction('Несохранённый черновик', 'Обновление страницы удалит несохранённые значения. Отмените и сначала сохраните их либо явно продолжите.', 'Обновить и потерять черновик')) return;
+    if ((hasUnsavedChanges() || settingsView?.isBusy()) && !await confirmAction('Несохранённый черновик', 'Обновление страницы удалит несохранённые значения. Отмените и сначала сохраните их либо явно продолжите.', 'Обновить и потерять черновик')) return;
     leaving = true; location.reload();
   });
   node.append(message,button);
@@ -43,7 +58,7 @@ export async function request(path, {method = 'GET', data, signal} = {}) {
   }
   const response = await fetch(path, options);
   offerReload(response.headers.get('X-XTTP-Version'));
-  if (response.status === 401) { leaving = true; location.assign('/login'); throw new Error('Сессия завершена. Войдите снова.'); }
+  if (response.status === 401) { goToLogin(); throw new Error('Сессия завершена. Войдите снова.'); }
   let result;
   try { result = await response.json(); } catch { throw new Error(`Сервер вернул неверный ответ (${response.status}). Повторите запрос.`); }
   if (!response.ok || result.ok === false) {
@@ -77,11 +92,13 @@ export function confirmAction(title, message, label = 'Подтвердить') 
   dialog.returnValue = ''; dialog.showModal();
   return new Promise(resolve => dialog.addEventListener('close', () => { focused?.isConnected && focused.focus(); resolve(dialog.returnValue === 'confirm'); }, {once:true}));
 }
-export function scopedPoll(task, milliseconds = 2000, {immediate = true} = {}) {
+export function scopedPoll(task, milliseconds = 2000, {immediate = true, root = main} = {}) {
   let timer, running = false, stopped = false, suspended = false, controller;
   async function tick() {
     clearTimeout(timer);
     if (stopped || suspended || document.hidden || running) return;
+    const dialog = $('#settings-dialog');
+    if (dialog.open && !dialog.contains(root)) { timer = setTimeout(tick, milliseconds); return; }
     running = true; controller = new AbortController();
     try { await task(controller.signal); } catch (error) { if (error.name !== 'AbortError') notify(error.message, true); }
     finally { running = false; if (!stopped && !suspended && !document.hidden) timer = setTimeout(tick, milliseconds); }
@@ -120,16 +137,82 @@ export async function copyText(text) {
   else { input.scrollIntoView({block:'center'}); notify('Выделен текст. Нажмите Ctrl+C или используйте меню копирования.'); }
 }
 function navigation() {
-  const section = location.pathname.split('/')[1];
+  const parts = location.pathname.split('/');
+  const section = parts[1] === 'rules' ? 'rules' : parts[2];
   $$('[data-section]').forEach(link => { if (link.dataset.section === section) link.setAttribute('aria-current','page'); });
-  const pages = section === 'monitoring' ? [['traffic','Трафик'],['connections','Соединения'],['logs','Логи']] : section === 'system' ? [['core','Ядро'],['connection','Подключение'],['updates','Обновления'],['users','Пользователи'],['activity','Операции']] : [];
-  if (pages.length) { const nav = $('#section-nav'); nav.hidden = false; nav.innerHTML = pages.map(([path,label]) => `<a href="/${section}/${path}"${location.pathname === `/${section}/${path}` ? ' aria-current="page"' : ''}>${label}</a>`).join(''); }
+  if (parts[1] !== 'system') return;
+  document.body.classList.add('system-page');
+  const pages = settingsPages;
+  const selected = parts[2] === 'updates' ? 'core' : parts[2];
+  const nav = $('#section-nav'); nav.hidden = false;
+  nav.innerHTML = pages.map(([path,label]) => `<a href="/system/${path}"${selected === path ? ' aria-current="page"' : ''}>${label}</a>`).join('');
 }
-window.addEventListener('beforeunload', event => { if (!leaving && dirtyGuard()) { event.preventDefault(); event.returnValue = ''; } });
+function setupDialogs() {
+  const dialog = $('#settings-dialog'), body = $('#settings-content'), nav = $('#settings-nav');
+  const bundleNotice = $('#bundle-notice'), noticeHome = bundleNotice.parentElement;
+  let closing = false, generation = 0, selected = '';
+  async function canLeave() {
+    if (settingsView?.isBusy()) {
+      const message = $('#settings-busy'); message.hidden = false;
+      message.textContent = 'Действие ещё выполняется. Дождитесь ответа, прежде чем закрыть настройки или сменить вкладку.';
+      return false;
+    }
+    return !settingsView?.hasDraft() || await confirmAction('Несохранённые изменения', 'Потерять несохранённые изменения в настройках?', 'Продолжить');
+  }
+  async function closeSettings() {
+    if (!dialog.open || closing) return;
+    closing = true;
+    try { if (await canLeave()) dialog.close(); }
+    finally { closing = false; }
+  }
+  openSettings = async href => {
+    const url = new URL(href, location.href), page = url.pathname.split('/')[2];
+    if (dialog.open && selected === page) return;
+    if (dialog.open && !await canLeave()) return;
+    const ticket = ++generation;
+    settingsView?.dispose(); settingsView = undefined; selected = page;
+    const target = document.createElement('div');
+    target.className = 'settings-content'; target.innerHTML = '<p class="loading" role="status">Загрузка…</p>';
+    body.replaceChildren(target); $('#settings-busy').hidden = true;
+    nav.innerHTML = settingsPages.map(([path,label]) => `<a href="/system/${path}"${(page === 'updates' ? 'core' : page) === path ? ' aria-current="page"' : ''}>${label}</a>`).join('');
+    if (!dialog.open) { document.body.classList.add('settings-active'); dialog.showModal(); }
+    dialog.querySelector('.workspace-body').prepend(bundleNotice);
+    try {
+      const module = await import('./system.js');
+      if (ticket !== generation) return;
+      const view = module.mount(target, page); settingsView = view;
+      await view.ready;
+    } catch (error) { if (ticket === generation && error.name !== 'AbortError') target.innerHTML = `<p class="status error" role="alert">${esc(error.message)}</p>`; }
+  };
+  dialog.addEventListener('cancel', event => { event.preventDefault(); closeSettings(); });
+  dialog.addEventListener('close', () => {
+    generation++; settingsView?.dispose(); settingsView = undefined;
+    body.replaceChildren(); document.body.classList.remove('settings-active');
+    noticeHome.insertBefore(bundleNotice, main);
+    const url = new URL(location.href);
+    if (url.searchParams.has('operation')) { url.searchParams.delete('operation'); history.replaceState(null,'',url); }
+  });
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href]');
+    if (event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && link && !link.target) {
+      if (link.hasAttribute('data-close-settings') && link.closest('#settings-dialog')) { event.preventDefault(); closeSettings(); return; }
+      const url = new URL(link.href);
+      if (link.hasAttribute('data-settings') || link.closest('#settings-dialog') && url.origin === location.origin && url.pathname.startsWith('/system/')) {
+        event.preventDefault(); openSettings(link.href); return;
+      }
+    }
+    const opener = event.target.closest('[data-open-dialog]');
+    if (opener) document.getElementById(opener.dataset.openDialog)?.showModal();
+    if (event.target.closest('[data-close-dialog]')) event.target.closest('dialog')?.close();
+  });
+}
+window.addEventListener('beforeunload', event => {
+  if (!leaving && (hasUnsavedChanges() || settingsView?.isBusy())) { event.preventDefault(); event.returnValue = ''; }
+});
 window.addEventListener('pageshow', event => { if (event.persisted) leaving = false; });
 document.addEventListener('click', async event => {
   const link = event.target.closest('a[href]');
-  if (!link || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || link.target || !dirtyGuard()) return;
+  if (!link || link.matches('[data-settings]') || link.closest('#settings-dialog') || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || link.target || !dirtyGuard()) return;
   if (new URL(link.href).href === location.href || link.getAttribute('href').startsWith('#')) return;
   event.preventDefault(); if (await confirmAction('Несохранённые изменения', 'Покинуть редактор и потерять несохранённые изменения?', 'Покинуть')) { leaving = true; location.assign(link.href); }
 });
@@ -139,19 +222,40 @@ async function checkEntryUpdates() {
   const failures = checks.filter(x => x.status === 'rejected');
   if (offers.length || failures.length) {
     const node = $('#update-offer'); node.hidden = false;
-    node.innerHTML = `${offers.length ? `Доступно обновление: ${esc(offers.join(', '))}. ` : ''}${failures.length ? `Не удалось проверить ${failures.length} компонент(а). ` : ''}<a href="/system/updates">Проверить и выбрать обновление</a>. Ничего не установлено автоматически.`;
+    node.innerHTML = `${offers.length ? `Доступно обновление: ${esc(offers.join(', '))}. ` : ''}${failures.length ? `Не удалось проверить ${failures.length} компонент(а). ` : ''}<a href="/system/updates" data-settings>Проверить и выбрать обновление</a>. Ничего не установлено автоматически.`;
   }
 }
 async function start() {
   navigation();
+  setupDialogs();
   try {
     session = await request('/api/session'); csrf = session.csrf;
-    $('#logout').addEventListener('click', event => action(event.currentTarget, async () => { if (dirtyGuard() && !await confirmAction('Выход', 'Несохранённые изменения будут потеряны. Выйти?', 'Выйти')) return; await post('/logout'); leaving = true; location.assign('/login'); }));
+    $('#logout').addEventListener('click', event => logout(event.currentTarget));
+    if (!document.body.classList.contains('system-page')) scopedPoll(async signal => {
+      if ($('#settings-dialog').open) return;
+      const results = await Promise.allSettled([request('/api/services/status',{signal}), request('/api/xttp/status',{signal})]);
+      if (signal.aborted) return;
+      const services = results[0], connection = results[1];
+      const serviceNode = $('#service-status'), connectionNode = $('#connection-chip');
+      const healthy = services.status === 'fulfilled' && services.value.mihomo && services.value.xray;
+      serviceNode.textContent = services.status === 'fulfilled' ? `svc · ${healthy ? 'online' : 'проверить'}` : 'svc · нет данных';
+      serviceNode.classList.toggle('up', !!healthy);
+      serviceNode.classList.toggle('down', services.status === 'fulfilled' && !healthy);
+      const running = connection.status === 'fulfilled' && connection.value.xray_active;
+      connectionNode.textContent = connection.status === 'fulfilled' ? `xttp · ${running ? 'online' : 'offline'}` : 'xttp · нет данных';
+      connectionNode.classList.toggle('up', !!running);
+      connectionNode.classList.toggle('down', connection.status === 'fulfilled' && !running);
+    },15000);
     const section = location.pathname.split('/')[1];
     if (section === 'rules') await (await import('./rules.js')).mount();
     else if (section === 'monitoring') await (await import('./monitoring.js')).mount();
-    else if (section === 'system') await (await import('./system.js')).mount();
+    else if (section === 'system') {
+      const view = (await import('./system.js')).mount();
+      guardNavigation(view.hasDraft);
+      await view.ready;
+    }
     else throw new Error('Страница не найдена. Откройте раздел в навигации.');
+    if (section !== 'system' && new URL(location.href).searchParams.has('operation')) openSettings('/system/updates');
     if (section !== 'system' || !location.pathname.endsWith('/updates')) checkEntryUpdates().catch(error => { const node = $('#update-offer'); node.hidden = false; node.textContent = `Проверка обновлений недоступна: ${error.message}. Повторите её в разделе «Обновления».`; });
   } catch (error) { main.innerHTML = `<div class="status error" role="alert">${esc(error.message)}</div><button type="button" id="retry-page">Повторить загрузку</button>`; $('#retry-page').addEventListener('click', () => location.reload()); }
 }

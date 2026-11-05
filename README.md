@@ -94,10 +94,10 @@ Services are **enabled** but **not started** until configs/secrets are ready.
 
 ## Panel workflows
 
-- **Правила** (`/rules`): searchable groups, an addressable `/rules/<id>` editor, paginated rules, import, route explanation and cross-group conflict overview. Desktop uses master/detail; mobile opens the selected group with a return link.
+- **Правила** (`/rules`): the original centered graphite panel, upper navigation and inline group cards are restored. The addressable `/rules/<id>` editor expands inside its group on desktop and mobile, with paginated rules, import, route explanation and cross-group conflict overview.
 - **Сохранить** validates all dirty rows and deletions as one transaction with one backup. Drafts survive a failed save. Saving does **not** restart a core; **Применить** separately confirms activation of saved rules and requires unsaved edits to be resolved first.
-- **Мониторинг** (`/monitoring/traffic`, `/connections`, `/logs` under that prefix): traffic chart/data and periods, keyed connection controls, searchable tail/live logs. History transfers incrementally; polling stops when its page is hidden.
-- **Система**: separate pages for runtime core settings, VLESS/backups, updates, all-admin users and activity/preferences. Ports and TUN are read-only status; supported runtime switches remain editable.
+- **Статистика / Соединения / Логи** (`/monitoring/traffic`, `/connections`, `/logs` under that prefix): upper tabs open traffic chart/data and periods, keyed connection controls, searchable tail/live logs. History transfers incrementally; background monitoring pauses while Settings covers it.
+- **Настройки**: the original modal and Core / Users / Connection / Operations tabs are restored. Opening it preserves the rules draft underneath; switching settings tabs or closing the modal confirms unsaved runtime/VLESS edits. Runtime settings, VLESS/backups, durable updates, all-admin users and activity/preferences remain available; direct `/system/*` links still work. Ports and TUN remain read-only.
 - **Обновления** (`/system/updates`): checking does not install. Installation needs confirmation; the durable operation ID, stage, terminal result and verified rollback remain inspectable after panel restart or page reload. Entry checks only offer updates; they do not change timer policy.
 
 The panel loads one immutable frontend bundle before listening. An older open tab offers an explicit reload after a server-version change, without converting a successful write into an error or silently discarding drafts.
@@ -127,7 +127,7 @@ If fetch or fast-forward fails, the updater stops before installing files.
 Older installations may have local `update rules: …` commits: preserve those commits
 and back up live rules before manually reconciling the checkout. The updater does not discard local work.
 
-### Upgrading to 0.19.1
+### Upgrading to 0.19.2
 
 Use the persistent checkout named by the service's `XTTP_GIT_REPO`; replace `/opt/xttp-stack` in examples if yours differs.
 The exact 0.18.5 SSH updater can perform this transition: the new unit starts the complete source tree, not a copied singleton `app.py`.
@@ -139,9 +139,9 @@ Stop the timer, let any active update finish, and back up device data and the ol
 ```bash
 sudo systemctl stop xttp-update.timer
 # Back up /etc/mihomo, /etc/xray, /etc/mihomo-lists, units/drop-ins and the old checkout.
-sudo git clone https://github.com/kotetsyy/xttp-stack.git /opt/xttp-stack-0.19.1
-# Verify VERSION and version-manifest.json contain 0.19.1 or later.
-sudo bash /opt/xttp-stack-0.19.1/scripts/update.sh
+sudo git clone https://github.com/kotetsyy/xttp-stack.git /opt/xttp-stack-0.19.2
+# Verify VERSION and version-manifest.json contain 0.19.2 or later.
+sudo bash /opt/xttp-stack-0.19.2/scripts/update.sh
 ```
 
 Keep that checkout: the service now runs its `panel/app.py` and adjacent frontend.

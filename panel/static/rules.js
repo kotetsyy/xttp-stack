@@ -1,6 +1,21 @@
 import {$,$$,main,esc,request,post,action,status,notify,confirmAction,setTitle,guardNavigation,copyText,kv} from './app.js';
 const types = [['auto','Авто'],['namespace','Домен и поддомены'],['domain','Точный домен'],['keyword','Ключевое слово'],['ipv4','IPv4 / CIDR'],['ipv6','IPv6 / CIDR'],['raw','Classical rule']];
 const options = selected => types.map(([value,label]) => `<option value="${value}"${value === selected ? ' selected' : ''}>${label}</option>`).join('');
+const icon = name => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${{
+  add:'<path d="M12 5v14M5 12h14"/>',
+  apply:'<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/>',
+  overview:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  route:'<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="6" cy="5" r="2"/><path d="M6 7v10M6 5h8a4 4 0 0 1 0 8H6"/>',
+  chevron:'<path d="m8 10 4 4 4-4"/>',
+  delete:'<path d="M3 6h18M9 6V4h6v2M5 6l1 14h12l1-14M10 10v6M14 10v6"/>'
+}[name]}</svg>`;
+const typeLabels = {auto:'Авто',ipv4:'IPv4',ipv6:'IPv6',namespace:'NS',domain:'Domain',keyword:'Key',raw:'Rule'};
+function category(name) {
+  const text = name.toLowerCase();
+  if (/(telegram|discord|whatsapp|meta|instagram|facebook|threads|signal|viber|chat)/.test(text)) return 'messenger';
+  if (/(youtube|meet|video|stream|zoom|media|twitch|netflix)/.test(text)) return 'video';
+  return /(cloud|google|ai|geo|block|cdn|dns|cloudflare|net|proxy)/.test(text) ? 'infra' : 'default';
+}
 let groups = [], gid = '', group, originalGroup, page = [], total = 0, offset = 0, query = '', revision;
 const drafts = new Map(), deleted = new Set();
 let rowSerial = 0, loading = false, loadSerial = 0, saving = false, importChanged = false;
@@ -13,8 +28,21 @@ function renderState(state) {
 }
 function renderGroups() {
   const search = $('#group-search').value.toLocaleLowerCase();
-  const visible = groups.filter(g => g.name.toLocaleLowerCase().includes(search));
-  $('#group-list').innerHTML = visible.map(g => `<a class="group-link" href="/rules/${encodeURIComponent(g.id)}"${g.id === gid ? ' aria-current="page"' : ''}><strong>${esc(g.name)}</strong><small>${g.enabled ? 'Включена' : 'Выключена'} · ${g.count} правил</small><small>${esc(Object.entries(g.counts || {}).map(([k,v]) => `${k}: ${v}`).join(' · '))}</small></a>`).join('') || '<p class="empty">Группы не найдены.</p>';
+  const visible = groups.filter(g => g.id === gid || g.name.toLocaleLowerCase().includes(search));
+  const editor = $('.group-editor'), focused = document.activeElement;
+  editor?.remove();
+  $('#group-list').innerHTML = visible.map(g => `<article class="gcard${g.id === gid ? ' expanded' : ''}${g.enabled ? '' : ' disabled'}" data-cat="${category(g.name)}">
+    <div class="gcard-head"><span class="gcard-stripe" aria-hidden="true"></span>
+    <a class="gcard-name" href="${g.id === gid ? '/rules' : `/rules/${encodeURIComponent(g.id)}`}" aria-expanded="${g.id === gid}"><strong>${esc(g.name)}</strong></a>
+    <div class="gcard-meta">${Object.entries(g.counts || {}).map(([type,count]) => `<span class="pill type-${esc(type)}">${esc(typeLabels[type] || type)} ${count}</span>`).join('')}</div>
+    <span class="rule-count-wrap"><strong>${g.count}</strong><small>правил</small></span>
+    <span class="group-status${g.enabled ? ' up' : ''}" title="${g.enabled ? 'Группа включена' : 'Группа выключена'}" aria-label="${g.enabled ? 'Включена' : 'Выключена'}"></span>
+    <a class="mini-btn group-expand" href="${g.id === gid ? '/rules' : `/rules/${encodeURIComponent(g.id)}`}" aria-label="${g.id === gid ? 'Свернуть' : 'Открыть'} группу ${esc(g.name)}">${icon('chevron')}</a>
+    </div>${g.id === gid ? '<div id="active-group-body" class="gcard-body"></div>' : ''}</article>`).join('') || '<p class="empty">Группы не найдены.</p>';
+  if (editor) {
+    ($('#active-group-body') || $('#editor-parking')).append(editor);
+    if (editor.contains(focused)) focused.focus({preventScroll:true});
+  }
   if (gid && group) {
     const index=groups.findIndex(item=>item.id===gid);
     $('#group-up').disabled=index<=0;
@@ -23,7 +51,7 @@ function renderGroups() {
 }
 async function loadGroups() { const data = await request('/api/groups'); groups = data.groups; renderGroups(); renderState(data.state); }
 function rowHTML(entry, key, index) {
-  return `<div class="rule-row${drafts.has(key) ? ' dirty' : ''}" data-key="${esc(key)}"><span class="row-number">${entry.id ? `Правило ${offset + index + 1}` : 'Новое правило'}</span><label>Имя<input data-field="name" value="${esc(entry.name)}" maxlength="256"></label><label>Тип<select data-field="type">${options(entry.type || 'auto')}</select></label><label class="pattern-label">Значение<input data-field="value" value="${esc(entry.value || entry.rule)}" required spellcheck="false"></label><label class="check"><input type="checkbox" data-field="enabled"${entry.enabled !== false ? ' checked' : ''}>Вкл.</label><button type="button" data-delete="${esc(key)}" class="danger" aria-label="Удалить правило ${esc(entry.name || entry.value || entry.rule)}">Удалить</button><p class="row-error" hidden></p></div>`;
+  return `<div class="rule-row${drafts.has(key) ? ' dirty' : ''}" data-key="${esc(key)}"><span class="row-number">${entry.id ? String(offset + index + 1).padStart(2,'0') : '+'}</span><label class="rule-name-label"><span>Имя</span><input class="cell-input" data-field="name" value="${esc(entry.name)}" maxlength="256" placeholder="Без имени"></label><label class="rule-type-label"><span>Тип</span><select class="type-select type-${esc(entry.type || 'auto')}" data-field="type">${options(entry.type || 'auto')}</select></label><label class="pattern-label"><span>Значение</span><input class="cell-input mono" data-field="value" value="${esc(entry.value || entry.rule)}" required spellcheck="false"></label><label class="check switch"><input type="checkbox" data-field="enabled"${entry.enabled !== false ? ' checked' : ''}><span aria-hidden="true"></span><span class="sr-only">Правило включено</span></label><button type="button" data-delete="${esc(key)}" class="mini-btn danger" aria-label="Удалить правило ${esc(entry.name || entry.value || entry.rule)}" title="Удалить правило">${icon('delete')}</button><p class="row-error" hidden></p></div>`;
 }
 function renderRows() {
   const rows = page.filter(entry => !deleted.has(entry.id)).map((entry,index) => rowHTML(drafts.get(entry.id) || entry, entry.id, index));
@@ -93,7 +121,17 @@ async function save() {
   return true;
 }
 function editorHTML() {
-  return `<section class="group-editor surface"><a class="editor-back" href="/rules">К списку групп</a><h2 id="editor-title">Редактор группы</h2><div class="form-grid"><label>Полное имя группы<input id="group-name" required maxlength="256"></label><label class="check"><input id="group-enabled" type="checkbox">Группа включена</label></div><div class="actions"><button type="button" id="group-up">Выше</button><button type="button" id="group-down">Ниже</button><button type="button" id="copy-group">Копировать группу</button><button type="button" id="delete-group" class="danger">Удалить группу</button></div><p id="editor-status" class="status"></p><div class="toolbar"><label>Поиск по правилам<input id="rule-search" type="search" placeholder="Домен, адрес или имя"></label><button type="button" id="search-rules">Найти</button><button type="button" id="reload-rules">Обновить</button></div><div id="rule-rows"></div><div class="pagination"><button type="button" id="previous-page">Назад</button><p id="page-count"></p><button type="button" id="next-page">Далее</button></div><div class="actions"><button type="button" id="add-rule">Добавить правило</button><button type="button" id="save-group" class="primary" disabled>Сохранить</button><button type="button" id="discard-draft">Отменить черновик</button></div><p id="draft-state" class="muted"></p><details><summary>Импорт списка</summary><p class="muted">Вставьте текущий исходный текст. Сервер проверит дубли и конфликты заново при импорте. Импорт сохраняет правила, но не применяет их.</p><form id="import-form" class="form-stack"><label>Исходный текст<textarea id="import-text" required spellcheck="false" placeholder="Один домен или CIDR в строке"></textarea></label><label>Режим типа<select id="import-detect"><option value="auto">Автоопределение</option><option value="ipv4">Только IPv4 / CIDR</option><option value="namespace">Домен и поддомены</option></select></label><label class="check"><input type="checkbox" id="skip-conflicts" checked>Пропускать конфликты с другими группами</label><div class="actions"><button type="button" id="preview-import">Проверить превью</button><button type="submit" class="primary">Импортировать текущий текст</button></div></form><p id="import-status" class="status"></p><div id="import-preview" class="preview"></div></details></section>`;
+  return `<section class="group-editor">
+    <h2 id="editor-title" class="sr-only">Редактор группы</h2>
+    <details class="group-properties"><summary>Настройки группы</summary><div class="form-grid"><label>Название<input id="group-name" required maxlength="256"></label><label class="check"><input id="group-enabled" type="checkbox">Группа включена</label></div><div class="actions"><button type="button" id="group-up">Выше</button><button type="button" id="group-down">Ниже</button><button type="button" id="copy-group">Копировать</button><button type="button" id="delete-group" class="danger">Удалить группу</button></div></details>
+    <p id="editor-status" class="status"></p>
+    <div class="editor-toolbar"><label class="search-field"><span class="sr-only">Поиск по правилам</span><input id="rule-search" type="search" placeholder="Поиск по правилам…"></label><button type="button" id="search-rules">Найти</button><button type="button" id="reload-rules">Обновить</button><button type="button" data-open-dialog="import-dialog">Импорт</button></div>
+    <div class="rule-table-head" aria-hidden="true"><span>#</span><span>Имя</span><span>Тип</span><span>Значение</span><span>Вкл.</span><span></span></div>
+    <div id="rule-rows"></div>
+    <div class="editor-footer"><div class="actions tight"><button type="button" id="add-rule">Добавить правило</button><button type="button" id="save-group" class="primary" disabled>Сохранить</button><button type="button" id="discard-draft">Отменить</button></div><div class="pagination"><button type="button" id="previous-page" aria-label="Предыдущие правила">Назад</button><p id="page-count"></p><button type="button" id="next-page" aria-label="Следующие правила">Далее</button></div></div>
+    <p id="draft-state" class="muted"></p>
+    <dialog id="import-dialog" aria-labelledby="import-title"><button type="button" class="modal-x" data-close-dialog aria-label="Закрыть импорт">×</button><h2 id="import-title">Импорт правил</h2><p class="muted">По одной записи в строке. Импорт сохраняет список; применение выполняется отдельно.</p><form id="import-form" class="form-stack"><label>Исходный текст<textarea id="import-text" required spellcheck="false" placeholder="Один домен или CIDR в строке"></textarea></label><label>Режим типа<select id="import-detect"><option value="auto">Автоопределение</option><option value="ipv4">Только IPv4 / CIDR</option><option value="namespace">Домен и поддомены</option></select></label><label class="check"><input type="checkbox" id="skip-conflicts" checked>Пропускать конфликты с другими группами</label><div class="actions"><button type="button" id="preview-import">Превью</button><button type="submit" class="primary">Импортировать</button></div></form><p id="import-status" class="status"></p><div id="import-preview" class="preview"></div></dialog>
+  </section>`;
 }
 let overviewItems = [], overviewLoaded = false, overviewSerial = 0;
 function renderOverview() {
@@ -129,9 +167,18 @@ async function overview() {
   renderOverview();
 }
 export async function mount() {
-  setTitle('Правила','Сохранение меняет список. Применение отдельно активирует сохранённые правила.');
+  setTitle('Правила');
   gid = decodeURIComponent(location.pathname.split('/')[2] || ''); guardNavigation(() => dirty() || importChanged);
-  main.innerHTML = `<div class="toolbar"><p id="rules-state" class="status">Состояние неизвестно</p><button type="button" id="apply-rules" class="primary">Применить</button></div><div class="rules-layout${gid ? ' has-selection' : ''}"><section class="group-master surface"><h2>Группы</h2><label>Поиск групп<input id="group-search" type="search"></label><form id="create-group" class="form-stack"><label>Новая группа<input name="name" required maxlength="256" placeholder="Полное название"></label><button type="submit">Создать группу</button></form><div id="group-list" class="group-list"><p class="loading">Загрузка групп…</p></div></section>${gid ? editorHTML() : '<section class="group-editor surface"><h2>Выберите группу</h2><p class="muted">Откройте группу слева, чтобы редактировать её правила. Порядок групп определяет приоритет.</p></section>'}</div><section class="surface"><h2>Проверка маршрута</h2><form id="explain-form" class="toolbar"><label>Домен или IP<input name="q" required placeholder="example.com"></label><button type="submit">Объяснить маршрут</button></form><p class="muted">Проверка использует сохранённые правила, не текущий черновик.</p><div id="explain-result" class="status"></div></section><section class="surface"><h2>Обзор правил</h2><form id="overview-form" class="toolbar"><label>Поиск во всех группах<input id="overview-search" type="search"></label><button type="submit">Загрузить обзор</button></form><p id="overview-count" class="muted">Обзор загружается только по запросу.</p><div class="table-wrap"><table><thead><tr><th>Группа</th><th>Тип</th><th>Значение</th><th>Состояние</th></tr></thead><tbody id="overview-results"></tbody></table></div><div class="pagination" id="overview-page" data-offset="0"><button type="button" id="overview-prev" disabled>Назад</button><button type="button" id="overview-next" disabled>Далее</button></div></section>`;
+  main.innerHTML = `<div id="rule-controls"><label id="group-search-label" class="search-field"><span class="sr-only">Поиск сервисов</span><input id="group-search" type="search" placeholder="Поиск сервисов…"></label><div id="rule-tools" class="toolbar-right"><button type="button" id="apply-rules" class="icon-btn" title="Применить сохранённые правила" aria-label="Применить сохранённые правила">${icon('apply')}</button><button type="button" class="icon-btn" data-open-dialog="overview-dialog" title="Обзор правил" aria-label="Обзор правил">${icon('overview')}</button><button type="button" class="icon-btn" data-open-dialog="explain-dialog" title="Проверка маршрута" aria-label="Проверка маршрута">${icon('route')}</button><button type="button" class="icon-btn primary" data-open-dialog="create-dialog" title="Новая группа" aria-label="Новая группа">${icon('add')}</button></div></div>
+    <p id="rules-state" class="rules-state">Состояние неизвестно</p>
+    <div id="group-list" class="group-list"><p class="loading">Загрузка групп…</p></div><div id="editor-parking" hidden>${gid ? editorHTML() : ''}</div>
+    <dialog id="create-dialog" aria-labelledby="create-title"><button type="button" class="modal-x" data-close-dialog aria-label="Закрыть создание группы">×</button><h2 id="create-title">Новая группа</h2><p class="muted">Порядок групп определяет приоритет правил.</p><form id="create-group" class="form-stack"><label>Название группы<input name="name" required maxlength="256" placeholder="Впишите название группы"></label><div class="actions"><button type="button" data-close-dialog>Отмена</button><button type="submit" class="primary">Создать</button></div></form></dialog>
+    <dialog id="explain-dialog" aria-labelledby="explain-title"><button type="button" class="modal-x" data-close-dialog aria-label="Закрыть проверку маршрута">×</button><h2 id="explain-title">Проверка маршрута</h2><p class="muted">Домен или IP против сохранённых правил, не черновика.</p><form id="explain-form" class="toolbar"><label>Домен или IP<input name="q" required placeholder="example.com"></label><button type="submit">Проверить</button></form><div id="explain-result" class="status"></div></dialog>
+    <dialog id="overview-dialog" class="wide-dialog" aria-labelledby="overview-title"><button type="button" class="modal-x" data-close-dialog aria-label="Закрыть обзор правил">×</button><h2 id="overview-title">Обзор правил</h2><form id="overview-form" class="toolbar"><label>Поиск во всех группах<input id="overview-search" type="search"></label><button type="submit">Загрузить обзор</button></form><p id="overview-count" class="muted">Обзор загружается только по запросу.</p><div class="table-wrap"><table><thead><tr><th>Группа</th><th>Тип</th><th>Значение</th><th>Состояние</th></tr></thead><tbody id="overview-results"></tbody></table></div><div class="pagination" id="overview-page" data-offset="0"><button type="button" id="overview-prev" disabled>Назад</button><button type="button" id="overview-next" disabled>Далее</button></div></dialog>`;
+  $('#global-search-slot').append($('#group-search-label'));
+  $('#rule-actions-slot').append($('#rule-tools'));
+  const importDialog = $('#import-dialog');
+  if (importDialog) main.append(importDialog);
   if (gid) $$('input,select,textarea,button',$('.group-editor')).forEach(control=>{control.disabled=control.id!=='reload-rules';});
   $('#overview-form').insertAdjacentHTML('afterend',`<div class="form-grid">
     <label>Тип в обзоре<select id="overview-type"><option value="">Все типы</option>${options('')}</select></label>
@@ -227,4 +274,5 @@ export async function mount() {
     await Promise.allSettled([loadGroups(),loadPage(0)]);
     status($('#import-status'),`Импортировано: ${typeof data.imported==='number'?data.imported:JSON.stringify(data.imported)} · пропущено: ${typeof data.skipped==='number'?data.skipped:JSON.stringify(data.skipped)} · невалидно: ${typeof data.invalid==='number'?data.invalid:JSON.stringify(data.invalid)}. Правила ещё не применены.`,'success');
   },$('#import-status'));});
+  $('.gcard.expanded')?.scrollIntoView({block:'start'});
 }
