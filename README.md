@@ -60,7 +60,7 @@ sudo bash scripts/install.sh
 Then:
 
 1. **Edit secrets** in `/etc/mihomo/config.yaml` and `/etc/xray/config.json`  
-   (created from examples if missing), **or** after start paste `vless://` in **Система → Подключение**.
+   (created from examples if missing), **or** after start paste `vless://` in **Настройки → Подключение**.
 2. Start services:
 
 ```bash
@@ -94,13 +94,13 @@ Services are **enabled** but **not started** until configs/secrets are ready.
 
 ## Panel workflows
 
-- **Правила** (`/rules`): the original centered graphite panel, upper navigation and inline group cards are restored. The addressable `/rules/<id>` editor expands inside its group on desktop and mobile, with paginated rules, import, route explanation and cross-group conflict overview.
-- **Сохранить** validates all dirty rows and deletions as one transaction with one backup. Drafts survive a failed save. Saving does **not** restart a core; **Применить** separately confirms activation of saved rules and requires unsaved edits to be resolved first.
-- **Статистика / Соединения / Логи** (`/monitoring/traffic`, `/connections`, `/logs` under that prefix): upper tabs open traffic chart/data and periods, keyed connection controls, searchable tail/live logs. History transfers incrementally; background monitoring pauses while Settings covers it.
-- **Настройки**: the original modal and Core / Users / Connection / Operations tabs are restored. Opening it preserves the rules draft underneath; switching settings tabs or closing the modal confirms unsaved runtime/VLESS edits. Runtime settings, VLESS/backups, durable updates, all-admin users and activity/preferences remain available; direct `/system/*` links still work. Ports and TUN remain read-only.
-- **Обновления** (`/system/updates`): checking does not install. Installation needs confirmation; the durable operation ID, stage, terminal result and verified rollback remain inspectable after panel restart or page reload. Entry checks only offer updates; they do not change timer policy.
+- **Правила** (`/rules`): the actual 0.18.3 frontend from Git `a2c0fe7`, including its original markup, stylesheet and motion. Groups expand independently in the same document; their original inline tables are restored, without the replacement paginated editor or separate group pages.
+- **Сохранить правки** submits changed rows as one validated transaction with one backup. Failed or invalid saves retain edits. Saving does **not** restart a core; **Применить** separately confirms activation of saved rules and requires unsaved edits to be resolved first.
+- **Статистика / Соединения / Логи**: original upper-tab transitions, four metrics, live canvas chart, periods, connection controls and searchable tail/live logs. History transfers incrementally with epoch reset; monitoring pauses behind blocking modals and in a hidden document.
+- **Настройки**: the original modal and Core / Users / Connection / Operations tabs. Rules drafts remain underneath; runtime/VLESS drafts remain in their controls across tab changes and reopening. Refresh confirms discarding runtime edits. Runtime fields stay disabled until the first successful core snapshot. Ports and TUN remain read-only.
+- **Обновления**: component chips in **Настройки → Ядро** open the original confirmation modal. Checking never installs. Accepted/running is not success: the durable ID, stage, terminal result and recovery status are shown in that modal and resume after reopening or panel restart. Entry checks only offer a newer published panel release; they do not change timer policy.
 
-The panel loads one immutable frontend bundle before listening. An older open tab offers an explicit reload after a server-version change, without converting a successful write into an error or silently discarding drafts.
+The panel loads one immutable frontend bundle before listening. Successful panel-update completion reloads only after the draft guard; a server-version header never silently discards edits or converts a completed write into an error. Logout and changing your own password warn about drafts before revoking the session.
 API mutations require a session-bound `X-CSRF-Token` from `/api/session`; browser requests must be same-origin.
 Form bodies are bounded to 2 MiB and a 10-second read deadline. Keep HTTP access on a trusted network or behind HTTPS.
 
@@ -121,13 +121,13 @@ This will:
 - **not** overwrite secret configs under `/etc/mihomo/config.yaml` or `/etc/xray/config.json`
 - **never** replace an existing `/etc/mihomo/rule-providers/groups.json`, even when bundled rules are newer
 
-Binary upgrades for mihomo/xray: **Система → Обновления**, separately confirmed. Installer, manual updater, UI workers and timer share one OS update lock.
+Binary upgrades for mihomo/xray: **Настройки → Ядро**, choose a component chip and confirm. Installer, manual updater, UI workers and timer share one OS update lock.
 
 If fetch or fast-forward fails, the updater stops before installing files.
 Older installations may have local `update rules: …` commits: preserve those commits
 and back up live rules before manually reconciling the checkout. The updater does not discard local work.
 
-### Upgrading to 0.19.2
+### Upgrading to 0.19.3
 
 Use the persistent checkout named by the service's `XTTP_GIT_REPO`; replace `/opt/xttp-stack` in examples if yours differs.
 The exact 0.18.5 SSH updater can perform this transition: the new unit starts the complete source tree, not a copied singleton `app.py`.
@@ -139,13 +139,13 @@ Stop the timer, let any active update finish, and back up device data and the ol
 ```bash
 sudo systemctl stop xttp-update.timer
 # Back up /etc/mihomo, /etc/xray, /etc/mihomo-lists, units/drop-ins and the old checkout.
-sudo git clone https://github.com/kotetsyy/xttp-stack.git /opt/xttp-stack-0.19.2
-# Verify VERSION and version-manifest.json contain 0.19.2 or later.
-sudo bash /opt/xttp-stack-0.19.2/scripts/update.sh
+sudo git clone https://github.com/kotetsyy/xttp-stack.git /opt/xttp-stack-0.19.3
+# Verify VERSION and version-manifest.json contain 0.19.3 or later.
+sudo bash /opt/xttp-stack-0.19.3/scripts/update.sh
 ```
 
 Keep that checkout: the service now runs its `panel/app.py` and adjacent frontend.
-Restore the timer's **previous** policy only after checking login and `/system/updates`; do not enable a previously disabled timer.
+Restore the timer's **previous** policy only after checking login and **Настройки → Ядро**; do not enable a previously disabled timer.
 Unrelated non-Git install targets are refused without deletion. An intentional non-Git source installation is local-only and cannot remotely update its panel.
 `XTTP_INSTALL_ROOT` selects the persistent tree; `XTTP_BIN_DIR` values other than `/usr/local/bin` are rejected before mutation.
 
@@ -205,7 +205,7 @@ mihomo and Xray are third-party projects with their own licenses.
 sudo systemctl enable --now xttp-update.timer
 # первый ручной прогон:
 sudo systemctl start xttp-update.service
-# or in the panel: Система → Обновления → «Проверить и обновить весь стек»
+# The UI checks components in Настройки → Ядро; it does not start an unconfirmed fleet update.
 ```
 
 Интервал по умолчанию: **каждые 30 минут** (`OnUnitActiveSec=30min`).  
@@ -214,8 +214,8 @@ sudo systemctl start xttp-update.service
 При открытии авторизованной панели выполняется проверка версии из опубликованного `main`.
 Только новая версия открывает предложение обновления; само открытие панели ничего не устанавливает.
 Для установки нужно нажать «Обновить» и подтвердить действие. Совпадающая версия не вызывает диалог.
-«Проверить и обновить весь стек» создаёт сохраняемое задание и может обновить ядра и панель.
-Принятие задания не означает завершение: смотрите его конечный результат и отдельный статус восстановления в **Система → Обновления**.
+«Проверить обновления сейчас» в **Настройки → Ядро** только проверяет версии и предлагает подтверждение выбранного компонента; это не запуск всего флота.
+Принятие задания не означает завершение: смотрите его конечный результат и отдельный статус восстановления в исходном окне обновления. Закрытие окна не отменяет worker; повторное открытие возобновляет наблюдение за ID.
 
 ### Что делает check-and-update.sh
 
@@ -234,7 +234,7 @@ journalctl -u xttp-update.service -n 50 --no-pager
 systemctl list-timers xttp-update.timer
 ```
 
-Также: **Система → Операции → Журнал**; состояние конкретного задания — **Система → Обновления**.
+Также: **Настройки → Операции → Журнал**; состояние выбранного задания — в окне обновления компонента в **Настройки → Ядро**.
 
 ## Checks
 
@@ -250,5 +250,5 @@ They do not update real services. Run fresh-install, interrupted preparation, ex
 
 История версий панели — файл **CHANGELOG.md** в корне репозитория (GitHub).
 
-**Система → Обновления** загружает его через `GET /api/changelog` по запросу.
+Чип версии в верхней панели открывает исходный changelog через `GET /api/changelog` по запросу.
 Чтобы добавить запись при релизе: допишите секцию ## [x.y.z] - YYYY-MM-DD сверху файла, поднимите VERSION в panel/app.py и panel в version-manifest.json, commit + push.

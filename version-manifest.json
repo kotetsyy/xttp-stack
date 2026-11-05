@@ -1,7 +1,7 @@
 {
-  "panel": "0.19.2",
+  "panel": "0.19.3",
   "mihomo": "v1.19.29",
   "xray": "v26.6.22",
-  "updated_at": "2026-11-05T05:41:27Z",
-  "notes": "Restore classic graphite layout and modal settings; keep transactional rules, CSRF and durable verified updates; native core pins unchanged"
+  "updated_at": "2026-11-05T07:57:26Z",
+  "notes": "Restore exact original 0.18.3 frontend from a2c0fe7, including motion and single-page interactions; keep secure API and durable updates; native core pins unchanged"
 }

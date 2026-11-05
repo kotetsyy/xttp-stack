@@ -1,54 +1,534 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="dark">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>xttp panel</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/panel.css">
-<script type="module" src="/static/app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/static/panel.css"/>
 </head>
-<body data-version="@@VERSION@@">
-<div class="bg-fx" aria-hidden="true"><div class="mesh"></div><div class="grid"></div><div class="vignette"></div></div>
-<a class="skip-link" href="#main">К содержимому</a>
+<body>
+<div class="bg-fx" aria-hidden="true">
+  <div class="mesh mesh-a"></div>
+  <div class="mesh mesh-b"></div>
+  <div class="grid"></div>
+  <div class="noise"></div>
+  <div class="vignette"></div>
+</div>
 <div class="app">
-<header class="topbar">
-<a class="brand" href="/rules"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>xttp panel</a>
-<div class="top-right">
-<a href="/system/updates" class="chip ver-chip" data-settings title="Версии и обновления">v@@VERSION@@</a>
-<span id="service-status" class="chip chip-status">Сервисы · …</span>
-<span id="connection-chip" class="chip chip-status">xttp · …</span>
-<a href="/system/core" class="chip chip-action" data-settings><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m9 3 1-1h4l1 3 3 1 3 3-1 3 1 3-3 3-3 1-1 3h-4l-1-3-3-1-3-3 1-3-1-3 3-3 3-1Z"/></svg>Настройки</a>
-<button type="button" id="logout" class="link-logout">Выйти</button>
+  <header class="topbar">
+    <div class="brand">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      xttp panel
+    </div>
+    <div class="top-right">
+      <div class="ver-wrap" tabindex="0">
+        <button type="button" class="chip ver-chip" id="verChip" aria-haspopup="true" aria-expanded="false" aria-controls="verDd" onclick="try{window.__toggleVerChangelog&&window.__toggleVerChangelog(event)}catch(e){}" style="pointer-events:auto;cursor:pointer;opacity:1;-webkit-user-select:none">v@@VERSION@@</button>
+        <div class="ver-dd" id="verDd" role="menu" aria-label="История версий">
+          <div class="ver-loading" id="verChangelogLoading" style="padding:14px 12px;color:var(--muted);font-size:12.5px">Загрузка changelog с GitHub…</div>
+          <div id="verChangelogList"></div>
+          <div class="ver-changelog-foot" id="verChangelogFoot" hidden style="padding:8px 12px 12px;font-size:11px;color:var(--muted2)">
+            <a id="verChangelogLink" href="#" target="_blank" rel="noopener" style="color:var(--acc)">CHANGELOG.md на GitHub</a>
+          </div>
+        
+        </div>
+      </div>
+      <span class="chip chip-status" id="svcDot" title="Сервисы xray / mihomo">svc · …</span>
+      <span class="chip chip-status" id="xttpDot" title="Статус xttp">xttp · …</span>
+      <button type="button" class="chip chip-action" id="btnSettings" title="Настройки">⚙ Настройки</button>
+      <a class="link-logout" href="/logout" id="btnLogout" title="Выйти из панели">Выйти</a>
+    </div>
+  </header>
+  @@TOAST@@
+  <div class="toolbar">
+    <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0">
+      <div class="search-wrap open" id="searchWrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+        <input id="searchInput" type="search" placeholder="Поиск сервисов…" aria-label="Поиск сервисов"/>
+      </div>
+      <button type="button" class="conflict-filter-link" id="conflictFilter" data-show="0" hidden aria-pressed="false"></button>
+      <div class="view-switch stabs" id="viewSwitch" role="tablist" aria-label="Режим">
+        <span class="stab-pill" id="viewPill" aria-hidden="true"></span>
+        <button type="button" class="stab active" data-view="rules" id="viewRules" role="tab" aria-selected="true">Правила</button>
+        <button type="button" class="stab" data-view="stats" id="viewStats" role="tab" aria-selected="false">Статистика</button>
+        <button type="button" class="stab" data-view="conns" id="viewConns" role="tab" aria-selected="false">Соединения</button>
+        <button type="button" class="stab" data-view="logs" id="viewLogs" role="tab" aria-selected="false">Логи</button>
+      </div>
+    </div>
+    <div class="toolbar-right" id="toolbarRulesActions">
+      <form method="post" action="/api/rules/apply">
+        <button type="submit" class="icon-btn" aria-label="Применить" title="Записать rule-providers и restart mihomo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg>
+        </button>
+      </form>
+      <button type="button" class="icon-btn" id="btnRulesOverview" aria-label="Обзор правил" title="Обзор всех правил">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+      </button>
+      <button type="button" class="icon-btn" id="btnExplain" aria-label="Explain route" title="Explain route — куда уйдёт трафик">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="6" cy="5" r="2"/>
+          <path d="M6 7v10"/><path d="M6 5h8a4 4 0 0 1 0 8H6"/>
+        </svg>
+      </button>
+      <button type="button" class="icon-btn primary" id="btnAdd" aria-label="Новая группа" title="Новая группа">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="view-stage" id="viewStage">
+    <section id="panel-groups" class="panel view-panel" data-view-panel="rules" role="tabpanel">@@GROUPS@@</section>
+    <section id="panel-stats" class="panel view-panel" data-view-panel="stats" role="tabpanel" hidden>
+      <div class="stats-grid" id="statsCards">
+        <div class="stat-card"><div class="stat-label">Скорость ↓</div><div class="stat-value" id="statDownRate">—</div><div class="stat-sub" id="statDownTotal">всего —</div></div>
+        <div class="stat-card"><div class="stat-label">Скорость ↑</div><div class="stat-value" id="statUpRate">—</div><div class="stat-sub" id="statUpTotal">всего —</div></div>
+        <div class="stat-card"><div class="stat-label">Соединения</div><div class="stat-value" id="statConns">—</div><div class="stat-sub" id="statConnSub">—</div></div>
+        <div class="stat-card"><div class="stat-label">Обращения к правилам</div><div class="stat-value" id="statHits">—</div><div class="stat-sub">срабатываний правил всего</div></div>
+      </div>
+      <div class="stats-chart-wrap">
+        <div class="stats-chart-head">
+          <div class="stats-chart-title" id="statsChartTitle">Трафик (live)</div>
+          <div class="stats-period stabs" id="statsPeriod" role="tablist" aria-label="Период">
+            <span class="stab-pill" id="statsPeriodPill" aria-hidden="true"></span>
+            <button type="button" class="stab active" data-period="live">Live</button>
+            <button type="button" class="stab" data-period="5m">5 мин</button>
+            <button type="button" class="stab" data-period="1h">1 час</button>
+            <button type="button" class="stab" data-period="session">Сессия</button>
+          </div>
+        </div>
+        <div class="stats-chart-body">
+          <div class="stats-chart-legend" id="statsLineToggles">
+            <label class="stats-line-toggle"><input type="checkbox" id="lineDown" checked/><i class="dn"></i><span>download</span></label>
+            <label class="stats-line-toggle"><input type="checkbox" id="lineUp" checked/><i class="up"></i><span>upload</span></label>
+          </div>
+          <canvas id="statsChart" width="900" height="160" aria-label="График трафика"></canvas>
+          <div class="stats-tooltip" id="statsTooltip" hidden></div>
+        </div>
+      </div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead><tr><th>Группа</th><th>Hits</th><th>Conn</th><th>↓</th><th>↑</th><th>Доля</th></tr></thead>
+          <tbody id="statsBody"><tr><td colspan="6" class="stats-empty">Загрузка…</td></tr></tbody>
+        </table>
+      </div>
+      <p class="stats-meta" id="statsMeta"></p>
+    </section>
+    <section id="panel-conns" class="panel view-panel" data-view-panel="conns" role="tabpanel" hidden>
+      <div class="conn-head">
+        <div class="conn-meta" id="connMeta">—</div>
+        <div class="conn-actions">
+          <button type="button" class="btn btn-ghost" id="btnRefreshConns" style="padding:8px 12px;font-size:13px">Обновить</button>
+          <button type="button" class="btn btn-ghost" id="btnKillAllConns" style="padding:8px 12px;font-size:13px;color:var(--err)">Разорвать все</button>
+        </div>
+      </div>
+      <div class="stats-table-wrap conn-table-wrap">
+        <table class="stats-table" id="connsTable">
+          <thead>
+            <tr>
+              <th>Домен / цель</th>
+              <th>Правило</th>
+              <th>Цепочка</th>
+              <th>Протокол</th>
+              <th>↓ / ↑</th>
+              <th>Длит.</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="connsBody">
+            <tr><td colspan="7" class="stats-empty">Загрузка…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section id="panel-logs" class="panel view-panel" data-view-panel="logs" role="tabpanel" hidden>
+      <div class="logs-head">
+        <div class="stabs logs-level" id="logsLevel" role="tablist" aria-label="Уровень логов">
+          <button type="button" class="stab" data-log-level="debug">debug</button>
+          <button type="button" class="stab active" data-log-level="info">info</button>
+          <button type="button" class="stab" data-log-level="warning">warning</button>
+          <button type="button" class="stab" data-log-level="error">error</button>
+        </div>
+        <div class="stabs logs-mode" id="logsMode" role="tablist" aria-label="Окно логов">
+          <button type="button" class="stab active" data-log-mode="tail">последние 200</button>
+          <button type="button" class="stab" data-log-mode="live">с текущего момента</button>
+        </div>
+        <button type="button" class="btn btn-ghost" id="btnClearLogs" style="padding:8px 12px;font-size:13px">Очистить вид</button>
+      </div>
+      <div class="logs-view-wrap">
+        <pre class="logs-view" id="logsView" aria-live="polite"></pre>
+      </div>
+      <div class="logs-foot meta" id="logsMeta">—</div>
+    </section>
+
+  </div>
 </div>
-</header>
-<div class="shell-toolbar">
-<div id="global-search-slot"></div>
-<nav class="primary-nav stabs" aria-label="Разделы панели">
-<a href="/rules" data-section="rules">Правила</a>
-<a href="/monitoring/traffic" data-section="traffic">Статистика</a>
-<a href="/monitoring/connections" data-section="connections">Соединения</a>
-<a href="/monitoring/logs" data-section="logs">Логи</a>
-</nav>
-<div id="rule-actions-slot" class="toolbar-right"></div>
+
+<div class="modal-backdrop" id="modalGroup" aria-hidden="true">
+  <div class="modal" role="dialog">
+    <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
+    <h2>Новая группа</h2>
+    <p class="sub">Группа → classical rule-set → PROXY. Внутри: IP-CIDR / DOMAIN-SUFFIX. Тип строки определяется автоматически.</p>
+    <form method="post" action="/api/groups/create">
+      <div class="field"><label for="gname">Название</label>
+        <input id="gname" name="name" placeholder="Впишите название группы" required autofocus/></div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" data-close>Отмена</button>
+        <button type="submit" class="btn btn-primary">Создать</button>
+      </div>
+    </form>
+  </div>
 </div>
-<div class="workspace">
-<header class="page-header"><div><h1 id="page-title">Настройки</h1><p id="page-description" class="muted"></p></div><a href="/rules" class="modal-x" data-close-settings aria-label="Закрыть настройки"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></a></header>
-<nav id="section-nav" class="section-nav stabs" aria-label="Разделы настроек" hidden></nav>
-<div class="workspace-body">
-<aside id="update-offer" class="notice" hidden></aside>
-<aside id="bundle-notice" class="notice" role="status" hidden></aside>
-<main id="main" tabindex="-1"><p class="loading" role="status">Загрузка…</p></main>
+
+<div class="modal-backdrop" id="modalExplain" aria-hidden="true">
+  <div class="modal" role="dialog" aria-labelledby="explain-title">
+    <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
+    <h2 id="explain-title">Explain route</h2>
+    <p class="sub">Проверка, куда уйдёт трафик: домен или IP против правил групп (тот же порядок, что у mihomo).</p>
+    <form id="explainForm" class="explain-form" autocomplete="off">
+      <div class="field">
+        <label for="explainInput">Домен или IP</label>
+        <input id="explainInput" name="q" type="text" placeholder="Введите домен или IP…" required autofocus/>
+      </div>
+      <button type="submit" class="btn btn-primary" id="btnExplainRun">Проверить маршрут</button>
+    </form>
+    <div id="explainResult" class="explain-result" aria-live="polite"></div>
+  </div>
 </div>
+
+<!-- Settings -->
+<div class="settings-bd" id="settingsBd" aria-hidden="true">
+  <div class="settings-modal" role="dialog" aria-labelledby="set-title">
+    <div class="settings-head">
+      <h2 id="set-title">Настройки</h2>
+      <button type="button" class="modal-x" id="settingsClose" aria-label="Закрыть">×</button>
+    </div>
+    <div class="settings-nav">
+      <div class="stabs" role="tablist">
+        <span class="stab-pill" id="stabPill" aria-hidden="true"></span>
+        <button type="button" class="stab active" data-stab="core">Ядро</button>
+        <button type="button" class="stab" data-stab="users">Пользователи</button>
+        <button type="button" class="stab" data-stab="xttp">Подключение</button>
+        <button type="button" class="stab" data-stab="ops">Операции</button>
+      </div>
+    </div>
+    <div class="settings-body">
+    <div class="spanels">
+    <div id="spanel-core" class="spanel active">
+      <p class="sub" style="margin-top:0">Runtime-настройки mihomo. Меняются сразу через API ядра — MetaCube не нужен.</p>
+      <p class="core-meta" id="coreMeta">—</p>
+      <div class="core-versions" id="coreVersions" aria-label="Версии компонентов"></div>
+      <p class="core-ver-debug" id="coreVerDebug" aria-live="polite"></p>
+      <div class="btn-row" style="margin:0 0 14px">
+        <button type="button" class="btn btn-ghost" id="btnFleetUpdateNow" style="padding:8px 12px;font-size:13px" title="Запустить check-and-update (как timer)">Проверить обновления сейчас</button>
+      </div>
+      <div class="core-ports-head">
+        <div>
+          <div class="ct-lab">Порты</div>
+          <div class="ct-sub">Только просмотр: 0 или пусто = выключен</div>
+        </div>
+      </div>
+      <div class="core-ports" id="corePorts" aria-live="polite"></div>
+      <div class="core-grid">
+        <div class="core-field">
+          <div class="core-field-lab">
+            <label for="coreMode">Режим</label>
+            <span class="core-tip" tabindex="0" aria-label="Справка: режим">?<span class="core-tip-pop" role="tooltip">Rule — трафик идёт по вашим правилам (обычный режим). Global — весь трафик через прокси. Direct — весь трафик напрямую, без прокси.</span></span>
+          </div>
+          <select id="coreMode">
+            <option value="rule">rule</option>
+            <option value="global">global</option>
+            <option value="direct">direct</option>
+          </select>
+          <div class="ct-sub">Rule — по правилам. Global — всё в прокси. Direct — всё напрямую.</div>
+        </div>
+        <div class="core-field">
+          <div class="core-field-lab">
+            <label for="coreLogLevel">Уровень логов</label>
+            <span class="core-tip" tabindex="0" aria-label="Справка: уровень логов">?<span class="core-tip-pop" role="tooltip">Silent — логов нет. Error/Warning — только сбои. Info — важные события. Debug — подробный вывод (много данных).</span></span>
+          </div>
+          <select id="coreLogLevel">
+            <option value="silent">silent</option>
+            <option value="error">error</option>
+            <option value="warning">warning</option>
+            <option value="info">info</option>
+            <option value="debug">debug</option>
+          </select>
+          <div class="ct-sub">Silent — без логов. Info — важное. Debug — максимум деталей.</div>
+        </div>
+        <div class="core-field">
+          <div class="core-field-lab">
+            <label for="coreFindProcess">Find process</label>
+            <span class="core-tip" tabindex="0" aria-label="Справка: find process">?<span class="core-tip-pop" role="tooltip">Off — не определять процесс-источник. Strict — точное определение (может замедлить). Always — всегда пытаться определить процесс.</span></span>
+          </div>
+          <select id="coreFindProcess">
+            <option value="off">off</option>
+            <option value="strict">strict</option>
+            <option value="always">always</option>
+          </select>
+          <div class="ct-sub">Off — не искать процесс. Strict — точно (медленнее). Always — всегда пытаться.</div>
+        </div>
+      </div>
+      <div class="core-toggles">
+        <div class="core-toggle-row">
+          <div><div class="ct-lab">Allow LAN</div><div class="ct-sub">Разрешить доступ с устройств в локальной сети</div></div>
+          <label class="switch"><input type="checkbox" id="coreAllowLan"/><span></span></label>
+        </div>
+        <div class="core-toggle-row">
+          <div><div class="ct-lab">IPv6</div><div class="ct-sub">Обрабатывать IPv6-трафик в ядре</div></div>
+          <label class="switch"><input type="checkbox" id="coreIpv6"/><span></span></label>
+        </div>
+        <div class="core-toggle-row">
+          <div><div class="ct-lab">Unified delay</div><div class="ct-sub">Одинаковый способ замера задержки для нод</div></div>
+          <label class="switch"><input type="checkbox" id="coreUnifiedDelay"/><span></span></label>
+        </div>
+        <div class="core-toggle-row">
+          <div><div class="ct-lab">TCP concurrent</div><div class="ct-sub">Параллельные TCP-подключения (быстрее, больше нагрузка)</div></div>
+          <label class="switch"><input type="checkbox" id="coreTcpConcurrent"/><span></span></label>
+        </div>
+      </div>
+
+      <div class="core-section" id="coreTunGeo">
+        <div class="core-section-title">TUN-интерфейс</div>
+        <p class="core-section-sub">Только просмотр — runtime-статус mihomo (вкл/выкл из UI пока недоступен)</p>
+        <div class="core-tun-list" id="coreTun" aria-live="polite"></div>
+
+        <div class="core-toggles" style="margin-top:14px">
+          <div class="core-toggle-row">
+            <div>
+              <div class="ct-lab">Определение протокола (sniffing)</div>
+              <div class="ct-sub">Определяет реальный протокол по содержимому пакета, а не только по порту — повышает точность маршрутизации</div>
+            </div>
+            <label class="switch"><input type="checkbox" id="coreSniffing"/><span></span></label>
+          </div>
+          <div class="core-toggle-row">
+            <div>
+              <div class="ct-lab">Автообновление geo-баз</div>
+              <div class="ct-sub">Периодически подтягивает свежие geoip/geosite базы для точной гео-маршрутизации</div>
+            </div>
+            <div class="core-toggle-actions">
+              <button type="button" class="btn btn-ghost" id="btnGeoUpdateNow" style="padding:7px 11px;font-size:12.5px" title="Принудительное обновление geo-баз">Обновить сейчас</button>
+              <label class="switch"><input type="checkbox" id="coreGeoAuto"/><span></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="core-geo-interval" id="coreGeoIntervalWrap" hidden>
+          <span class="meta">Интервал обновления, часов</span>
+          <input type="number" id="coreGeoInterval" min="1" max="168" value="24"/>
+          <button type="button" class="btn btn-primary" id="btnGeoIntervalSave" style="padding:8px 14px;font-size:13px">Сохранить</button>
+        </div>
+        <p class="core-geo-src" id="coreGeoSources">geoip.dat, geosite.dat — MetaCubeX/meta-rules-dat</p>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" id="btnCoreSave" style="padding:8px 14px;font-size:13px">Применить</button>
+        <button type="button" class="btn btn-ghost" id="btnCoreRefresh" style="padding:8px 14px;font-size:13px">Обновить</button>
+      </div>
+    </div>
+    <div id="spanel-users" class="spanel">
+      <p class="sub" style="margin-top:0">Все пользователи — admin. Можно блокировать и удалять (кроме себя / последнего).</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" id="btnUserAdd" style="padding:8px 14px;font-size:13px">+ Пользователь</button>
+      </div>
+      <table class="utable">
+        <thead><tr><th>Логин</th><th>Статус</th><th>Вход</th><th></th></tr></thead>
+        <tbody id="usersBody"></tbody>
+      </table>
+      <form id="userAddForm" style="display:none;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="field" style="margin:0"><label>Логин</label><input name="username" required pattern="[A-Za-z0-9_.-]{2,32}" placeholder="operator"/></div>
+          <div class="field" style="margin:0"><label>Пароль</label><input name="password" type="password" required minlength="6" placeholder="мин. 6 символов"/></div>
+        </div>
+        <div class="btn-row">
+          <button type="submit" class="btn btn-primary" style="padding:8px 14px;font-size:13px">Создать</button>
+          <button type="button" class="btn btn-ghost" id="userAddCancel" style="padding:8px 14px;font-size:13px">Отмена</button>
+        </div>
+      </form>
+    </div>
+    <div id="spanel-xttp" class="spanel">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+        <span class="status-pill unk" id="xttpStatusPill">Не проверено</span>
+        <span class="meta" id="xttpServices"></span>
+      </div>
+      <dl class="kv" id="xttpKv"></dl>
+      <div class="metric">
+        <div class="box"><div class="n empty-metric" id="mTcp">не измерено</div><div class="l">TCP до порта ноды</div></div>
+        <div class="box"><div class="n empty-metric" id="mHttp">не измерено</div><div class="l">Туннель (socks→нода→net)</div></div>
+        <div class="box"><div class="n empty-metric" id="mSpeed">не измерено</div><div class="l">Speedtest</div></div>
+      </div>
+      <p class="sub" id="pingHint" style="margin:0 0 10px;font-size:12px">TCP — только открытие порта. «Туннель» — полный путь socks→xray→нода→net (HTTPS), обычно 100–500&nbsp;ms.</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" id="btnXttpPing" style="padding:8px 14px;font-size:13px">Проверить связь</button>
+        <button type="button" class="btn btn-ghost" id="btnXttpSpeed" style="padding:8px 14px;font-size:13px">Speedtest (~5 MB)</button>
+        <button type="button" class="btn btn-ghost" id="btnXttpRefresh" style="padding:8px 14px;font-size:13px">Обновить</button>
+      </div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:16px 0"/>
+      <h3 style="margin:0 0 6px;font-size:14px">Замена конфигурации</h3>
+      <p class="sub" style="margin:0 0 10px">Вставьте <code>vless://…</code> — backup, запись xray, restart, проверка.</p>
+      <div class="field"><label for="vlessIn">vless:// ссылка</label>
+        <textarea id="vlessIn" placeholder="vless://uuid@host:port?security=reality&amp;…"></textarea></div>
+      <div id="vlessPreview" class="meta" style="margin-bottom:8px"></div>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btnVlessPreview" style="padding:8px 14px;font-size:13px">Превью</button>
+        <button type="button" class="btn btn-primary" id="btnVlessApply" style="padding:8px 14px;font-size:13px">Применить</button>
+      </div>
+      <div style="margin-top:12px">
+        <div class="meta" style="margin-bottom:6px">Бэкапы xray</div>
+        <div id="backupList" class="meta"></div>
+      </div>
+    </div>
+    <div id="spanel-ops" class="spanel">
+      <p class="sub" style="margin-top:0">Сервисы, auto-ping и журнал действий (apply, restart, vless, users).</p>
+      <div class="metric ops-metric" style="margin-bottom:14px">
+        <div class="box ops-stat">
+          <div class="ops-stat-main">
+            <span class="ops-stat-dot stale" id="svcXrayDot" aria-hidden="true"></span>
+            <span class="ops-stat-val empty-metric" id="svcXray">…</span>
+          </div>
+          <div class="l">xray</div>
+        </div>
+        <div class="box ops-stat">
+          <div class="ops-stat-main">
+            <span class="ops-stat-dot stale" id="svcMihomoDot" aria-hidden="true"></span>
+            <span class="ops-stat-val empty-metric" id="svcMihomo">…</span>
+          </div>
+          <div class="l">mihomo</div>
+        </div>
+        <div class="box ops-stat">
+          <div class="ops-stat-main">
+            <span class="ops-stat-dot stale" id="svcPingDot" aria-hidden="true"></span>
+            <span class="ops-stat-val empty-metric" id="svcPingAge">нет данных</span>
+          </div>
+          <div class="l">auto-ping</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btnRestartXray" style="padding:8px 14px;font-size:13px" title="systemctl restart xray">Restart xray</button>
+        <button type="button" class="btn btn-ghost" id="btnRestartMihomo" style="padding:8px 14px;font-size:13px" title="systemctl restart mihomo">Restart mihomo</button>
+        <button type="button" class="btn btn-ghost" id="btnRefreshOps" style="padding:8px 14px;font-size:13px">Обновить</button>
+      </div>
+      <div class="ops-prefs-card">
+        <label class="ops-prefs-label" for="autoPingToggle">
+          <input type="checkbox" id="autoPingToggle"/>
+          Auto-ping ноды (шапка UP/DOWN)
+        </label>
+        <div class="ops-prefs-row">
+          <span class="meta">интервал, сек</span>
+          <input type="number" id="autoPingSec" min="15" max="300" value="45"/>
+          <button type="button" class="btn btn-primary" id="btnSavePrefs" style="padding:8px 14px;font-size:13px">Сохранить</button>
+        </div>
+      </div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:16px 0"/>
+      <div class="journal-head">
+        <div class="journal-head-left">
+          <h3>Журнал</h3>
+          <span class="journal-age" id="journalAge"></span>
+        </div>
+        <button type="button" class="btn-icon-only" id="btnRefreshLog" title="Обновить журнал" aria-label="Обновить журнал">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12a9 9 0 1 1-2.64-6.36"/><polyline points="21 3 21 9 15 9"/>
+          </svg>
+        </button>
+      </div>
+      <div id="activityList" class="activity-list meta">Загрузка…</div>
+    </div>
+    </div><!-- /.spanels -->
+    </div><!-- /.settings-body -->
+  </div>
 </div>
-<footer class="panel-footer"><span>@@USERNAME@@</span><span>xttp panel · v@@VERSION@@</span></footer>
+
+
+<div class="modal-backdrop" id="modalRulesOverview" aria-hidden="true">
+  <div class="modal" role="dialog" aria-labelledby="rov-title" style="max-width:820px;width:100%">
+    <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
+    <h2 id="rov-title">Обзор правил</h2>
+    <p class="sub">Все записи из групп. Клик по строке — открыть группу.</p>
+    <div class="rov-toolbar">
+      <input type="search" id="rovSearch" placeholder="Фильтр: домен, IP, группа…" autocomplete="off"/>
+      <button type="button" class="btn btn-ghost" id="btnRovRefresh" style="padding:8px 12px;font-size:13px">Обновить</button>
+    </div>
+    <p class="rov-meta" id="rovMeta">—</p>
+    <div class="rov-table-wrap">
+      <table class="rov-table" id="rovTable">
+        <thead>
+          <tr>
+            <th>Группа</th>
+            <th>Тип</th>
+            <th>Значение</th>
+            <th>Вкл</th>
+          </tr>
+        </thead>
+        <tbody id="rovBody">
+          <tr><td colspan="4" class="rov-empty">Загрузка…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-<div id="notifications" class="notifications" aria-live="polite" aria-atomic="false"></div>
-<dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title"><div class="settings-shell"><header class="page-header"><h2 id="settings-title">Настройки</h2><a href="/rules" class="modal-x" data-close-settings aria-label="Закрыть настройки"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></a></header><nav id="settings-nav" class="section-nav stabs" aria-label="Разделы настроек"></nav><div class="workspace-body"><p id="settings-busy" class="status warning" hidden></p><div id="settings-content"></div></div></div></dialog>
-<dialog id="confirm-dialog" aria-labelledby="confirm-title"><form method="dialog"><h2 id="confirm-title">Подтверждение</h2><p id="confirm-message"></p><div class="actions"><button value="cancel" autofocus>Отмена</button><button value="confirm" id="confirm-action" class="primary">Подтвердить</button></div></form></dialog>
-<noscript><p class="notice">Для панели нужен JavaScript. Включите его и обновите страницу.</p></noscript>
+
+
+<div class="modal-backdrop" id="modalCoreUpdate" aria-hidden="true">
+  <div class="modal core-upd-modal" role="dialog" aria-labelledby="coreUpdTitle" style="max-width:440px">
+    <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
+    <h2 id="coreUpdTitle">Обновление</h2>
+    <div class="core-upd-row"><span class="meta">Версии:</span> <strong id="coreUpdVersions">—</strong></div>
+    <p class="core-upd-notes" id="coreUpdNotes"></p>
+    <p class="core-upd-manual" id="coreUpdManual" hidden></p>
+    <p class="sub" id="coreUpdLinkWrap" style="margin:0 0 14px"><a id="coreUpdLink" href="#" target="_blank" rel="noopener">Посмотреть полный changelog</a></p>
+    <div class="btn-row" id="coreUpdActions">
+      <button type="button" class="btn btn-ghost" data-close style="padding:8px 14px;font-size:13px">Закрыть</button>
+      <button type="button" class="btn btn-primary" id="btnCoreUpdDo" style="padding:8px 14px;font-size:13px">Обновить</button>
+    </div>
+    <div class="btn-row" id="coreUpdConfirm" hidden>
+      <p class="sub" style="margin:0 0 10px;width:100%" id="coreUpdConfirmText">Сервис будет остановлен и перезапущен. Продолжить?</p>
+      <button type="button" class="btn btn-ghost" id="btnCoreUpdCancel" style="padding:8px 14px;font-size:13px">Отмена</button>
+      <button type="button" class="btn btn-primary" id="btnCoreUpdConfirm" style="padding:8px 14px;font-size:13px">Да, обновить</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalImport" aria-hidden="true">
+  <div class="modal" role="dialog">
+    <button type="button" class="modal-x" data-close aria-label="Закрыть">×</button>
+    <h2>Импорт правил</h2>
+    <p class="sub">По одной строке: CIDR → IPv4, домен → Namespace. Превью ниже.</p>
+    <p class="import-group-line">Группа: <strong id="importGroupName">—</strong></p>
+    <form method="post" action="/api/groups/import" id="importForm">
+      <input type="hidden" name="gid" id="importGid" value=""/>
+      <div class="field"><label for="importText">Список</label>
+        <textarea id="importText" name="text" placeholder="91.108.4.0/22&#10;telegram.com" required></textarea></div>
+      <div class="preview-stats" id="previewStats"></div>
+      <div class="import-opt-wrap" id="importOptWrap" hidden>
+        <label class="import-opt" for="importSkipDupConflict">
+          <input type="checkbox" id="importSkipDupConflict" checked/>
+          <span>Не импортировать дубли и конфликты</span>
+        </label>
+        <p class="import-opt-hint">Строки, помеченные как дубль или конфликт, будут пропущены при импорте</p>
+      </div>
+      <div class="preview" id="previewBox" hidden></div>
+      <div class="foot-row">
+        <div class="detect-field">
+          <label for="detectMode">Режим типа</label>
+          <select name="detect" id="detectMode" class="detect-select">
+            <option value="auto" selected>Auto — по строке</option>
+            <option value="ipv4">Только IP/CIDR</option>
+            <option value="namespace">Только domain</option>
+          </select>
+          <p class="detect-hint">Auto — автоопределение типа каждой строки (IP/CIDR vs domain). Фильтр ниже сужает превью и импорт, не выбирает группу.</p>
+        </div>
+        <div class="modal-actions" style="margin:0">
+          <button type="button" class="btn btn-ghost" data-close>Отмена</button>
+          <button type="submit" class="btn btn-primary" id="importSubmitBtn">Импортировать</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="module" src="/static/app.js"></script>
 </body>
 </html>

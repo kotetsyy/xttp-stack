@@ -1,30 +1,289 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="dark">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>xttp panel — Вход</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/panel.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --acc:#3b9eff;
+  --text:#eceef2;
+  --muted:#8b93a7;
+  --font:"Inter",ui-sans-serif,system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  font-family:var(--font);
+  color:var(--text);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  background:#06070b;
+}
+
+/* full-bleed ambient mesh — no spinning plate */
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 10% 0%, #0a1628 0%, transparent 55%),
+    radial-gradient(100% 80% at 100% 100%, #0c0a1a 0%, transparent 50%),
+    #06070b;
+}
+.bg::before,
+.bg::after{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  pointer-events:none;
+}
+/* soft color fields that slowly drift and breathe */
+.bg::before{
+  background:
+    radial-gradient(ellipse 50% 45% at 15% 25%, rgba(45,120,255,.45) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 40% at 85% 75%, rgba(100,70,220,.4) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 70% 15%, rgba(30,180,140,.22) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 50% at 40% 90%, rgba(40,90,200,.28) 0%, transparent 55%);
+  filter:blur(8px);
+  animation:meshA 22s ease-in-out infinite alternate;
+  opacity:.95;
+}
+.bg::after{
+  background:
+    radial-gradient(ellipse 42% 38% at 80% 20%, rgba(80,160,255,.35) 0%, transparent 55%),
+    radial-gradient(ellipse 48% 42% at 25% 70%, rgba(120,80,255,.32) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 30% at 50% 45%, rgba(50,200,160,.12) 0%, transparent 50%);
+  filter:blur(12px);
+  animation:meshB 28s ease-in-out infinite alternate;
+  mix-blend-mode:screen;
+  opacity:.75;
+}
+.bg-noise{
+  position:absolute;
+  inset:0;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+  pointer-events:none;
+}
+.bg-vignette{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse 75% 70% at 50% 45%, transparent 30%, rgba(0,0,0,.55) 100%);
+  pointer-events:none;
+}
+.bg-grid{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 45%, #000 0%, transparent 72%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 45%, #000 0%, transparent 72%);
+  opacity:.45;
+  pointer-events:none;
+  animation:gridPulse 10s ease-in-out infinite alternate;
+}
+
+@keyframes meshA{
+  0%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(3%,-2%) scale(1.05)}
+  100%{transform:translate(-2%,3%) scale(1.02)}
+}
+@keyframes meshB{
+  0%{transform:translate(0,0) scale(1.05)}
+  50%{transform:translate(-4%,2%) scale(1)}
+  100%{transform:translate(2%,-3%) scale(1.08)}
+}
+@keyframes gridPulse{
+  from{opacity:.3}
+  to{opacity:.5}
+}
+@keyframes pop{
+  from{opacity:0;transform:scale(.96) translateY(14px)}
+  to{opacity:1;transform:none}
+}
+
+.wrap{
+  position:relative;
+  z-index:1;
+  min-height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.card{
+  width:min(400px,100%);
+  background:rgba(14,16,22,.78);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;
+  padding:32px 28px 28px;
+  box-shadow:
+    0 24px 64px rgba(0,0,0,.55),
+    0 0 0 1px rgba(255,255,255,.03) inset,
+    0 1px 0 rgba(255,255,255,.06) inset;
+  backdrop-filter:blur(24px) saturate(1.2);
+  -webkit-backdrop-filter:blur(24px) saturate(1.2);
+  animation:pop .45s var(--ease);
+}
+.logo{text-align:center;margin-bottom:6px}
+.logo-mark{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:linear-gradient(145deg,rgba(59,158,255,.28),rgba(124,106,247,.18));
+  border:1px solid rgba(59,158,255,.35);
+  color:var(--acc);
+  margin-bottom:12px;
+  box-shadow:0 8px 28px rgba(59,158,255,.22);
+}
+.brand{
+  font-size:1.35rem;
+  font-weight:700;
+  letter-spacing:-.03em;
+  background:linear-gradient(100deg,#9fd0ff 0%,#3b9eff 45%,#8b7cf7 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.hello{
+  text-align:center;
+  font-size:1.15rem;
+  font-weight:600;
+  margin:10px 0 4px;
+  letter-spacing:-.02em;
+}
+.sub{
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+  margin:0 0 22px;
+  line-height:1.45;
+}
+.field{margin-bottom:14px}
+.field label{
+  display:block;
+  font-size:12px;
+  font-weight:600;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+.input-wrap{position:relative}
+.input-wrap svg{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--muted);
+  opacity:.7;
+  pointer-events:none;
+}
+.field input{
+  width:100%;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(0,0,0,.4);
+  padding:12px 12px 12px 40px;
+  outline:none;
+  color:var(--text);
+  transition:border-color .2s,box-shadow .2s;
+}
+.field input:focus{
+  border-color:rgba(59,158,255,.55);
+  box-shadow:0 0 0 3px rgba(59,158,255,.15);
+}
+.field input::placeholder{color:#5c657a}
+.err{
+  background:rgba(255,107,107,.12);
+  color:#ff6b6b;
+  border:1px solid rgba(255,107,107,.22);
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:13px;
+  margin-bottom:14px;
+}
+.btn{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:12px 16px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(180deg,#54aaff,#2f8ff0);
+  color:#061018;
+  box-shadow:0 6px 22px rgba(59,158,255,.35);
+  transition:transform .15s,filter .15s;
+  margin-top:6px;
+}
+.btn:hover{filter:brightness(1.06)}
+.btn:active{transform:translateY(1px)}
+.foot{
+  text-align:center;
+  margin-top:18px;
+  font-size:12px;
+  color:#5c657a;
+}
+@media (prefers-reduced-motion:reduce){
+  .bg::before,.bg::after,.bg-grid{animation:none}
+}
+</style>
 </head>
-<body class="login-page">
-<div class="bg-fx" aria-hidden="true"><div class="mesh"></div><div class="grid"></div><div class="vignette"></div></div>
-<main class="login-panel">
-<div class="login-logo"><span class="login-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="brand">xttp panel</span></div>
-<h1>Добро пожаловать</h1>
-<p class="muted">Войдите, чтобы управлять группами маршрутизации</p>
-<p class="login-message" role="status">@@CONTENT@@</p>
-<form action="/login" method="post" class="form-stack">
-<label for="username">Имя пользователя</label>
-<input id="username" name="user" autocomplete="username" placeholder="Имя пользователя" required autofocus>
-<label for="password">Пароль</label>
-<input id="password" name="pass" type="password" autocomplete="current-password" placeholder="Пароль" required>
-<button type="submit" class="primary">Войти</button>
-</form>
-<p class="login-foot">version @@VERSION@@</p>
-</main>
+<body>
+<div class="bg" aria-hidden="true">
+  <div class="bg-noise"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-vignette"></div>
+</div>
+<div class="wrap">
+  <div class="card">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      </div>
+      <div class="brand">xttp panel</div>
+    </div>
+    <h1 class="hello">Привет!</h1>
+    <p class="sub">Войдите, чтобы управлять группами маршрутизации</p>
+    @@ERR@@
+    <form method="post" action="/login" autocomplete="on">
+      <div class="field">
+        <label for="user">Имя пользователя</label>
+        <div class="input-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="8" r="4"/></svg>
+          <input id="user" name="user" type="text" placeholder="Имя пользователя" required autofocus autocomplete="username"/>
+        </div>
+      </div>
+      <div class="field">
+        <label for="pass">Пароль</label>
+        <div class="input-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <input id="pass" name="pass" type="password" placeholder="Пароль" required autocomplete="current-password"/>
+        </div>
+      </div>
+      <button type="submit" class="btn">Войти</button>
+    </form>
+    <div class="foot">version @@VERSION@@</div>
+  </div>
+</div>
+<script>
+(function(){
+  try {
+    if (location.search) history.replaceState(null, "", location.pathname || "/");
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
+

@@ -300,6 +300,32 @@ class TransactionTests(unittest.TestCase):
         self.assertEqual(saved["entries"][1]["rule"], "DOMAIN-SUFFIX,second.org")
         self.assertEqual(saved["entries"][0]["local_note"], "preserve")
 
+    def test_new_entry_identity_survives_another_insert_before_inline_edit(self):
+        Path(self.app.GROUPS_FILE).write_text(json.dumps([
+            {"id": "g", "name": "Group", "enabled": True, "entries": []}
+        ]), encoding="utf-8")
+        cookie, csrf = self.start_server()
+        code, _, body = self.request("POST", "/api/groups/save", {
+            "gid": "g", "entries": json.dumps([{"type": "domain", "value": "first.org"}])
+        }, cookie, csrf)
+        self.assertEqual(code, 200, body)
+        first_id = json.loads(body)["entries"][0]["id"]
+        code, _, body = self.request("POST", "/api/groups/save", {
+            "gid": "g", "entries": json.dumps([{"type": "domain", "value": "second.org"}])
+        }, cookie, csrf)
+        self.assertEqual(code, 200, body)
+        code, _, body = self.request("POST", "/api/groups/save", {
+            "gid": "g", "entries": json.dumps([
+                {"id": first_id, "type": "domain", "value": "edited.org"}
+            ])
+        }, cookie, csrf)
+        self.assertEqual(code, 200, body)
+        entries = self.app.load_groups()[0]["entries"]
+        by_id = {entry["id"]: entry for entry in entries}
+        self.assertEqual(by_id[first_id]["rule"], "DOMAIN,edited.org")
+        self.assertEqual(sorted(entry["rule"] for entry in entries),
+                         ["DOMAIN,edited.org", "DOMAIN,second.org"])
+
     def test_group_summaries_pagination_and_import_use_current_raw_text(self):
         groups = [{"id": "g", "name": "Group", "enabled": True, "entries": [
             {"id": str(i), "type": "domain", "value": f"host{i}.org", "rule": f"DOMAIN,host{i}.org"}

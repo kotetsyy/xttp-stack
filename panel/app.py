@@ -64,7 +64,7 @@ BOOTSTRAP_USER = "admin"
 RESTART_CMD = ["systemctl", "restart", "mihomo"]
 RESTART_XRAY_CMD = ["systemctl", "restart", "xray"]
 ACTIVITY_MAX = 100
-VERSION = "0.19.2"
+VERSION = "0.19.3"
 MIHOMO_API = "http://127.0.0.1:9090"
 
 
@@ -2294,13 +2294,18 @@ def load_ui_bundle() -> dict:
         return bundle
 
 
-def render_template(name: str, username: str = "", content: str = "") -> bytes:
+def render_template(name: str, content: str = "", groups: str = "") -> bytes:
     if name not in ("panel.html", "login.html"):
         raise ValueError("unknown template")
     template = load_ui_bundle()["templates"][name]
-    values = {"@@VERSION@@": VERSION, "@@USERNAME@@": username, "@@CONTENT@@": content}
-    return re.sub(r"@@(?:VERSION|USERNAME|CONTENT)@@", lambda match: esc(values[match.group()]),
-                  template).encode("utf-8")
+    values = {
+        "@@VERSION@@": esc(VERSION),
+        "@@GROUPS@@": groups,
+        "@@TOAST@@": "",
+        "@@ERR@@": f'<div class="err" role="alert">{esc(content)}</div>' if content else "",
+    }
+    return re.sub(r"@@(?:VERSION|GROUPS|TOAST|ERR)@@",
+                  lambda match: values[match.group()], template).encode("utf-8")
 
 
 def login_page(err: str = "") -> bytes:
@@ -3937,6 +3942,12 @@ def mutate_groups(action: str, form: dict) -> dict:
             if errors:
                 raise RequestError(400, "Повторяющиеся правила", errors)
             group["entries"] = final
+            changed = sorted(list(updates.values()) + additions, key=lambda entry: submitted_index[entry["id"]])
+            result["entries"] = [
+                {key: entry.get(key, True if key == "enabled" else "") for key in
+                 ("id", "type", "value", "rule", "name", "enabled")}
+                for entry in changed
+            ]
         elif action == "import":
             preview = detect_snapshot(form.get("text", ""), form.get("detect") or "auto")
             existing = {e.get("rule") for e in group.get("entries", [])}
@@ -3977,8 +3988,205 @@ def fleet_timer_status() -> dict:
         return {"enabled": None, "active": None, "error": str(ex)[:160]}
 
 
-def page(username: str = "") -> bytes:
-    return render_template("panel.html", username=username)
+STRIPE_CAT_MESSENGER = ("telegram", "discord", "whatsapp", "meta", "instagram", "facebook", "threads", "signal", "viber", "chat")
+
+STRIPE_CAT_VIDEO = ("youtube", "meet", "video", "stream", "zoom", "media", "twitch", "netflix")
+
+STRIPE_CAT_INFRA = ("cloud", "google", "ai", "geo", "block", "cdn", "dns", "cloudflare", "net", "proxy")
+
+def stripe_category(name: str) -> str:
+    n = (name or "").lower()
+    if any(k in n for k in STRIPE_CAT_MESSENGER):
+        return "messenger"
+    if any(k in n for k in STRIPE_CAT_VIDEO):
+        return "video"
+    if any(k in n for k in STRIPE_CAT_INFRA):
+        return "infra"
+    return "default"
+
+def type_badge(t: str) -> tuple[str, str]:
+    m = {
+        "ipv4": ("IPV4", "badge-v4"),
+        "ipv6": ("IPV6", "badge-v6"),
+        "namespace": ("NAMESPACE", "badge-ns"),
+        "domain": ("DOMAIN", "badge-dom"),
+        "keyword": ("KEYWORD", "badge-kw"),
+        "raw": ("RAW", "badge-raw"),
+    }
+    return m.get(t, ("RAW", "badge-raw"))
+
+def type_options(selected: str) -> str:
+    opts = [
+        ("namespace", "Namespace"),
+        ("ipv4", "IPv4"),
+        ("ipv6", "IPv6"),
+        ("domain", "Domain"),
+        ("keyword", "Keyword"),
+    ]
+    parts = []
+    for val, lab in opts:
+        sel = " selected" if val == selected else ""
+        parts.append(f'<option value="{val}"{sel}>{lab}</option>')
+    return "".join(parts)
+
+def render_entry_row(gid: str, j: int, ent: dict) -> str:
+    etype = ent.get("type", "namespace")
+    if etype == "raw":
+        etype = "namespace"
+    en_checked = "checked" if ent.get("enabled", True) else ""
+    ename = ent.get("name") or ""
+    val = ent.get("value") or ent.get("rule") or ""
+    eid = ensure_entry_id(ent)
+    return f"""<tr class="rule-row" data-eid="{esc(eid)}" data-entry-type="{esc(ent.get("type", "namespace"))}" data-filter="{esc((ename+' '+val+' '+etype).lower())}" style="--ri:{min(j, 12)}">
+      <td class="col-id">#{j+1}</td>
+      <td class="col-name-hide"><input class="cell-input emptyish" name="ename" value="{esc(ename)}" placeholder="имя правила…"/></td>
+      <td class="col-type">
+        <select class="type-select {esc(etype)}" name="etype" onchange="this.className='type-select '+this.value">
+          {type_options(etype)}
+        </select>
+      </td>
+      <td class="col-pattern"><div class="pattern-cell">
+        <input class="cell-input mono pattern-input emptyish" name="value" value="{esc(val)}" placeholder="паттерн правила…"/>
+        <span class="rule-conflict-badge pill pill-status pill-conflict" hidden></span>
+      </div></td>
+      <td class="col-en">
+        <label class="switch" title="Включён">
+          <input type="checkbox" name="enabled" value="1" {en_checked} data-toggle-entry/>
+          <span></span>
+        </label>
+      </td>
+      <td class="col-del">
+        <button type="button" class="icon-del" data-del-entry aria-label="Удалить" title="Удалить">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+        </button>
+      </td>
+    </tr>"""
+
+def render_group_card(g: dict, idx: int) -> str:
+    gid = g.get("id", "")
+    name = g.get("name", "")
+    cat = stripe_category(name)
+    enabled = g.get("enabled", True)
+    entries = g.get("entries") or []
+    for ent in entries:
+        ensure_entry_id(ent)
+    disabled_cls = "" if enabled else " disabled"
+    checked = "checked" if enabled else ""
+    n = len(entries)
+
+    rows = [render_entry_row(gid, j, ent) for j, ent in enumerate(entries)]
+
+    counts = {}
+    for e in entries:
+        t = e.get("type", "namespace")
+        if t == "raw":
+            t = "namespace"
+        counts[t] = counts.get(t, 0) + 1
+    count_pills = " ".join(
+        f'<span class="pill {type_badge(t)[1]}">{type_badge(t)[0]} {c}</span>'
+        for t, c in sorted(counts.items())
+    )
+    hay_parts = [name.lower()]
+    for e in entries:
+        hay_parts.append((e.get("name") or "").lower())
+        hay_parts.append((e.get("value") or "").lower())
+        hay_parts.append((e.get("rule") or "").lower())
+        hay_parts.append((e.get("type") or "").lower())
+    hay = " ".join(p for p in hay_parts if p)
+
+    return f"""
+    <div class="gcard collapsed{disabled_cls}" data-gid="{esc(gid)}" data-cat="{esc(cat)}" data-filter="{esc(hay)}" style="--i:{min(idx, 12)}">
+      <div class="gcard-head">
+        <div class="gcard-stripe" aria-hidden="true"></div>
+        <span class="gcard-drag" aria-hidden="true" title="Перетащить">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.5"/><circle cx="15" cy="6" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="18" r="1.5"/><circle cx="15" cy="18" r="1.5"/></svg>
+        </span>
+        <form method="post" action="/api/groups/save" data-group-action="rename" style="flex:1;min-width:0;display:flex" onclick="event.stopPropagation()">
+          <input type="hidden" name="gid" value="{esc(gid)}"/>
+          <input class="gcard-name emptyish" name="name" value="{esc(name)}" placeholder="имя группы…" onchange="this.form.requestSubmit()"/>
+        </form>
+        <span class="gcard-conflict-warn" hidden title="" aria-label="Конфликт правил" role="img"></span>
+        <div class="gcard-meta">
+          <span class="rule-count-wrap" title="{n} активных правил">
+            <span class="rule-count">{n}</span>
+            <span class="rule-count-lbl">правил</span>
+          </span>
+          <span class="count-pills">{count_pills}</span>
+        </div>
+        <div class="gcard-actions" onclick="event.stopPropagation()">
+          <div class="act-group act-state">
+            <form method="post" action="/api/groups/save" data-group-action="toggle">
+              <input type="hidden" name="gid" value="{esc(gid)}"/>
+              <label class="switch" title="Включить / выключить группу">
+                <input type="checkbox" name="enabled" value="1" {checked} onchange="this.form.requestSubmit()"/>
+                <span></span>
+              </label>
+            </form>
+          </div>
+          <span class="act-sep" aria-hidden="true"></span>
+          <div class="act-group act-danger">
+            <form method="post" action="/api/groups/delete" data-group-action="delete">
+              <input type="hidden" name="gid" value="{esc(gid)}"/>
+              <button type="submit" class="mini-btn danger" title="Удалить группу" aria-label="Удалить группу">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+              </button>
+            </form>
+          </div>
+          <span class="act-sep" aria-hidden="true"></span>
+          <div class="act-group act-tools">
+            <button type="button" class="mini-btn" data-add-rule title="Добавить правило" aria-label="Добавить правило">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <button type="button" class="mini-btn" data-import="{esc(gid)}" title="Импорт списка" aria-label="Импорт списка">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M8 11l4 4 4-4"/><path d="M4 19h16"/></svg>
+            </button>
+            <button type="button" class="mini-btn" data-collapse title="Развернуть / свернуть" aria-label="Развернуть или свернуть">
+              <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="gcard-body">
+        <table class="gtable">
+          <thead>
+            <tr>
+              <th class="col-id">#</th>
+              <th class="col-name-hide">Имя</th>
+              <th class="col-type">Тип</th>
+              <th>Паттерн</th>
+              <th class="col-en">Включён</th>
+              <th class="col-del"></th>
+            </tr>
+          </thead>
+          <tbody class="rules-body">
+            {''.join(rows)}
+          </tbody>
+        </table>
+        <div class="gcard-foot">
+          <span class="rule-count-wrap" title="{n} активных правил">
+            <span class="rule-count">{n}</span>
+            <span class="rule-count-lbl">правил</span>
+          </span>
+          <span class="gcard-conflict-count" data-show="0" hidden></span>
+          <span class="count-pills">{count_pills}</span>
+          <button type="button" class="btn btn-ghost btn-save-group" style="margin-left:auto;padding:6px 12px;font-size:12px">Сохранить правки</button>
+        </div>
+      </div>
+    </div>
+    """
+
+def page() -> bytes:
+    groups = load_groups()
+    if groups:
+        groups_content = "".join(render_group_card(g, i) for i, g in enumerate(groups))
+    else:
+        groups_content = (
+            '<div class="empty-wrap"><div class="empty-card">'
+            '<div class="empty-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>'
+            "<div><h3>Групп нет</h3><p>Создайте группу (+). Добавьте IP-CIDR или domain — тип определится автоматически.</p></div>"
+            "</div></div>"
+        )
+    return render_template("panel.html", groups=groups_content)
 
 
 class RequestError(ValueError):
@@ -4221,7 +4429,7 @@ class Handler(BaseHTTPRequestHandler):
         pages = {"/rules", "/monitoring/traffic", "/monitoring/connections", "/monitoring/logs",
                  "/system/core", "/system/connection", "/system/updates", "/system/users", "/system/activity"}
         if path in pages or re.fullmatch(r"/rules/[A-Za-z0-9_-]{1,80}", path):
-            return self._send(200, page(user), "text/html; charset=utf-8")
+            return self._send(200, page(), "text/html; charset=utf-8")
         if path == "/api/session":
             return self._json(200, {"ok": True, "user": public_user(find_user(user)),
                                     "csrf": session_csrf(self._token()), "version": VERSION,
