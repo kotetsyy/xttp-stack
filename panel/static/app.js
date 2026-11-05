@@ -897,7 +897,7 @@ import * as monitoringAPI from "./monitoring.js";
       if (!d.ok) {
         window.__coreVerState[comp] = { error: true, checking: false };
         dbg(comp + ": ошибка — " + (d.error || res.status));
-        if (typeof toast === "function") toast((comp) + ": не удалось проверить", false);
+        if (showResult && typeof toast === "function") toast((comp) + ": не удалось проверить", false);
         if (typeof loadCoreVersions === "function") await loadCoreVersions(false);
         return;
       }
@@ -918,21 +918,20 @@ import * as monitoringAPI from "./monitoring.js";
       const _nm = (comp === "panel") ? "панель" : comp;
       if (d.update_available) {
         dbg(_nm + ": есть обновление v" + (d.current || "?") + " → v" + (d.latest || "?"));
-        if (typeof toast === "function") toast(_nm + ": доступна v" + (d.latest || ""));
+        if (showResult && typeof toast === "function") toast(_nm + ": доступна v" + (d.latest || ""), true);
       } else if (d.up_to_date) {
         dbg(_nm + ": актуальная v" + (d.current || d.latest || ""));
-        if (typeof toast === "function") toast(_nm + ": актуальная версия");
       } else {
         dbg(_nm + ": ответ без флага update/up_to_date");
       }
-      // always show result modal (update OR up-to-date)
+      // Manual checks show details; background callers decide whether to offer an update.
       if (showResult && typeof openCoreUpdModal === "function") openCoreUpdModal(window.__coreVerState[comp]);
     } catch (e) {
       const wait = Math.max(0, 450 - (Date.now() - t0));
       if (wait) await new Promise((r) => setTimeout(r, wait));
       window.__coreVerState[comp] = { error: true, checking: false };
       dbg(comp + ": сеть/исключение — " + (e && e.message ? e.message : e));
-      if (typeof toast === "function") toast(String(e), false);
+      if (showResult && typeof toast === "function") toast(String(e), false);
       if (typeof loadCoreVersions === "function") await loadCoreVersions(false);
     }
   }

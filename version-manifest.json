@@ -1,7 +1,7 @@
 {
-  "panel": "0.19.4",
+  "panel": "0.19.5",
   "mihomo": "v1.19.29",
   "xray": "v26.6.22",
-  "updated_at": "2026-11-05T15:25:06Z",
-  "notes": "Preserve original UI and motion; name and focus core switches, close Settings with Escape, scroll mobile settings tabs, improve secondary-text contrast and clarify save versus apply; native core pins unchanged"
+  "updated_at": "2026-11-05T16:03:50Z",
+  "notes": "Keep background version checks silent; preserve genuine update offers and explicit manual result/error feedback; native core pins unchanged"
 }
