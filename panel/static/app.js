@@ -1890,7 +1890,14 @@ import * as monitoringAPI from "./monitoring.js";
   });
   document.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", closeAll));
   [modalGroup, modalImport, modalExplain].forEach(m => m?.addEventListener("click", e => { if (e.target === m) closeAll(); }));
-  document.addEventListener("keydown", e => { if (e.key === "Escape") closeAll(); });
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape" || e.defaultPrevented) return;
+    if (document.querySelector(".modal-backdrop.open")) closeAll();
+    else if (settingsBd?.classList.contains("open")) {
+      e.preventDefault();
+      closeSettings();
+    }
+  });
 
   /**
    * Single status → color mapping for Explain route.
@@ -3424,6 +3431,7 @@ function hideStatsTooltip(){
     try { const c = document.getElementById("statsChart"); if (c) c.style.visibility = "hidden"; } catch (e) {}
     settingsBd.classList.add("open");
     settingsBd.setAttribute("aria-hidden","false");
+    document.getElementById("settingsClose")?.focus({preventScroll:true});
     syncMonitoringVisibility();
     try { document.body.classList.add("settings-open"); } catch (_) {}
     resetXttpHealthUi();
@@ -3456,6 +3464,7 @@ function hideStatsTooltip(){
     try { const c = document.getElementById("statsChart"); if (c) c.style.visibility = ""; } catch (e) {}
     syncMonitoringVisibility();
     setupActivityPoll(false);
+    btnSettings?.focus({preventScroll:true});
   }
   btnSettings?.addEventListener("click", openSettings);
   document.getElementById("settingsClose")?.addEventListener("click", closeSettings);
@@ -3491,6 +3500,7 @@ function hideStatsTooltip(){
     document.querySelectorAll(".spanel").forEach(x => x.classList.remove("active"));
     b.classList.add("active");
     document.getElementById("spanel-" + b.dataset.stab)?.classList.add("active");
+    b.scrollIntoView({block:"nearest",inline:"nearest"});
     moveStabPill(b);
     if (b.dataset.stab === "core" && typeof loadCoreSettings === "function") {
       loadCoreSettings();
@@ -3508,7 +3518,9 @@ function hideStatsTooltip(){
   requestAnimationFrame(() => moveStabPill(document.querySelector(".stab.active")));
   window.addEventListener("resize", () => {
     if (settingsBd?.classList.contains("open")) {
-      moveStabPill(document.querySelector(".settings-nav .stab[data-stab].active"), true);
+      const active = document.querySelector(".settings-nav .stab[data-stab].active");
+      active?.scrollIntoView({block:"nearest",inline:"nearest"});
+      moveStabPill(active, true);
     }
   });
 

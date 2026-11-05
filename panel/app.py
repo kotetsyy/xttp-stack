@@ -64,7 +64,7 @@ BOOTSTRAP_USER = "admin"
 RESTART_CMD = ["systemctl", "restart", "mihomo"]
 RESTART_XRAY_CMD = ["systemctl", "restart", "xray"]
 ACTIVITY_MAX = 100
-VERSION = "0.19.3"
+VERSION = "0.19.4"
 MIHOMO_API = "http://127.0.0.1:9090"
 
 
@@ -4169,6 +4169,7 @@ def render_group_card(g: dict, idx: int) -> str:
           </span>
           <span class="gcard-conflict-count" data-show="0" hidden></span>
           <span class="count-pills">{count_pills}</span>
+          <span class="meta">Сохранение — без перезапуска. «Применить» активирует правила.</span>
           <button type="button" class="btn btn-ghost btn-save-group" style="margin-left:auto;padding:6px 12px;font-size:12px">Сохранить правки</button>
         </div>
       </div>

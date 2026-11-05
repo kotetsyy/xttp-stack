@@ -59,8 +59,9 @@
     </div>
     <div class="toolbar-right" id="toolbarRulesActions">
       <form method="post" action="/api/rules/apply">
-        <button type="submit" class="icon-btn" aria-label="Применить" title="Записать rule-providers и restart mihomo">
+        <button type="submit" class="icon-btn icon-btn-labeled" aria-label="Применить" title="Активировать сохранённые правила и перезапустить mihomo">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg>
+          <span>Применить</span>
         </button>
       </form>
       <button type="button" class="icon-btn" id="btnRulesOverview" aria-label="Обзор правил" title="Обзор всех правил">
@@ -219,7 +220,7 @@
     <div class="settings-body">
     <div class="spanels">
     <div id="spanel-core" class="spanel active">
-      <p class="sub" style="margin-top:0">Runtime-настройки mihomo. Меняются сразу через API ядра — MetaCube не нужен.</p>
+      <p class="sub" style="margin-top:0">Runtime-настройки mihomo. Изменения вступают в силу после «Применить» через API ядра — MetaCube не нужен.</p>
       <p class="core-meta" id="coreMeta">—</p>
       <div class="core-versions" id="coreVersions" aria-label="Версии компонентов"></div>
       <p class="core-ver-debug" id="coreVerDebug" aria-live="polite"></p>
@@ -275,20 +276,20 @@
       </div>
       <div class="core-toggles">
         <div class="core-toggle-row">
-          <div><div class="ct-lab">Allow LAN</div><div class="ct-sub">Разрешить доступ с устройств в локальной сети</div></div>
-          <label class="switch"><input type="checkbox" id="coreAllowLan"/><span></span></label>
+          <div><div class="ct-lab" id="coreAllowLanLabel">Allow LAN</div><div class="ct-sub">Разрешить доступ с устройств в локальной сети</div></div>
+          <label class="switch"><input type="checkbox" id="coreAllowLan" aria-labelledby="coreAllowLanLabel"/><span></span></label>
         </div>
         <div class="core-toggle-row">
-          <div><div class="ct-lab">IPv6</div><div class="ct-sub">Обрабатывать IPv6-трафик в ядре</div></div>
-          <label class="switch"><input type="checkbox" id="coreIpv6"/><span></span></label>
+          <div><div class="ct-lab" id="coreIpv6Label">IPv6</div><div class="ct-sub">Обрабатывать IPv6-трафик в ядре</div></div>
+          <label class="switch"><input type="checkbox" id="coreIpv6" aria-labelledby="coreIpv6Label"/><span></span></label>
         </div>
         <div class="core-toggle-row">
-          <div><div class="ct-lab">Unified delay</div><div class="ct-sub">Одинаковый способ замера задержки для нод</div></div>
-          <label class="switch"><input type="checkbox" id="coreUnifiedDelay"/><span></span></label>
+          <div><div class="ct-lab" id="coreUnifiedDelayLabel">Unified delay</div><div class="ct-sub">Одинаковый способ замера задержки для нод</div></div>
+          <label class="switch"><input type="checkbox" id="coreUnifiedDelay" aria-labelledby="coreUnifiedDelayLabel"/><span></span></label>
         </div>
         <div class="core-toggle-row">
-          <div><div class="ct-lab">TCP concurrent</div><div class="ct-sub">Параллельные TCP-подключения (быстрее, больше нагрузка)</div></div>
-          <label class="switch"><input type="checkbox" id="coreTcpConcurrent"/><span></span></label>
+          <div><div class="ct-lab" id="coreTcpConcurrentLabel">TCP concurrent</div><div class="ct-sub">Параллельные TCP-подключения (быстрее, больше нагрузка)</div></div>
+          <label class="switch"><input type="checkbox" id="coreTcpConcurrent" aria-labelledby="coreTcpConcurrentLabel"/><span></span></label>
         </div>
       </div>
 
@@ -300,19 +301,19 @@
         <div class="core-toggles" style="margin-top:14px">
           <div class="core-toggle-row">
             <div>
-              <div class="ct-lab">Определение протокола (sniffing)</div>
+              <div class="ct-lab" id="coreSniffingLabel">Определение протокола (sniffing)</div>
               <div class="ct-sub">Определяет реальный протокол по содержимому пакета, а не только по порту — повышает точность маршрутизации</div>
             </div>
-            <label class="switch"><input type="checkbox" id="coreSniffing"/><span></span></label>
+            <label class="switch"><input type="checkbox" id="coreSniffing" aria-labelledby="coreSniffingLabel"/><span></span></label>
           </div>
           <div class="core-toggle-row">
             <div>
-              <div class="ct-lab">Автообновление geo-баз</div>
+              <div class="ct-lab" id="coreGeoAutoLabel">Автообновление geo-баз</div>
               <div class="ct-sub">Периодически подтягивает свежие geoip/geosite базы для точной гео-маршрутизации</div>
             </div>
             <div class="core-toggle-actions">
               <button type="button" class="btn btn-ghost" id="btnGeoUpdateNow" style="padding:7px 11px;font-size:12.5px" title="Принудительное обновление geo-баз">Обновить сейчас</button>
-              <label class="switch"><input type="checkbox" id="coreGeoAuto"/><span></span></label>
+              <label class="switch"><input type="checkbox" id="coreGeoAuto" aria-labelledby="coreGeoAutoLabel"/><span></span></label>
             </div>
           </div>
         </div>
