@@ -2325,6 +2325,137 @@ def _read_xray_config() -> dict | None:
     return None
 
 
+def build_bittorrent_block_config(cfg: dict, enabled: bool) -> dict:
+    """Own only the tagged rule and payload-sniffing requirements."""
+    if not isinstance(enabled, bool):
+        raise ValueError("Ожидалось логическое значение")
+    if not isinstance(cfg, dict):
+        raise ValueError("Конфигурация Xray должна быть объектом")
+    inbounds, outbounds = cfg.get("inbounds"), cfg.get("outbounds")
+    if not isinstance(inbounds, list) or not inbounds or any(
+            not isinstance(item, dict) or not isinstance(item.get("protocol"), str)
+            or not item["protocol"] for item in inbounds):
+        raise ValueError("Неподдерживаемая структура inbounds Xray")
+    if not isinstance(outbounds, list) or not outbounds or any(
+            not isinstance(item, dict) or not isinstance(item.get("protocol"), str)
+            or not item["protocol"] for item in outbounds):
+        raise ValueError("Нужен существующий непустой список outbounds Xray")
+    routing = cfg.get("routing", {})
+    if not isinstance(routing, dict):
+        raise ValueError("Неподдерживаемая структура routing Xray")
+    rules = routing.get("rules", [])
+    if not isinstance(rules, list) or any(not isinstance(rule, dict) for rule in rules):
+        raise ValueError("Неподдерживаемая структура routing.rules Xray")
+    api = cfg.get("api", {})
+    if not isinstance(api, dict):
+        raise ValueError("Неподдерживаемая структура api Xray")
+    api_tag = api.get("tag")
+    if "tag" in api and (not isinstance(api_tag, str) or not api_tag):
+        raise ValueError("Неподдерживаемая структура api.tag Xray")
+    api_inbounds = set()
+    if api_tag:
+        api_inbounds.add(api_tag)
+        for rule in rules:
+            if (rule.get("outboundTag") == api_tag
+                    and set(rule) <= {"type", "inboundTag", "outboundTag", "ruleTag"}):
+                tags = rule.get("inboundTag", [])
+                if not isinstance(tags, list) or any(not isinstance(tag, str) for tag in tags):
+                    raise ValueError("Неподдерживаемая маршрутизация API Xray")
+                api_inbounds.update(tags)
+    traffic_inbounds = []
+    for inbound in inbounds:
+        tag = inbound.get("tag")
+        if tag is not None and not isinstance(tag, str):
+            raise ValueError("Неподдерживаемая структура inbound.tag Xray")
+        if tag in api_inbounds:
+            continue
+        sniffing = inbound.get("sniffing", {})
+        if not isinstance(sniffing, dict):
+            raise ValueError("Неподдерживаемая структура sniffing Xray")
+        for key in ("enabled", "metadataOnly", "routeOnly"):
+            if key in sniffing and not isinstance(sniffing[key], bool):
+                raise ValueError("Неподдерживаемые параметры sniffing Xray")
+        if "destOverride" in sniffing and (
+                not isinstance(sniffing["destOverride"], list)
+                or any(not isinstance(value, str) for value in sniffing["destOverride"])):
+            raise ValueError("Неподдерживаемый destOverride Xray")
+        traffic_inbounds.append(inbound)
+    if not traffic_inbounds:
+        raise ValueError("В конфигурации Xray нет пользовательских inbounds")
+    block = [item for item in outbounds if item.get("tag") == "block"]
+    if enabled and (len(block) > 1 or any(item["protocol"] != "blackhole" for item in block)):
+        raise ValueError("Outbound block уже занят и не является единственным blackhole")
+    result = copy.deepcopy(cfg)
+    kept_rules = [copy.deepcopy(rule) for rule in rules
+                  if rule.get("ruleTag") != "xttp-block-bittorrent"]
+    if enabled:
+        kept_rules.insert(0, {"type": "field", "ruleTag": "xttp-block-bittorrent",
+                              "protocol": ["bittorrent"], "outboundTag": "block"})
+        if not block:
+            result["outbounds"].append({"tag": "block", "protocol": "blackhole"})
+        for inbound in result["inbounds"]:
+            if inbound.get("tag") in api_inbounds:
+                continue
+            sniffing = inbound.setdefault("sniffing", {"destOverride": [], "routeOnly": True})
+            # Enabling payload inspection must not activate dormant SNI overrides.
+            if not sniffing.get("enabled", False):
+                sniffing["destOverride"] = []
+            elif sniffing.get("metadataOnly", False):
+                sniffing["destOverride"] = [
+                    value for value in sniffing.get("destOverride", [])
+                    if value in ("fakedns", "fakedns+others")
+                ]
+            sniffing.update({"enabled": True, "metadataOnly": False})
+    if enabled or len(kept_rules) != len(rules):
+        result.setdefault("routing", {})["rules"] = kept_rules
+    return result
+
+
+def _bittorrent_saved_config() -> dict:
+    if not os.path.isfile(XRAY_BIN) or not os.access(XRAY_BIN, os.X_OK):
+        raise ValueError("Бинарник Xray отсутствует или недоступен для запуска")
+    # Unlike connection setup, a toggle must not skip a broken primary config.
+    source = next((path for path in XRAY_CONFIGS if os.path.exists(path)), None)
+    if source is None:
+        raise ValueError("Конфигурация Xray не найдена")
+    try:
+        with open(source, encoding="utf-8") as stream:
+            return json.load(stream)
+    except (OSError, ValueError):
+        raise ValueError("Не удалось прочитать конфигурацию Xray") from None
+
+
+def bittorrent_block_status() -> dict:
+    with _xray_lock:
+        state = {"ok": True, "available": False, "enabled": False,
+                 "xray_running": False, "scope": "xray"}
+        try:
+            state["xray_running"] = bool(service_active("xray"))
+        except Exception:
+            state["error"] = "Не удалось проверить состояние службы Xray"
+        try:
+            cfg = _bittorrent_saved_config()
+            required = build_bittorrent_block_config(cfg, True)
+            state.update({"available": True, "enabled": cfg == required})
+        except ValueError as ex:
+            state["error"] = str(ex)
+        return state
+
+
+def set_bittorrent_block(enabled: bool) -> dict:
+    if not isinstance(enabled, bool):
+        raise ValueError("Ожидалось логическое значение")
+    with _xray_lock:
+        try:
+            cfg = build_bittorrent_block_config(_bittorrent_saved_config(), enabled)
+        except ValueError as ex:
+            return {"ok": False, "backup": None, "error": str(ex),
+                    "state": bittorrent_block_status()}
+        result = activate_xray(cfg)
+        result["state"] = bittorrent_block_status()
+        return result
+
+
 def parse_xray_outbound(cfg: dict | None = None) -> dict:
     cfg = cfg if cfg is not None else _read_xray_config()
     empty = {
@@ -4453,6 +4584,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(200, {"ok": True, "prefs": load_prefs()})
         if path == "/api/services/status":
             return self._json(200, services_status())
+        if path == "/api/block":
+            return self._json(200, bittorrent_block_status())
         if path == "/api/xttp/status":
             return self._json(200, xttp_status())
         if path == "/api/xttp/backups":
@@ -4533,6 +4666,21 @@ class Handler(BaseHTTPRequestHandler):
                 result = mutate_groups(path.removeprefix("/api/groups/"), form)
                 log_activity(user, "groups", path.rsplit("/", 1)[-1])
                 return self._json(200, result)
+            if path == "/api/block/bittorrent":
+                detail = "BitTorrent: Xray rule"
+                try:
+                    if form.get("confirm") != "1":
+                        raise ValueError("confirm required")
+                    if form.get("enabled") not in ("1", "0"):
+                        raise ValueError("enabled должен быть 1 или 0")
+                    enabled = _boolean(form["enabled"])
+                    detail = "BitTorrent: " + ("enable" if enabled else "disable")
+                    result = set_bittorrent_block(enabled)
+                except Exception:
+                    log_activity(user, "bittorrent_block", detail, ok=False)
+                    raise
+                log_activity(user, "bittorrent_block", detail, ok=result["ok"])
+                return self._json(200 if result["ok"] else 400, result)
             if path == "/api/rules/apply":
                 if form.get("confirm") != "1":
                     raise ValueError("confirm required")

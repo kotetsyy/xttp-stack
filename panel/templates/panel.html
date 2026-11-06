@@ -215,6 +215,7 @@
         <button type="button" class="stab" data-stab="users">Пользователи</button>
         <button type="button" class="stab" data-stab="xttp">Подключение</button>
         <button type="button" class="stab" data-stab="ops">Операции</button>
+        <button type="button" class="stab" data-stab="block">Block</button>
       </div>
     </div>
     <div class="settings-body">
@@ -436,6 +437,25 @@
         </button>
       </div>
       <div id="activityList" class="activity-list meta">Загрузка…</div>
+    </div>
+    <div id="spanel-block" class="spanel">
+      <p class="sub" style="margin-top:0">Штатное правило Xray блокирует распознанный BitTorrent только в трафике, проходящем через Xray.</p>
+      <div class="core-toggles">
+        <div class="core-toggle-row">
+          <div><div class="ct-lab" id="blockBittorrentLabel">BitTorrent</div><div class="ct-sub" id="blockBittorrentHint">Блокировать распознанный протокол средствами Xray</div></div>
+          <label class="switch"><input type="checkbox" id="blockBittorrent" name="bittorrent" aria-labelledby="blockBittorrentLabel" aria-describedby="blockBittorrentHint blockLimits" disabled/><span></span></label>
+        </div>
+      </div>
+      <div role="status" aria-live="polite" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+        <span class="status-pill unk" id="blockConfigStatus">Правило в конфигурации: не проверено</span>
+        <span class="meta" id="blockServiceStatus">Xray: не проверен</span>
+      </div>
+      <p class="core-meta" id="blockError" role="alert" style="color:var(--err)" hidden></p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btnBlockRefresh" style="padding:8px 14px;font-size:13px">Обновить состояние</button>
+      </div>
+      <p class="sub" id="blockLimits">Состояние показывает правило в сохранённой конфигурации и отдельно работу сервиса, а не подтверждённую блокировку всего трафика. DIRECT через Mihomo не покрывается. Шифрование, обфускация и неподдерживаемые варианты BitTorrent могут мешать распознаванию.</p>
+      <p class="core-meta">Изменение перезапускает только Xray и прерывает его текущие соединения. Обновление состояния ничего не меняет.</p>
     </div>
     </div><!-- /.spanels -->
     </div><!-- /.settings-body -->

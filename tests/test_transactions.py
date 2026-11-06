@@ -700,6 +700,141 @@ class TransactionTests(unittest.TestCase):
         reader.join(timeout=2)
         self.assertEqual(json.loads(Path(self.app.PREFS_FILE).read_text(encoding="utf-8"))["log_level"], "debug")
 
+    @staticmethod
+    def _bittorrent_fixture():
+        return {
+            "log": {"loglevel": "warning"},
+            "inbounds": [{
+                "tag": "socks-in", "listen": "127.0.0.1", "port": 11090,
+                "protocol": "socks", "settings": {"udp": True},
+                "sniffing": {"enabled": False, "metadataOnly": True,
+                             "routeOnly": True, "destOverride": ["tls"]},
+            }],
+            "outbounds": [{"tag": "xttp", "protocol": "freedom"},
+                          {"tag": "block", "protocol": "blackhole"},
+                          {"tag": "custom", "protocol": "freedom"}],
+            "routing": {"domainStrategy": "AsIs", "rules": [
+                {"type": "field", "domain": ["domain:keep.test"], "outboundTag": "custom"},
+                {"type": "field", "network": "tcp,udp", "outboundTag": "xttp"},
+            ]},
+            "dns": {"servers": ["localhost"]},
+        }
+
+    def test_bittorrent_block_precedes_routes_without_overwriting_configuration(self):
+        original = self._bittorrent_fixture()
+        before = json.dumps(original, sort_keys=True)
+        configured = self.app.build_bittorrent_block_config(original, True)
+        rule = configured["routing"]["rules"][0]
+        self.assertEqual(rule["protocol"], ["bittorrent"])
+        self.assertEqual(rule["outboundTag"], "block")
+        self.assertEqual(configured["routing"]["rules"][1:], original["routing"]["rules"])
+        self.assertEqual(configured["outbounds"], original["outbounds"])
+        self.assertEqual(configured["dns"], original["dns"])
+        sniff = configured["inbounds"][0]["sniffing"]
+        self.assertTrue(sniff["enabled"])
+        self.assertFalse(sniff["metadataOnly"])
+        self.assertTrue(sniff["routeOnly"])
+        self.assertEqual(json.dumps(original, sort_keys=True), before)
+
+    def test_bittorrent_enabling_does_not_activate_dormant_domain_overrides(self):
+        cases = [
+            ({"enabled": False, "destOverride": ["tls", "fakedns"]}, []),
+            ({"enabled": True, "metadataOnly": True,
+              "destOverride": ["tls", "fakedns"]}, ["fakedns"]),
+            ({"enabled": True, "metadataOnly": False,
+              "destOverride": ["tls"]}, ["tls"]),
+        ]
+        for sniffing, active_overrides in cases:
+            with self.subTest(sniffing=sniffing):
+                original = self._bittorrent_fixture()
+                original["inbounds"][0]["sniffing"] = sniffing
+                configured = self.app.build_bittorrent_block_config(original, True)
+                self.assertEqual(configured["inbounds"][0]["sniffing"]["destOverride"],
+                                 active_overrides)
+
+    def test_bittorrent_disable_preserves_manual_protocol_rules_and_other_outbounds(self):
+        original = self._bittorrent_fixture()
+        manual = {"type": "field", "protocol": ["bittorrent"],
+                  "outboundTag": "custom", "ruleTag": "administrator-rule"}
+        original["routing"]["rules"].insert(0, manual)
+        configured = self.app.build_bittorrent_block_config(original, True)
+        self.assertEqual(self.app.build_bittorrent_block_config(configured, True), configured)
+        disabled = self.app.build_bittorrent_block_config(configured, False)
+        self.assertEqual(disabled["routing"], original["routing"])
+        self.assertEqual(disabled["outbounds"], original["outbounds"])
+
+    def test_bittorrent_rejects_conflicting_block_outbound_without_mutating_input(self):
+        original = self._bittorrent_fixture()
+        original["outbounds"][1]["protocol"] = "freedom"
+        before = json.dumps(original, sort_keys=True)
+        with self.assertRaises(ValueError):
+            self.app.build_bittorrent_block_config(original, True)
+        self.assertEqual(json.dumps(original, sort_keys=True), before)
+
+    def test_bittorrent_rule_survives_connection_replacement(self):
+        configured = self.app.build_bittorrent_block_config(self._bittorrent_fixture(), True)
+        parsed = self.app.parse_vless_link(
+            "vless://11111111-1111-4111-8111-111111111111@example.org:443?type=tcp&security=none")
+        replaced = self.app.build_xray_config_from_vless(parsed, configured)
+        self.assertEqual(replaced["routing"], configured["routing"])
+        self.assertEqual(replaced["inbounds"], configured["inbounds"])
+        tag = replaced["routing"]["rules"][0]["outboundTag"]
+        self.assertEqual(next(o for o in replaced["outbounds"] if o["tag"] == tag)["protocol"], "blackhole")
+
+    def test_bittorrent_status_distinguishes_saved_rule_from_stopped_core(self):
+        config = Path(self.app.XRAY_CONFIGS[0])
+        configured = self.app.build_bittorrent_block_config(self._bittorrent_fixture(), True)
+        config.write_text(json.dumps(configured), encoding="utf-8")
+        Path(self.app.XRAY_BIN).touch()
+        Path(self.app.XRAY_BIN).chmod(0o700)
+        with patch.object(self.app, "service_active", return_value=False):
+            status = self.app.bittorrent_block_status()
+        self.assertTrue(status["available"])
+        self.assertTrue(status["enabled"])
+        self.assertFalse(status["xray_running"])
+        self.assertEqual(status["scope"], "xray")
+
+    def test_bittorrent_status_reports_missing_native_binary_as_unavailable(self):
+        config = Path(self.app.XRAY_CONFIGS[0])
+        config.write_text(json.dumps(self._bittorrent_fixture()), encoding="utf-8")
+        with patch.object(self.app, "service_active", return_value=False):
+            status = self.app.bittorrent_block_status()
+        self.assertFalse(status["available"])
+        self.assertFalse(status["enabled"])
+        self.assertFalse(status["xray_running"])
+
+    def test_bittorrent_apply_failure_recovers_previous_configuration(self):
+        config = Path(self.app.XRAY_CONFIGS[0])
+        config.write_text(json.dumps(self._bittorrent_fixture()), encoding="utf-8")
+        before = config.read_bytes()
+        Path(self.app.XRAY_BIN).touch()
+        Path(self.app.XRAY_BIN).chmod(0o700)
+        with readiness_clock(self.app), \
+                patch.object(self.app.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, "", "")), \
+                patch.object(self.app, "restart_xray", side_effect=[RuntimeError("restart rejected"), None]), \
+                patch.object(self.app, "_health_xray", return_value=True), \
+                patch.object(self.app, "socks_http_probe", return_value={"ok": True}), \
+                patch.object(self.app, "service_active", return_value=True):
+            result = self.app.set_bittorrent_block(True)
+        self.assertFalse(result["ok"])
+        self.assertEqual(result["rollback"]["status"], "succeeded")
+        self.assertEqual(config.read_bytes(), before)
+        self.assertFalse(result["state"]["enabled"])
+
+    def test_bittorrent_http_requires_auth_csrf_confirmation_and_valid_boolean(self):
+        config = Path(self.app.XRAY_CONFIGS[0])
+        config.write_text(json.dumps(self._bittorrent_fixture()), encoding="utf-8")
+        before = config.read_bytes()
+        cookie, csrf = self.start_server()
+        self.assertEqual(self.request("GET", "/api/block")[0], 401)
+        self.assertEqual(self.request("POST", "/api/block/bittorrent",
+                                      {"enabled": "1", "confirm": "1"}, cookie=cookie)[0], 403)
+        self.assertEqual(self.request("POST", "/api/block/bittorrent",
+                                      {"enabled": "maybe", "confirm": "1"}, cookie, csrf)[0], 400)
+        self.assertEqual(self.request("POST", "/api/block/bittorrent",
+                                      {"enabled": "1"}, cookie, csrf)[0], 400)
+        self.assertEqual(config.read_bytes(), before)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -3405,6 +3405,113 @@ function hideStatsTooltip(){
   let usersMe = "";
   let usersMeId = "";
 
+  const blockToggle = document.getElementById("blockBittorrent");
+  const blockRefresh = document.getElementById("btnBlockRefresh");
+  let blockState = null;
+  let blockEnabled = false;
+  let blockBusy = "";
+  let blockGeneration = 0;
+  let blockApplyError = "";
+  let blockReadError = "";
+
+  function isBlockState(state){
+    return state?.ok === true && state.scope === "xray"
+      && typeof state.available === "boolean" && typeof state.enabled === "boolean"
+      && typeof state.xray_running === "boolean";
+  }
+  function renderBlockState(){
+    if (!blockToggle || !blockRefresh) return;
+    blockToggle.checked = blockEnabled;
+    blockToggle.disabled = !!blockBusy || !blockState?.available;
+    blockRefresh.disabled = !!blockBusy;
+    document.getElementById("spanel-block")?.setAttribute("aria-busy", String(!!blockBusy));
+    const status = document.getElementById("blockConfigStatus");
+    const service = document.getElementById("blockServiceStatus");
+    if (status) {
+      status.textContent = blockBusy === "apply" ? "Применение · перезапуск Xray…"
+        : blockBusy ? "Чтение конфигурации…"
+        : !blockState ? "Правило в конфигурации: не проверено"
+        : !blockState.available ? "Правило в конфигурации: недоступно"
+        : "Правило в конфигурации: " + (blockState.enabled ? "включено" : "выключено");
+    }
+    if (service) {
+      service.textContent = blockBusy ? "Xray: проверка…"
+        : !blockState ? "Xray: не проверен"
+        : "Xray: " + (blockState.xray_running ? "работает" : "не работает");
+    }
+    const error = document.getElementById("blockError");
+    if (error) {
+      error.textContent = [blockApplyError, blockReadError, blockState?.error
+        || (blockState && !blockState.available ? "Управление правилом недоступно. Проверьте Xray и его конфигурацию." : "")]
+        .filter(Boolean).join(" ");
+      error.hidden = !error.textContent;
+    }
+  }
+  async function readBlockState(){
+    const response = await fetch("/api/block", {credentials:"same-origin", cache:"no-store"});
+    const state = await response.json();
+    if (!response.ok || !isBlockState(state)) {
+      throw new Error(state?.error || "Не удалось прочитать состояние Block. Обновите состояние.");
+    }
+    return state;
+  }
+  async function loadBlockState(){
+    if (blockBusy === "apply") return;
+    const generation = ++blockGeneration;
+    blockBusy = "read";
+    renderBlockState();
+    try {
+      const state = await readBlockState();
+      if (generation !== blockGeneration) return;
+      blockState = state;
+      blockEnabled = state.available && state.enabled;
+      blockReadError = "";
+    } catch (error) {
+      if (generation !== blockGeneration) return;
+      blockState = null;
+      blockReadError = error.message || String(error);
+    } finally {
+      if (generation === blockGeneration) {
+        blockBusy = "";
+        renderBlockState();
+      }
+    }
+  }
+  blockRefresh?.addEventListener("click", () => loadBlockState());
+  blockToggle?.addEventListener("change", async () => {
+    const enabled = blockToggle.checked;
+    renderBlockState();
+    if (blockBusy || !blockState?.available || enabled === blockEnabled) return;
+    if (!confirm("Изменить блокировку BitTorrent? Xray будет перезапущен, его текущие соединения прервутся.")) return;
+    const generation = ++blockGeneration;
+    blockBusy = "apply";
+    blockApplyError = "";
+    blockReadError = "";
+    renderBlockState();
+    try {
+      const result = await api("/api/block/bittorrent", {enabled:enabled ? "1" : "0", confirm:"1"});
+      if (generation !== blockGeneration) return;
+      if (!result.ok) blockApplyError = result.error || "Не удалось применить правило BitTorrent.";
+      if (result.rollback?.status === "succeeded") blockApplyError += " Откат выполнен.";
+      if (result.rollback?.status === "failed") {
+        blockApplyError += " Откат не подтверждён: " + (result.rollback.error || "проверьте Xray.");
+      }
+      const state = isBlockState(result.state) ? result.state : await readBlockState();
+      if (generation !== blockGeneration) return;
+      blockState = state;
+      blockEnabled = state.available && state.enabled;
+    } catch (error) {
+      if (generation !== blockGeneration) return;
+      blockState = null;
+      blockReadError = (error.message || String(error)) + " Обновите состояние перед повторным изменением.";
+    } finally {
+      if (generation === blockGeneration) {
+        blockBusy = "";
+        renderBlockState();
+      }
+    }
+  });
+
   function resetXttpHealthUi(){
     const pill = document.getElementById("xttpStatusPill");
     if (pill) {
@@ -3448,6 +3555,7 @@ function hideStatsTooltip(){
     loadXttpStatus();
     loadBackups();
     loadOps();
+    if (document.getElementById("spanel-block")?.classList.contains("active")) loadBlockState();
     if (typeof loadCoreSettings === "function") loadCoreSettings();
     try { if (typeof setupCoreVersionChips === "function") setupCoreVersionChips(); } catch(_) {}
     try { if (typeof loadCoreVersions === "function") loadCoreVersions(false); } catch(_) {}
@@ -3507,6 +3615,7 @@ function hideStatsTooltip(){
     if (b.dataset.stab === "xttp" && typeof runXttpCheck === "function") {
       runXttpCheck({ quiet: true });
     }
+    if (b.dataset.stab === "block") loadBlockState();
     if (b.dataset.stab === "ops" && typeof loadActivity === "function") {
       loadActivity({ soft: true });
       if (typeof setupActivityPoll === "function") setupActivityPoll(true);

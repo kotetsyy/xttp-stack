@@ -104,6 +104,16 @@ The panel loads one immutable frontend bundle before listening. Successful panel
 API mutations require a session-bound `X-CSRF-Token` from `/api/session`; browser requests must be same-origin.
 Form bodies are bounded to 2 MiB and a 10-second read deadline. Keep HTTP access on a trusted network or behind HTTPS.
 
+### Block / BitTorrent
+
+**Настройки → Block** controls Xray's native `protocol: ["bittorrent"]` rejection rule. This is basic protocol recognition, not universal torrent prevention: Mihomo `DIRECT` traffic bypasses Xray, and encryption, obfuscation or unsupported BitTorrent variants can evade recognition.
+
+Enabling prepends the managed `xttp-block-bittorrent` rule before ordinary routes, uses a `blackhole` outbound without changing the default outbound, and enables payload sniffing on traffic inbounds. Previously inactive destination overrides are not activated; existing active domain overrides remain. API-control inbounds are excluded.
+
+Changes require confirmation, validate the candidate with the installed Xray binary, and use the existing activation and recovery path. Only Xray is restarted; its current connections are interrupted. Disabling removes only the managed rule: manual rules, the reusable blackhole outbound and sniffing remain in place.
+
+The UI separately reports the **saved configuration** and whether the **Xray service is running**. Neither is proof that every traffic path is protected. Refresh is read-only; an unavailable native binary or configuration disables the switch and displays the reason. `GET /api/block` reads state; `POST /api/block/bittorrent` uses the normal authenticated, same-origin, CSRF-protected form API with `enabled=1|0` and `confirm=1`.
+
 ## Update (code only; device-local rules are preserved)
 
 On each machine with a git checkout:
