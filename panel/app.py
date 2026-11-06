@@ -64,7 +64,7 @@ BOOTSTRAP_USER = "admin"
 RESTART_CMD = ["systemctl", "restart", "mihomo"]
 RESTART_XRAY_CMD = ["systemctl", "restart", "xray"]
 ACTIVITY_MAX = 100
-VERSION = "0.19.5"
+VERSION = "0.19.6"
 MIHOMO_API = "http://127.0.0.1:9090"
 
 

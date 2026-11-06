@@ -5,7 +5,7 @@ UI читает этот файл с GitHub (`main` / `CHANGELOG.md`).
 
 Формат: [Keep a Changelog](https://keepachangelog.com/) (упрощённо).
 
-## [Unreleased]
+## [0.19.6] - 2026-11-06
 
 ### Features
 - Добавлен **Настройки → Block**: штатная блокировка распознанного BitTorrent в Xray без переделки остальных страниц и без новых компонентов инфраструктуры.
